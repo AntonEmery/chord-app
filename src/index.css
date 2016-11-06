@@ -1,0 +1,13 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+#circle {
+  opacity: 0;
+}
+
+#circle:hover {
+  opacity: .5;
+}
