@@ -6,12 +6,17 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {stringState: 0};
+    this.circleClick = this.circleClick.bind(this);
   }
-  componentDidMount() {
-    console.log(this.state.stringState);
+  componentDidUpdate() {
+    console.log('component did update');
+    console.log(this.state);
   }
   circleClick(e) {
-    e.currentTarget.style.opacity = 1;  
+     e.currentTarget.style.opacity === '1' ? 
+     e.currentTarget.style.opacity = 0 :
+     e.currentTarget.style.opacity = 1
+     this.setState({stringState: 1});
   } 
   render() {
     return (
@@ -42,7 +47,7 @@ class App extends Component {
           <line x1={19} y1={80} x2={121} y2={80} strokeWidth={2} stroke="black" />
           <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
           <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
-          {/* circles */}
+          {/* finger position circles */}
           <circle cx={20} cy={40} r={8} fill="black" onClick={this.circleClick} id="circle"/>
           <circle cx={40} cy={40} r={8} fill="black" onClick={this.circleClick} id="circle"/>
 

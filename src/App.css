@@ -18,6 +18,17 @@
   font-size: large;
 }
 
+#circle {
+  opacity: 0;
+}
+
+#circle:hover {
+  opacity: .5;
+}
+
+
+
+
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
