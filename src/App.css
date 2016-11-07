@@ -18,12 +18,12 @@
   font-size: large;
 }
 
-#circle {
+.circle {
   opacity: 0;
 }
 
-#circle:hover {
-  opacity: .5;
+.circle:hover {
+  opacity: .5 !important;
 }
 
 

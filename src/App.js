@@ -33,7 +33,7 @@ class App extends Component {
           xmlns="http://www.w3.org/2000/svg"
           width={140} height={140}>
           {/* strings */}
-          <line x1={20} y1={20} x2={20} y2={140} strokeWidth={2} stroke="black" id="string" />
+          <line x1={20} y1={20} x2={20} y2={140} strokeWidth={2} stroke="black" className="string" />
           <line x1={40} y1={20} x2={40} y2={140} strokeWidth={2} stroke="black" />
           <line x1={60} y1={20} x2={60} y2={140} strokeWidth={2} stroke="black" />
           <line x1={80} y1={20} x2={80} y2={140} strokeWidth={2} stroke="black" />
@@ -48,8 +48,8 @@ class App extends Component {
           <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
           <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
           {/* finger position circles */}
-          <circle cx={20} cy={40} r={8} fill="black" onClick={this.circleClick} id="circle"/>
-          <circle cx={40} cy={40} r={8} fill="black" onClick={this.circleClick} id="circle"/>
+          <circle cx={20} cy={40} r={8} fill="black" onClick={this.circleClick} className="circle"/>
+          <circle cx={40} cy={40} r={8} fill="black" onClick={this.circleClick} className="circle"/>
 
           {/* open/muted strings */}
           <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
