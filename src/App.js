@@ -52,7 +52,7 @@ toggleVisibility(index) {
           {/* finger position circles */}
           <Circle index={1} isVisible={this.state[1] === true} onClick={this.toggleVisibility.bind(this)} cx={20} cy={40} radius={8} fill="black" />
           <Circle index={2} isVisible={this.state[2] === true} onClick={this.toggleVisibility.bind(this)} cx={40} cy={40} radius={8} fill="black" />
-          {/*<circle cx={40} cy={40} r={8} fill="black" onClick={this.circleClick.bind(this)} className="invisible"/>*/}
+          <Circle  index={3} isVisible={this.state[3] === true} onClick={this.toggleVisibility.bind(this)} cx={60} cy={40} radius={8} fill="black" />
 
           {/* open/muted strings */}
           <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
