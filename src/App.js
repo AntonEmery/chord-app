@@ -5,11 +5,15 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {isActive: null};
+    this.state = {1: false, 2: false};
   }
 
 toggleVisibility(index) {
-  this.setState({isActive: index})
+  if (!this.state[index]) {
+    this.setState({[index]: true});
+  } else {
+    this.setState({[index]: false});
+  }
 }
   componentDidUpdate() {
     console.log('component did update');
@@ -46,8 +50,8 @@ toggleVisibility(index) {
           <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
           <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
           {/* finger position circles */}
-          <Circle index={0} isActive={this.state.isActive === 0} onClick={this.toggleVisibility.bind(this)} cx={20} cy={40} radius={8} fill="black" />
-          <Circle index={1} isActive={this.state.isActive === 1} onClick={this.toggleVisibility.bind(this)} cx={40} cy={40} radius={8} fill="black" />
+          <Circle index={1} isVisible={this.state[1] === true} onClick={this.toggleVisibility.bind(this)} cx={20} cy={40} radius={8} fill="black" />
+          <Circle index={2} isVisible={this.state[2] === true} onClick={this.toggleVisibility.bind(this)} cx={40} cy={40} radius={8} fill="black" />
           {/*<circle cx={40} cy={40} r={8} fill="black" onClick={this.circleClick.bind(this)} className="invisible"/>*/}
 
           {/* open/muted strings */}
@@ -67,7 +71,7 @@ class Circle extends Component {
   }
   render() {
     return (
-    <circle cx={this.props.cx} cy={this.props.cy} r={this.props.radius} fill={this.props.fill} onClick={this.handleClick.bind(this)} className={this.props.isActive ? 'visible' : 'invisible'} />
+    <circle cx={this.props.cx} cy={this.props.cy} r={this.props.radius} fill={this.props.fill} onClick={this.handleClick.bind(this)} className={this.props.isVisible ? 'visible' : 'invisible'} />
     )
   }
 }
