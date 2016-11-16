@@ -8,13 +8,10 @@ class App extends Component {
     this.state = {1: false, 2: false};
   }
 
-toggleVisibility(index) {
-  if (!this.state[index]) {
-    this.setState({[index]: true});
-  } else {
-    this.setState({[index]: false});
+  toggleVisibility(index) { 
+    this.setState({[index]: !this.state[index]});
   }
-}
+
   componentDidUpdate() {
     console.log('component did update');
     console.log(this.state);
@@ -50,9 +47,9 @@ toggleVisibility(index) {
           <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
           <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
           {/* finger position circles */}
-          <Circle index={1} isVisible={this.state[1] === true} onClick={this.toggleVisibility.bind(this)} cx={20} cy={40} radius={8} fill="black" />
-          <Circle index={2} isVisible={this.state[2] === true} onClick={this.toggleVisibility.bind(this)} cx={40} cy={40} radius={8} fill="black" />
-          <Circle  index={3} isVisible={this.state[3] === true} onClick={this.toggleVisibility.bind(this)} cx={60} cy={40} radius={8} fill="black" />
+          <Circle index={1} isVisible={this.state[1] === true} onClick={() => this.toggleVisibility(1)} cx={20} cy={40} />
+          <Circle index={2} isVisible={this.state[2] === true} onClick={() => this.toggleVisibility(2)} cx={40} cy={40} />
+          <Circle  index={3} isVisible={this.state[3] === true} onClick={() => this.toggleVisibility(3)} cx={60} cy={40} />
 
           {/* open/muted strings */}
           <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
@@ -66,12 +63,10 @@ class Circle extends Component {
   constructor(props) {
     super(props)
   }
-  handleClick() {
-    this.props.onClick(this.props.index);
-  }
+
   render() {
     return (
-    <circle cx={this.props.cx} cy={this.props.cy} r={this.props.radius} fill={this.props.fill} onClick={this.handleClick.bind(this)} className={this.props.isVisible ? 'visible' : 'invisible'} />
+    <circle cx={this.props.cx} cy={this.props.cy} r={this.props.radius} fill={this.props.fill} onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} radius={8} fill="black" />
     )
   }
 }
