@@ -18,8 +18,6 @@ class App extends Component {
   }
 
   render() {
-    
-
     var dotPositions = [ ];
     for(let string = 0; string < 6; string ++) {
       for(let fret = 0; fret < 5; fret ++) {
