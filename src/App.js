@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {1: 3, 2: 2};
+    this.state = { };
   }
 
   toggleVisibility(string, fret) {
+    console.log('toggle visibility');
     this.setState({[string]: fret});
   }
 
@@ -18,7 +18,20 @@ class App extends Component {
   }
 
   render() {
+    
+
+    var dotPositions = [ ];
+    for(let string = 0; string < 6; string ++) {
+      for(let fret = 0; fret < 5; fret ++) {
+        dotPositions.push([string, fret]);
+      }
+    };
+    let that = this;
+    let drawingCircles = dotPositions.map(function(fingerPositions) {
+     return <Circle isVisible={that.state[fingerPositions[0]] === fingerPositions[1]} onClick={() => that.toggleVisibility(fingerPositions[0], fingerPositions[1])} string={fingerPositions[0]} fret={fingerPositions[1]} />
+    })
     return (
+      <div className="App">
       <svg 
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
@@ -39,17 +52,20 @@ class App extends Component {
         <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
         <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
         {/* finger position circles */}
-        <Circle isVisible={this.state[0] === 0} onClick={() => this.toggleVisibility(0, 0)} string={0} fret={0} />
+        {/*<Circle isVisible={this.state[0] === 0} onClick={() => this.toggleVisibility(0, 0)} string={string} fret={fret} /> */}
+        {drawingCircles}
 
         {/* open/muted strings */}
         <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
       </svg>
+      </div>
     );
   }
 }
 
 class Circle extends Component {
   render() {
+    
     let cx = 20 + 20 * this.props.string;
     let cy = 40 + 20 * this.props.fret;
 
