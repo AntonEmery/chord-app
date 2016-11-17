@@ -8,7 +8,6 @@ class App extends Component {
   }
 
   toggleVisibility(string, fret) {
-    console.log('toggle visibility');
     this.setState({[string]: fret});
   }
 
@@ -25,8 +24,8 @@ class App extends Component {
       }
     };
     
-    let drawingCircles = dotPositions.map((fingerPositions) => {
-     return <Circle isVisible={this.state[fingerPositions[0]] === fingerPositions[1]} onClick={() => this.toggleVisibility(fingerPositions[0], fingerPositions[1])} string={fingerPositions[0]} fret={fingerPositions[1]} />
+    let drawingCircles = dotPositions.map(([string, fret]) => {
+     return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
     })
     return (
       <div className="App">
