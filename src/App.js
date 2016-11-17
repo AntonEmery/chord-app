@@ -24,9 +24,9 @@ class App extends Component {
         dotPositions.push([string, fret]);
       }
     };
-    let that = this;
-    let drawingCircles = dotPositions.map(function(fingerPositions) {
-     return <Circle isVisible={that.state[fingerPositions[0]] === fingerPositions[1]} onClick={() => that.toggleVisibility(fingerPositions[0], fingerPositions[1])} string={fingerPositions[0]} fret={fingerPositions[1]} />
+    
+    let drawingCircles = dotPositions.map((fingerPositions) => {
+     return <Circle isVisible={this.state[fingerPositions[0]] === fingerPositions[1]} onClick={() => this.toggleVisibility(fingerPositions[0], fingerPositions[1])} string={fingerPositions[0]} fret={fingerPositions[1]} />
     })
     return (
       <div className="App">
@@ -63,10 +63,8 @@ class App extends Component {
 
 class Circle extends Component {
   render() {
-    
     let cx = 20 + 20 * this.props.string;
     let cy = 40 + 20 * this.props.fret;
-
     return (
     <circle cx={cx} cy={cy} r={8} onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} fill="black" />
     )
