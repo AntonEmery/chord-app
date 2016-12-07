@@ -70,4 +70,8 @@ class Circle extends Component {
   }
 }
 
+class String extends Component {
+  
+}
+
 export default App;
