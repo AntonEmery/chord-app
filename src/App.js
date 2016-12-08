@@ -18,15 +18,31 @@ class App extends Component {
 
   render() {
     var dotPositions = [ ];
+    var strings = [ ];
+    var frets = [ ];
     for(let string = 0; string < 6; string ++) {
       for(let fret = 0; fret < 5; fret ++) {
         dotPositions.push([string, fret]);
       }
+      strings.push(string);
     };
+
+    for(let fret=0; fret<6; fret++) {
+      frets.push(fret);
+    }
+
+    let drawingStrings = strings.map((string) => {
+      return <String string={string} />
+    });
     
     let drawingCircles = dotPositions.map(([string, fret]) => {
      return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
-    })
+    });
+
+    let drawingFrets = frets.map((fret) => {
+      return <Fret fret={fret} />
+    });
+
     return (
       <div className="App">
       <svg 
@@ -34,22 +50,14 @@ class App extends Component {
         xmlns="http://www.w3.org/2000/svg"
         width={140} height={140}>
         {/* strings */}
-        <line x1={20} y1={20} x2={20} y2={140} strokeWidth={2} stroke="black" className="string" />
-        <line x1={40} y1={20} x2={40} y2={140} strokeWidth={2} stroke="black" />
-        <line x1={60} y1={20} x2={60} y2={140} strokeWidth={2} stroke="black" />
-        <line x1={80} y1={20} x2={80} y2={140} strokeWidth={2} stroke="black" />
-        <line x1={100} y1={20} x2={100} y2={140} strokeWidth={2} stroke="black" />
-        <line x1={120} y1={20} x2={120} y2={140} strokeWidth={2} stroke="black" />
+        {drawingStrings}
+        
         {/* nut */} 
         <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
         {/* frets */}
-        <line x1={19} y1={40} x2={121} y2={40} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={60} x2={121} y2={60} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={80} x2={121} y2={80} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
+        {drawingFrets}
+
         {/* finger position circles */}
-        {/*<Circle isVisible={this.state[0] === 0} onClick={() => this.toggleVisibility(0, 0)} string={string} fret={fret} /> */}
         {drawingCircles}
 
         {/* open/muted strings */}
@@ -71,7 +79,32 @@ class Circle extends Component {
 }
 
 class String extends Component {
+  render() {
+    let x1 = 20 + 20 * this.props.string;
+    let y1 = 20;
+    let x2 = 20 + 20 * this.props.string;
+    let y2 = 140;
+    let strokeWidth = 2;
+
+    return (
+      <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
+    )
+  }
+}
+
+class Fret extends Component {
+  render() {
+    let x1 = 19;
+    let y1 = 20 + 20 * this.props.fret;
+    let x2 = 121;
+    let y2 = 20 + 20 * this.props.fret;
+    let strokeWidth = 2;
   
+
+    return (
+      <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
+    )
+  }
 }
 
 export default App;
