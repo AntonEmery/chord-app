@@ -19,6 +19,7 @@ class App extends Component {
   render() {
     var dotPositions = [ ];
     var strings = [ ];
+    var frets = [ ];
     for(let string = 0; string < 6; string ++) {
       for(let fret = 0; fret < 5; fret ++) {
         dotPositions.push([string, fret]);
@@ -41,8 +42,6 @@ class App extends Component {
         xmlns="http://www.w3.org/2000/svg"
         width={140} height={140}>
         {/* strings */}
-        
-       
         {drawingStrings}
         
         {/* nut */} 
@@ -82,6 +81,20 @@ class String extends Component {
     let x2 = 20 + 20 * this.props.string;
     let y2 = 140;
     let strokeWidth = 2;
+
+    return (
+      <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
+    )
+  }
+}
+
+class Fret extends Component {
+  render() {
+    let x1 = 19;
+    let y1 = 20 + 20 * this.props.fret;
+    let x2 = 121;
+    let y2 = 20 + 20 * this.props.fret;
+  
 
     return (
       <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
