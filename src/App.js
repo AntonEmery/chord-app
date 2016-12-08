@@ -27,12 +27,20 @@ class App extends Component {
       strings.push(string);
     };
 
+    for(let fret=0; fret<6; fret++) {
+      frets.push(fret);
+    }
+
     let drawingStrings = strings.map((string) => {
       return <String string={string} />
     });
     
     let drawingCircles = dotPositions.map(([string, fret]) => {
      return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
+    });
+
+    let drawingFrets = frets.map((fret) => {
+      return <Fret fret={fret} />
     });
 
     return (
@@ -47,12 +55,8 @@ class App extends Component {
         {/* nut */} 
         <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
         {/* frets */}
-        <line x1={19} y1={40} x2={121} y2={40} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={60} x2={121} y2={60} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={80} x2={121} y2={80} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={100} x2={121} y2={100} strokeWidth={2} stroke="black" />
-        <line x1={19} y1={120} x2={121} y2={120} strokeWidth={2} stroke="black" />
-        
+        {drawingFrets}
+
         {/* finger position circles */}
         {drawingCircles}
 
@@ -94,6 +98,7 @@ class Fret extends Component {
     let y1 = 20 + 20 * this.props.fret;
     let x2 = 121;
     let y2 = 20 + 20 * this.props.fret;
+    let strokeWidth = 2;
   
 
     return (
