@@ -16,32 +16,49 @@ class App extends Component {
     console.log(this.state);
   }
 
-  render() {
-    var dotPositions = [ ];
-    var strings = [ ];
+  drawFrets() {
     var frets = [ ];
+    for(let fret=0; fret<6; fret++) {
+      frets.push(fret);
+    }
+    return frets;
+  }
+
+  drawDots() {
+    var dotPositions = [ ];
     for(let string = 0; string < 6; string ++) {
       for(let fret = 0; fret < 5; fret ++) {
         dotPositions.push([string, fret]);
       }
-      strings.push(string);
     };
+    return dotPositions;
+  }
 
-    for(let fret=0; fret<6; fret++) {
-      frets.push(fret);
+  drawStrings() {
+    var strings = [ ];
+    for(let string = 0; string < 6; string++) {
+      strings.push(string);
     }
+    return strings;
+  }
 
+  render() {
+
+    var frets = this.drawFrets();
+    let drawingFrets = frets.map((fret) => {
+      return <Fret fret={fret} />
+    });
+
+    var strings = this.drawStrings();
     let drawingStrings = strings.map((string) => {
       return <String string={string} />
     });
     
+    var dotPositions = this.drawDots();
     let drawingCircles = dotPositions.map(([string, fret]) => {
      return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
     });
 
-    let drawingFrets = frets.map((fret) => {
-      return <Fret fret={fret} />
-    });
 
     return (
       <div className="App">
@@ -54,6 +71,7 @@ class App extends Component {
         
         {/* nut */} 
         <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
+        
         {/* frets */}
         {drawingFrets}
 
