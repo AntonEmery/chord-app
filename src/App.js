@@ -52,6 +52,17 @@ class App extends Component {
     return drawingStrings;
   }
 
+  drawOpenStrings(numberOfStrings) {
+    var dotPositions = [ ];
+    for(let string = 0; string < numberOfStrings; string ++) {
+      dotPositions.push(string);
+    };
+    let drawingOpenStrings = dotPositions.map((string) => {
+      return <OpenStrings string={string} />
+    });
+    return drawingOpenStrings;
+  }
+
   render() {
     const numberOfFrets = 7;
     const numberOfStrings = 6;
@@ -74,7 +85,8 @@ class App extends Component {
         {this.drawDots(numberOfStrings, numberOfFrets)}
 
         {/* open/muted strings */}
-        <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
+        {this.drawOpenStrings(numberOfStrings)}
+
       </svg>
       </div>
     );
@@ -118,6 +130,17 @@ class Fret extends Component {
     let strokeWidth = 2;
     return (
       <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
+    )
+  }
+}
+
+class OpenStrings extends Component {
+  render() {
+    let cx = 20 + 20 * this.props.string;
+    let cy = 10;
+
+    return (
+      <circle cx={cx} cy={cy} r={8} fill="none" stroke="black" strokeWidth={4} />
     )
   }
 }
