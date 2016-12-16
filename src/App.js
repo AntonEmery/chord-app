@@ -21,7 +21,10 @@ class App extends Component {
     for(let fret=0; fret<6; fret++) {
       frets.push(fret);
     }
-    return frets;
+    let drawingFrets = frets.map((fret) => {
+      return <Fret fret={fret} />
+    });
+    return drawingFrets;
   }
 
   drawDots() {
@@ -31,7 +34,10 @@ class App extends Component {
         dotPositions.push([string, fret]);
       }
     };
-    return dotPositions;
+    let drawingCircles = dotPositions.map(([string, fret]) => {
+      return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
+    });
+    return drawingCircles;
   }
 
   drawStrings() {
@@ -39,44 +45,30 @@ class App extends Component {
     for(let string = 0; string < 6; string++) {
       strings.push(string);
     }
-    return strings;
-  }
-
-  render() {
-
-    var frets = this.drawFrets();
-    let drawingFrets = frets.map((fret) => {
-      return <Fret fret={fret} />
-    });
-
-    var strings = this.drawStrings();
     let drawingStrings = strings.map((string) => {
       return <String string={string} />
     });
-    
-    var dotPositions = this.drawDots();
-    let drawingCircles = dotPositions.map(([string, fret]) => {
-     return <Circle isVisible={this.state[string] === fret} onClick={() => this.toggleVisibility(string, fret)} string={string} fret={fret} />
-    });
+    return drawingStrings;
+  }
 
-
+  render() {
     return (
       <div className="App">
-      <svg 
+      <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
         width={140} height={140}>
         {/* strings */}
-        {drawingStrings}
-        
-        {/* nut */} 
+        {this.drawStrings()}
+
+        {/* nut */}
         <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
-        
+
         {/* frets */}
-        {drawingFrets}
+        {this.drawFrets()}
 
         {/* finger position circles */}
-        {drawingCircles}
+        {this.drawDots()}
 
         {/* open/muted strings */}
         <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
@@ -117,8 +109,6 @@ class Fret extends Component {
     let x2 = 121;
     let y2 = 20 + 20 * this.props.fret;
     let strokeWidth = 2;
-  
-
     return (
       <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
     )
