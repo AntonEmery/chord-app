@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 class App extends Component {
+
   constructor(props) {
     super(props);
     this.state = { };
@@ -16,9 +17,9 @@ class App extends Component {
     console.log(this.state);
   }
 
-  drawFrets() {
+  drawFrets(numberOfFrets) {
     var frets = [ ];
-    for(let fret=0; fret<6; fret++) {
+    for(let fret = 0; fret<numberOfFrets; fret++) {
       frets.push(fret);
     }
     let drawingFrets = frets.map((fret) => {
@@ -27,10 +28,10 @@ class App extends Component {
     return drawingFrets;
   }
 
-  drawDots() {
+  drawDots(numberOfStrings, numberOfFrets) {
     var dotPositions = [ ];
-    for(let string = 0; string < 6; string ++) {
-      for(let fret = 0; fret < 5; fret ++) {
+    for(let string = 0; string < numberOfStrings; string ++) {
+      for(let fret = 0; fret < numberOfFrets; fret ++) {
         dotPositions.push([string, fret]);
       }
     };
@@ -40,9 +41,9 @@ class App extends Component {
     return drawingCircles;
   }
 
-  drawStrings() {
+  drawStrings(numberOfStrings) {
     var strings = [ ];
-    for(let string = 0; string < 6; string++) {
+    for(let string = 0; string < numberOfStrings; string++) {
       strings.push(string);
     }
     let drawingStrings = strings.map((string) => {
@@ -52,23 +53,25 @@ class App extends Component {
   }
 
   render() {
+    const numberOfFrets = 7;
+    const numberOfStrings = 6;
     return (
       <div className="App">
       <svg
         version="1.1"
         xmlns="http://www.w3.org/2000/svg"
-        width={140} height={140}>
+        width={140} height={160}>
         {/* strings */}
-        {this.drawStrings()}
+        {this.drawStrings(numberOfStrings)}
 
         {/* nut */}
         <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
 
         {/* frets */}
-        {this.drawFrets()}
+        {this.drawFrets(numberOfFrets)}
 
         {/* finger position circles */}
-        {this.drawDots()}
+        {this.drawDots(numberOfStrings, numberOfFrets)}
 
         {/* open/muted strings */}
         <circle cx={20} cy={10} r={8} fill="none" stroke="black" strokeWidth={4} />
@@ -80,8 +83,10 @@ class App extends Component {
 
 class Circle extends Component {
   render() {
-    let cx = 20 + 20 * this.props.string;
-    let cy = 40 + 20 * this.props.fret;
+    const circleSpacing = 20;
+
+    let cx = 20 + circleSpacing * this.props.string;
+    let cy = 40 + circleSpacing * this.props.fret;
     return (
     <circle cx={cx} cy={cy} r={8} onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} fill="black" />
     )
@@ -90,9 +95,10 @@ class Circle extends Component {
 
 class String extends Component {
   render() {
-    let x1 = 20 + 20 * this.props.string;
+    const stringSpacing = 20;
+    let x1 = 20 + stringSpacing * this.props.string;
     let y1 = 20;
-    let x2 = 20 + 20 * this.props.string;
+    let x2 = 20 + stringSpacing * this.props.string;
     let y2 = 140;
     let strokeWidth = 2;
 
@@ -104,10 +110,11 @@ class String extends Component {
 
 class Fret extends Component {
   render() {
+    const fretSpacing = 20;
     let x1 = 19;
-    let y1 = 20 + 20 * this.props.fret;
+    let y1 = 20 + fretSpacing * this.props.fret;
     let x2 = 121;
-    let y2 = 20 + 20 * this.props.fret;
+    let y2 = 20 + fretSpacing * this.props.fret;
     let strokeWidth = 2;
     return (
       <line x1={x1} y1={y1} x2={x2} y2={y2} strokeWidth={strokeWidth} stroke="black" />
