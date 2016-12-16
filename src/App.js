@@ -12,8 +12,12 @@ class App extends Component {
     this.setState({[string]: fret});
   }
 
-  toggleOpenMutedStrings(string) {
+  toggleOpenStrings(string) {
     this.setState({[string]: -1});
+  }
+
+  toggleMutedStrings(string) {
+    this.setState({[string]: -2});
   }
 
   componentDidUpdate() {
@@ -91,6 +95,8 @@ class App extends Component {
         {/* open/muted strings */}
         {this.openStringSymbols(numberOfStrings)}
 
+        <MutedStrings />
+
       </svg>
       </div>
     );
@@ -151,8 +157,19 @@ class OpenStrings extends Component {
 
 class MutedStrings extends Component {
   render() {
+    let x1 = 20 + 20 * 0;
+    let y1 = 20;
+    let x2 = 40;
+    let y2 = 0;
+
+    let x3 = 20 + 20 * 0;
+    let y3 = 0;
+    let x4 = 40;
+    let y4 = 20;
+
     return (
-      
+      <path d="M20 20 L40 0 M20 0 L40 20"   strokeWidth={2} stroke="black" />
+
     )
   }
 }
