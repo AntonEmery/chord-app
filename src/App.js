@@ -66,7 +66,7 @@ class App extends Component {
       dotPositions.push(string);
     };
     let drawingOpenStrings = dotPositions.map((string) => {
-      return <OpenStrings isVisible={this.state[string] === -1} string={string} onClick={() => this.toggleOpenMutedStrings(string)} />
+      return <OpenStrings isVisible={this.state[string] === -1} string={string} onClick={() => this.toggleOpenStrings(string)} />
     });
     return drawingOpenStrings;
   }
@@ -168,7 +168,7 @@ class MutedStrings extends Component {
     let y4 = 20;
 
     return (
-      <path d="M20 20 L40 0 M20 0 L40 20"   strokeWidth={2} stroke="black" />
+      <path d="M10 20 L30 0 M30 20 L10 0" strokeWidth={2} stroke="black" />
 
     )
   }
