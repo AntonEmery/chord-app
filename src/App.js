@@ -168,7 +168,7 @@ class MutedStrings extends Component {
     let y4 = 20;
 
     return (
-      <path d="M10 20 L30 0 M30 20 L10 0" strokeWidth={2} stroke="black" />
+      <path d="M12 18 L28 2 M28 18 L12 2" strokeWidth={2} stroke="black" />
 
     )
   }
