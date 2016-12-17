@@ -157,18 +157,19 @@ class OpenStrings extends Component {
 
 class MutedStrings extends Component {
   render() {
-    let x1 = 20 + 20 * 0;
-    let y1 = 20;
-    let x2 = 40;
-    let y2 = 0;
-
-    let x3 = 20 + 20 * 0;
-    let y3 = 0;
-    let x4 = 40;
-    let y4 = 20;
+    let m1 = 12;
+    let m2 = 18;
+    let l1 = 28;
+    let l2 = 2;
+    let m3 = 28;
+    let m4 = 18;
+    let l3 = 12;
+    let l4 = 2;
+    let stringPath = 'M' + m1 + ' ' + m2 + ' ' + 'L' + l1 + ' ' + l2 + ' ' + 'M' + m3 + ' ' + m4 + ' ' + 'L' + l3 + ' ' + l4;
+    parseInt(stringPath);
 
     return (
-      <path d="M10 20 L30 0 M30 20 L10 0" strokeWidth={2} stroke="black" />
+      <path d={stringPath} strokeWidth={2} stroke="black" />
 
     )
   }
