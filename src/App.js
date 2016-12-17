@@ -170,7 +170,6 @@ class MutedStrings extends Component {
 
     return (
       <path d={stringPath} strokeWidth={2} stroke="black" />
-
     )
   }
 }
