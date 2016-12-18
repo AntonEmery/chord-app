@@ -12,14 +12,6 @@ class App extends Component {
     this.setState({[string]: fret});
   }
 
-  toggleOpenStrings(string) {
-    this.setState({[string]: -1});
-  }
-
-  toggleMutedStrings(string) {
-    this.setState({[string]: -2});
-  }
-
   componentDidUpdate() {
     console.log('component did update');
     console.log(this.state);
@@ -62,11 +54,12 @@ class App extends Component {
 
   openStringSymbols(numberOfStrings) {
     var dotPositions = [ ];
+    var fret = -1;
     for(let string = 0; string < numberOfStrings; string ++) {
-      dotPositions.push(string);
+      dotPositions.push([string, fret]);
     };
-    let drawingOpenStrings = dotPositions.map((string) => {
-      return <OpenStrings isVisible={this.state[string] === -1} string={string} onClick={() => this.toggleOpenStrings(string)} />
+    let drawingOpenStrings = dotPositions.map(([string, fret]) => {
+      return <OpenStrings isVisible={this.state[string] === fret} string={string} onClick={() => this.toggleVisibility(string, fret)} />
     });
     return drawingOpenStrings;
   }
@@ -166,7 +159,6 @@ class MutedStrings extends Component {
     let l3 = 12;
     let l4 = 2;
     let stringPath = 'M' + m1 + ' ' + m2 + ' ' + 'L' + l1 + ' ' + l2 + ' ' + 'M' + m3 + ' ' + m4 + ' ' + 'L' + l3 + ' ' + l4;
-    parseInt(stringPath);
 
     return (
       <path d={stringPath} strokeWidth={2} stroke="black" />
