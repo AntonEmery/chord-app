@@ -64,6 +64,18 @@ class App extends Component {
     return drawingOpenStrings;
   }
 
+  mutedStringSymbols(numberOfStrings) {
+    var dotPositions = [ ];
+    var fret = -2;
+    for(let string=0; string < numberOfStrings; string++) {
+      dotPositions.push([string, fret])
+    };
+    let drawingMutedStrings = dotPositions.map(([string,fret]) => {
+      return <MutedStrings isVisible={this.state[string] === fret} string={string} onClick={() => this.toggleVisibility(string, fret)} />
+    });
+    return drawingMutedStrings;
+  }
+
   render() {
     const numberOfFrets = 7;
     const numberOfStrings = 6;
@@ -88,7 +100,7 @@ class App extends Component {
         {/* open/muted strings */}
         {this.openStringSymbols(numberOfStrings)}
 
-        <MutedStrings />
+        {this.mutedStringSymbols(numberOfStrings)}
 
       </svg>
       </div>
@@ -150,18 +162,18 @@ class OpenStrings extends Component {
 
 class MutedStrings extends Component {
   render() {
-    let m1 = 12;
+    let m1 = 12 + 20 * this.props.string;
     let m2 = 18;
-    let l1 = 28;
+    let l1 = 28 + 20 * this.props.string;
     let l2 = 2;
-    let m3 = 28;
+    let m3 = 28 + 20 * this.props.string;
     let m4 = 18;
-    let l3 = 12;
+    let l3 = 12 + 20 * this.props.string;
     let l4 = 2;
     let stringPath = 'M' + m1 + ' ' + m2 + ' ' + 'L' + l1 + ' ' + l2 + ' ' + 'M' + m3 + ' ' + m4 + ' ' + 'L' + l3 + ' ' + l4;
 
     return (
-      <path d={stringPath} strokeWidth={2} stroke="black" />
+      <path d={stringPath} strokeWidth={2} stroke="black" onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} />
     )
   }
 }
