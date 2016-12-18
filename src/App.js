@@ -52,15 +52,28 @@ class App extends Component {
     return drawingStrings;
   }
 
-  drawOpenStrings(numberOfStrings) {
+  openStringSymbols(numberOfStrings) {
     var dotPositions = [ ];
+    var fret = -1;
     for(let string = 0; string < numberOfStrings; string ++) {
-      dotPositions.push(string);
+      dotPositions.push([string, fret]);
     };
-    let drawingOpenStrings = dotPositions.map((string) => {
-      return <OpenStrings string={string} />
+    let drawingOpenStrings = dotPositions.map(([string, fret]) => {
+      return <OpenStrings isVisible={this.state[string] === fret} string={string} onClick={() => this.toggleVisibility(string, fret)} />
     });
     return drawingOpenStrings;
+  }
+
+  mutedStringSymbols(numberOfStrings) {
+    var dotPositions = [ ];
+    var fret = -2;
+    for(let string=0; string < numberOfStrings; string++) {
+      dotPositions.push([string, fret])
+    };
+    let drawingMutedStrings = dotPositions.map(([string,fret]) => {
+      return <MutedStrings isVisible={this.state[string] === fret} string={string} onClick={() => this.toggleVisibility(string, fret)} />
+    });
+    return drawingMutedStrings;
   }
 
   render() {
@@ -85,7 +98,9 @@ class App extends Component {
         {this.drawDots(numberOfStrings, numberOfFrets)}
 
         {/* open/muted strings */}
-        {this.drawOpenStrings(numberOfStrings)}
+        {this.openStringSymbols(numberOfStrings)}
+
+        {this.mutedStringSymbols(numberOfStrings)}
 
       </svg>
       </div>
@@ -140,7 +155,25 @@ class OpenStrings extends Component {
     let cy = 10;
 
     return (
-      <circle cx={cx} cy={cy} r={8} fill="none" stroke="black" strokeWidth={4} />
+      <circle cx={cx} cy={cy} r={8} fill="none" onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} stroke="black" strokeWidth={4} />
+    )
+  }
+}
+
+class MutedStrings extends Component {
+  render() {
+    let m1 = 12 + 20 * this.props.string;
+    let m2 = 18;
+    let l1 = 28 + 20 * this.props.string;
+    let l2 = 2;
+    let m3 = 28 + 20 * this.props.string;
+    let m4 = 18;
+    let l3 = 12 + 20 * this.props.string;
+    let l4 = 2;
+    let stringPath = 'M' + m1 + ' ' + m2 + ' ' + 'L' + l1 + ' ' + l2 + ' ' + 'M' + m3 + ' ' + m4 + ' ' + 'L' + l3 + ' ' + l4;
+
+    return (
+      <path d={stringPath} strokeWidth={2} stroke="black" onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} />
     )
   }
 }
