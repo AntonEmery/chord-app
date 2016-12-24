@@ -1,0 +1,27 @@
+{
+  "name": "chord-app-server-side",
+  "version": "1.0.0",
+  "description": "Server side code for React chord app",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --exec babel-node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonEmery/chord-app-server-side.git"
+  },
+  "author": "Anton Emery",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AntonEmery/chord-app-server-side/issues"
+  },
+  "homepage": "https://github.com/AntonEmery/chord-app-server-side#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "nodemon": "^1.11.0"
+  }
+}
