@@ -18,6 +18,8 @@
   "homepage": "https://github.com/AntonEmery/chord-app-server-side#readme",
   "dependencies": {
     "express": "^4.14.0",
+    "pg": "^6.1.2",
+    "pg-hstore": "^2.3.2",
     "sequelize": "^3.28.0"
   },
   "devDependencies": {
