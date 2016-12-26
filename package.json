@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/AntonEmery/chord-app-server-side#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "sequelize": "^3.28.0"
   },
   "devDependencies": {
     "babel-cli": "^6.18.0",
