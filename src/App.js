@@ -162,15 +162,11 @@ class OpenStrings extends Component {
 
 class MutedStrings extends Component {
   render() {
-    let m1 = 12 + 20 * this.props.string;
-    let m2 = 18;
-    let l1 = 28 + 20 * this.props.string;
-    let l2 = 2;
-    let m3 = 28 + 20 * this.props.string;
-    let m4 = 18;
-    let l3 = 12 + 20 * this.props.string;
-    let l4 = 2;
-    let stringPath = 'M' + m1 + ' ' + m2 + ' ' + 'L' + l1 + ' ' + l2 + ' ' + 'M' + m3 + ' ' + m4 + ' ' + 'L' + l3 + ' ' + l4;
+    let xValue = 12 + 20 * this.props.string;
+    let yValue = 18;
+    let xValue2 = 28 + 20 * this.props.string;
+    let yValue2 = 2;
+    let stringPath = `M${xValue} ${yValue} L${xValue2} ${yValue2} M${xValue2} ${yValue} L${xValue} ${yValue2}`;
 
     return (
       <path d={stringPath} strokeWidth={2} stroke="black" onClick={this.props.onClick} className={this.props.isVisible ? 'visible' : 'invisible'} />
