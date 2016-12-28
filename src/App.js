@@ -101,7 +101,6 @@ class App extends Component {
         {this.openStringSymbols(numberOfStrings)}
 
         {this.mutedStringSymbols(numberOfStrings)}
-
       </svg>
       </div>
     );
@@ -119,6 +118,7 @@ class Circle extends Component {
     )
   }
 }
+
 
 class String extends Component {
   render() {
