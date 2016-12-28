@@ -1,9 +1,11 @@
 import express from 'express';
 import routes from './routes.js';
+// crdentials from separate module
+import credentials from './credentials.js';
+import Sequelize from 'sequelize';
 let app = express();
-var Sequelize = require('sequelize');
 
-var sequelize =  new Sequelize('postgres://username:password@localhost:5432/chordapp');
+var sequelize =  new Sequelize(`postgres://${credentials.username}:${credentials.password}@localhost:5432/chordapp`);
 
 app.use(routes);
 
