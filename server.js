@@ -9,6 +9,7 @@ var sequelize =  new Sequelize(`postgres://${credentials.username}:${credentials
 
 app.use(routes);
 
+
 sequelize
   .authenticate()
   .then(function(err) {
