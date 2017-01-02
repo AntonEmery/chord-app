@@ -21,13 +21,8 @@ db
   });
 
 
-//define users table
+//define users table. dont need to specify id since it has been created in DB
 var Users = db.define('users', {
-  id: {
-    type: Sequelize.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
   name: {
     type: Sequelize.TEXT
   },
@@ -39,24 +34,25 @@ var Users = db.define('users', {
   timestamps: false
 });
 
-// Users.sync().then(function() {
-//   var data = {
-//     id: 2,
-//     name: 'Gilbert',
-//     email: 'gilbert@dog.com'
-//   }
-//
-//   Users.create(data).then(function(data) {
-//     console.log(data.get());
-//   })
-// });
+
+/*
+//sync, then add and return new data
+Users.sync().then(function() {
+  var data = {
+    name: 'Gilbert',
+    email: 'gilbert@dog.com'
+  }
+
+  Users.create(data).then(function(data) {
+    console.log(data.get());
+  })
+});
+*/
 
 //returns are records for users table
 Users.findAll().then(function(users) {
-  users.forEach(function(val, index) {
-    console.log(users[index].dataValues);
-  })
+  users.forEach((val, index) => console.log(users[index].dataValues)
+  )
 })
-
 
 app.listen(3000, () => console.log('listening on port 3000'));
