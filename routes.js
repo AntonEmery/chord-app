@@ -8,10 +8,6 @@ let router = express.Router();
 router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
 router.get('/home', (req, res) => res.send('home route'));
 router.get('/about', (req, res) => res.send('about route'));
-router.get('/users', (req, res) => {
-  console.log( userData )
-  //res.render('pages/index', {userData})
-  res.json(userData)
-})
+router.get('/users', (req, res) => {res.send(userData)});
 
 module.exports = router;

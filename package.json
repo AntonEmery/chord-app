@@ -17,7 +17,6 @@
   },
   "homepage": "https://github.com/AntonEmery/chord-app-server-side#readme",
   "dependencies": {
-    "ejs": "^2.5.5",
     "express": "^4.14.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",

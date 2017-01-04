@@ -3,8 +3,8 @@ import routes from './routes.js';
 
 
 let app = express();
-app.set('view engine', 'ejs');
 
+app.use(express.static('public'))
 app.use(routes);
 
 
