@@ -10,7 +10,8 @@ router.get('/home', (req, res) => res.send('home route'));
 router.get('/about', (req, res) => res.send('about route'));
 router.get('/users', (req, res) => {
   console.log( userData )
-  res.send('about route')
+  //res.render('pages/index', {userData})
+  res.json(userData)
 })
 
 module.exports = router;

@@ -1,8 +1,9 @@
 import express from 'express';
 import routes from './routes.js';
 
-let app = express();
 
+let app = express();
+app.set('view engine', 'ejs');
 
 app.use(routes);
 
