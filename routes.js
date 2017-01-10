@@ -1,13 +1,21 @@
 import express from 'express';
 import path from 'path';
-import { userData } from './database.js';
+import { Users, ChordSheets } from './database.js';
 
 
 let router = express.Router();
 
 router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
-router.get('/home', (req, res) => res.send('home route'));
-router.get('/about', (req, res) => res.send('about route'));
-router.get('/users', (req, res) => {res.send(userData)});
+router.get('/chordSheets/:id', (req, res) => {
+  ChordSheets.findById(req.params.id)
+    .then((chordSheet) => res.send(chordSheet))
+});
+
+router.get('/users', (req, res) => {
+  Users.findAll().then(function(allUsers) {
+    res.send(allUsers)
+  });
+
+});
 
 module.exports = router;

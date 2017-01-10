@@ -29,32 +29,16 @@ var Users = db.define('users', {
   timestamps: false
 });
 
-
-/*
-//sync, then add and return new data
-Users.sync().then(function() {
-  var data = {
-    name: 'Gilbert',
-    email: 'gilbert@dog.com'
+var ChordSheets = db.define('chord_sheets', {
+  name: {
+    type: Sequelize.TEXT
   }
-
-  Users.create(data).then(function(data) {
-    console.log(data.get());
-  })
-});
-*/
-
-//returns are records for users table
-var userData = []
-Users.findAll().then(function(allUsers) {
-  allUsers.forEach((val, userIndex) => {
-    userData.push( allUsers[userIndex].dataValues )
-  })
 })
 
+db.sync();
 
 
 module.exports = {
   Users,
-  userData
+  ChordSheets
 }
