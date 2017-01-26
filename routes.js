@@ -11,6 +11,10 @@ router.get('/chordSheets/:id', (req, res) => {
     .then((chordSheet) => res.send(chordSheet))
 });
 
+router.post('/saveChordSheet/', (req, res) => {
+  res.send('Sent Sheet');
+})
+
 router.get('/users', (req, res) => {
   Users.findAll().then(function(allUsers) {
     res.send(allUsers)
