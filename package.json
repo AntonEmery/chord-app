@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/AntonEmery/chord-app-server-side#readme",
   "dependencies": {
+    "body-parser": "^1.16.0",
     "express": "^4.14.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",

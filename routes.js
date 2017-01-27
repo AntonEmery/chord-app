@@ -12,7 +12,15 @@ router.get('/chordSheets/:id', (req, res) => {
 });
 
 router.post('/saveChordSheet/', (req, res) => {
-  res.send('Sent Sheet');
+  var data = '';
+  req.on('data', function(chunk) {
+    data += chunk;
+  })
+
+  req.on('end', function() {
+    var parse = JSON.stringify(data);
+    console.log(data);
+  })
 })
 
 router.get('/users', (req, res) => {
