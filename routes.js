@@ -12,16 +12,17 @@ router.get('/chordSheets/:id', (req, res) => {
 });
 
 router.post('/saveChordSheet/', (req, res) => {
-  var data = '';
-  req.on('data', function(chunk) {
-    data += chunk;
+    console.log(req);
+    ChordSheets.create({name: req.body.name})
+    .then(function(data) {
+        res.status(200).json(data);
+    })
+    .catch(function(error) {
+      res.status(500).json(error);
+    })
+
   })
 
-  req.on('end', function() {
-    var parse = JSON.stringify(data);
-    console.log(data);
-  })
-})
 
 router.get('/users', (req, res) => {
   Users.findAll().then(function(allUsers) {
