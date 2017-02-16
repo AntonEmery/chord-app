@@ -3,11 +3,12 @@ import './App.css'
 
 import Util from './Util.js'
 
-import CirclePoint from './CirclePoint.js'
-import OpenStringsPoint from './OpenStringsPoint.js'
-import StringPoints from './StringPoints.js'
-import FretPoints from './FretPoints.js'
-import MutedStringsPoints from './MutedStringsPoints.js'
+import GuitarCircle from './components/GuitarCircle.js'
+import GuitarString from './components/GuitarString.js'
+import GuitarFret from './components/GuitarFret.js'
+
+import OpenStrings from './components/OpenStrings.js'
+import MutedStrings from './components/MutedStrings.js'
 
 class App extends Component {
 
@@ -34,14 +35,14 @@ class App extends Component {
 
   drawFrets() {
     return this.numOfFretsAsArray.slice(0).map((fret) => {
-      return <Fret fret={fret} />
+      return <GuitarFret fret={fret} />
     })
   }
 
   drawDots() {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       return this.numOfStringsAsArray.slice(0).map((fret) => {
-        return <Circle isVisible={this.state[string] === fret}
+        return <GuitarCircle isVisible={this.state[string] === fret}
           onClick={() => this.toggleVisibility(string, fret)}
           string={string} fret={fret}
         />
@@ -51,7 +52,7 @@ class App extends Component {
 
   drawStrings() {
     return this.numOfStringsAsArray.slice(0).map((string) => {
-      return <String string={string} />
+      return <GuitarString string={string} />
     })
   }
 
@@ -90,77 +91,6 @@ class App extends Component {
         {this.mutedStringSymbols()}
       </svg>
       </div>
-    )
-  }
-}
-
-class Circle extends Component {
-  render() {
-    let p1 = new CirclePoint(
-      { props: { fret: this.props.fret, string: this.props.string } }
-    )
-    return (
-      <circle
-        cx={p1.x} cy={p1.y} r={8} onClick={this.props.onClick}
-        className={this.props.isVisible ? 'visible' : 'invisible'} fill="black"
-      />
-    )
-  }
-}
-
-class String extends Component {
-  render() {
-    let [p1, p2] = new StringPoints(
-      { props: { string: this.props.string } }
-    ).destructure()
-    return (
-      <line
-        x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} strokeWidth={2} stroke="black"
-      />
-    )
-  }
-}
-
-class Fret extends Component {
-  render() {
-    let [p1, p2] = new FretPoints(
-      { props: { fret: this.props.fret } }
-    ).destructure()
-    return (
-      <line
-        x1={p1.x} y1={p1.y} x2={p2.x} y2={p2.y} strokeWidth={2} stroke="black"
-      />
-    )
-  }
-}
-
-class OpenStrings extends Component {
-
-  render() {
-    let p1 = new OpenStringsPoint(
-      { props: { string: this.props.string } }
-    )
-    return (
-      <circle
-        cx={p1.x} cy={p1.y} r={8} fill="none" onClick={this.props.onClick}
-        className={this.props.isVisible ? 'visible' : 'invisible'}
-        stroke="black" strokeWidth={4}
-      />
-    )
-  }
-}
-
-class MutedStrings extends Component {
-  render() {
-    let stringPath = new MutedStringsPoints(
-      { props: { string: this.props.string } }
-    ).stringPath()
-    return (
-      <path
-        d={stringPath} strokeWidth={2}
-        stroke="black" onClick={this.props.onClick}
-        className={this.props.isVisible ? 'visible' : 'invisible'}
-      />
     )
   }
 }
