@@ -35,7 +35,7 @@ class App extends Component {
 
   drawFrets() {
     return this.numOfFretsAsArray.slice(0).map((fret) => {
-      return <GuitarFret fret={fret} />
+      return <GuitarFret key={fret} fret={fret} />
     })
   }
 
@@ -52,14 +52,14 @@ class App extends Component {
 
   drawStrings() {
     return this.numOfStringsAsArray.slice(0).map((string) => {
-      return <GuitarString string={string} />
+      return <GuitarString key={string} string={string} />
     })
   }
 
   openStringSymbols() {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       let fret = -1
-      return <OpenStrings isVisible={this.state[string] === fret}
+      return <OpenStrings key={string} isVisible={this.state[string] === fret}
         string={string} onClick={() => this.toggleVisibility(string, fret)}
       />
     })
@@ -68,7 +68,7 @@ class App extends Component {
   mutedStringSymbols() {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       let fret = -2
-      return <MutedStrings isVisible={this.state[string] === fret}
+      return <MutedStrings key={string} isVisible={this.state[string] === fret}
         string={string} onClick={() => this.toggleVisibility(string, fret)}
       />
     })
