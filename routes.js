@@ -27,6 +27,14 @@ router.post('/saveChordSheet/', (req, res) => {
     })
   })
 
+router.post('/updateChordSheet', () => {
+  ChordSheets.findById(5).then(function(chordSheet) {
+    chordSheet.updateAttributes({
+      chords: "blah"
+    })
+  })
+})
+
 
 router.get('/users', (req, res) => {
   Users.findAll().then(function(allUsers) {
