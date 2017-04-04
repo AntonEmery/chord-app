@@ -32,6 +32,12 @@ var Users = db.define('users', {
 var ChordSheets = db.define('chord_sheets', {
   name: {
     type: Sequelize.TEXT
+  },
+  chords: {
+    type: Sequelize.TEXT
+  },
+  user_id: {
+    type: Sequelize.INTEGER
   }
 })
 
