@@ -35,11 +35,20 @@ router.post('/updateChordSheet', () => {
   })
 })
 
+router.post('/users', (req,res) => {
+  Users.create({
+    name: req.body.name,
+    email: req.body.email
+  })
+  .then((data) => res.status(200).json(data))
+  .catch((error) => res.status(500).json(error))
+})
+
+router.delete('/users')
 
 router.get('/users', (req, res) => {
-  Users.findAll().then(function(allUsers) {
-    res.send(allUsers)
-  });
-});
+  Users.findAll().then((allUsers) => res.send(allUsers))
+})
+
 
 module.exports = router;
