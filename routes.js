@@ -5,13 +5,27 @@ import { Users, ChordSheets } from './database.js';
 
 let router = express.Router();
 
+//loads home route
 router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
 
+
+//returns chord sheet with a given id
 router.get('/chordSheets/:id', (req, res) => {
   ChordSheets.findById(req.params.id)
     .then((chordSheet) => res.send(chordSheet))
 });
 
+//returns chord sheets associated with a user id
+router.get('/userChordSheets/:id', (req, res) => {
+  ChordSheets.findAll({
+    where: {
+      user_id: req.params.id
+    }
+  })
+  .then((chordSheet) => res.send(chordSheet))
+});
+
+//saves a chord sheet
 router.post('/saveChordSheet/', (req, res) => {
   console.log(req.body);
   ChordSheets.create({
@@ -27,18 +41,29 @@ router.post('/saveChordSheet/', (req, res) => {
   })
 })
 
-router.post('/updateChordSheet', (req) => {
+//updates a chord sheet
+router.post('/updateChordSheet', (req, res) => {
   ChordSheets.findById(req.body.id).then(function(chordSheet) {
     chordSheet.updateAttributes({
-      chords: req.body.chords
+      chords: req.body.chords,
+      user_id: req.body.user_id
+    })
+    .then(function(data) {
+        res.status(200).json(data);
+    })
+    .catch(function(error) {
+      res.status(500).json(error);
     })
   })
 })
 
+
+//returns all users
 router.get('/users', (req, res) => {
   Users.findAll().then((allUsers) => res.send(allUsers))
 })
 
+//creates a new user
 router.post('/users', (req,res) => {
   Users.create({
     name: req.body.name,
@@ -48,6 +73,7 @@ router.post('/users', (req,res) => {
   .catch((error) => res.status(500).json(error))
 })
 
+//deletes a user
 router.delete('/users', (req, res) => {
   Users.destroy({
     where: {
