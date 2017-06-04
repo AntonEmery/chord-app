@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
 import './App.css'
+import axios from 'axios'
 
 import Util from './Util.js'
 
-import GuitarCircle from './components/GuitarCircle.js'
-import GuitarString from './components/GuitarString.js'
-import GuitarFret from './components/GuitarFret.js'
+import GuitarCircle from './components/GuitarCircle'
+import GuitarString from './components/GuitarString'
+import GuitarFret from './components/GuitarFret'
 
-import OpenStrings from './components/OpenStrings.js'
-import MutedStrings from './components/MutedStrings.js'
+import OpenStrings from './components/OpenStrings'
+import MutedStrings from './components/MutedStrings'
+
+import SaveButton from './components/SaveButton'
 
 class App extends Component {
 
@@ -74,6 +77,34 @@ class App extends Component {
     })
   }
 
+  handleClick = () => {
+    //this.state = {0: -1..5, 1: -1..6, ...}
+    //this.state -> [[-1..5, -1..5, ...]
+    var chord = []
+
+    for (let i = 0; i < 6; i++) {
+      if (this.state[i] === undefined) {
+        chord.push(-1)
+      } else {
+        chord.push(this.state[i])
+      }
+    }
+
+    console.log(chord)
+
+    axios.post('http://192.168.100.22:3000/saveChordSheet/', {
+        name: 'Untitled',
+        chords: [chord],
+        user_id: 1
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   render() {
     return (
       <div className="App">
@@ -90,6 +121,7 @@ class App extends Component {
         {this.openStringSymbols()}
         {this.mutedStringSymbols()}
       </svg>
+      <SaveButton handleClick={this.handleClick} />
       </div>
     )
   }
