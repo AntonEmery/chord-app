@@ -27,7 +27,6 @@ router.get('/userChordSheets/:id', (req, res) => {
 
 //saves a chord sheet
 router.post('/saveChordSheet/', (req, res) => {
-  console.log(req.body);
   ChordSheets.create({
     name: req.body.name,
     chords: req.body.chords,
@@ -56,7 +55,6 @@ router.post('/updateChordSheet', (req, res) => {
     })
   })
 })
-
 
 //returns all users
 router.get('/users', (req, res) => {
