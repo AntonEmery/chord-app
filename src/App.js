@@ -54,6 +54,15 @@ class App extends Component {
     })
   }
 
+  deleteChord = (id) => {
+    console.log('delete chord');
+    let newChordState = this.state.chords.slice();
+    newChordState.splice(id);
+    this.setState({
+      chords: newChordState
+    })
+  }
+
   handleSave = () => {
     //this.state = {0: -1..5, 1: -1..6, ...}
     //this.state -> [[-1..5, -1..5, ...]
@@ -86,7 +95,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.chords.map((chord, index) => {
-          return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility}/>)
+          return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility} deleteChord={this.deleteChord}/>)
         })}
         <SaveButton handleSave={this.handleSave} />
         <AddChord addChord={this.addChord} />

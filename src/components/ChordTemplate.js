@@ -64,19 +64,22 @@ class ChordTemplate extends Component {
 
   render() {
     return (
-      <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={140} height={160}>
-        {/* strings */}
-        {this.drawStrings()}
-        {/* nut */}
-        <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black"/>
-        {/* frets */}
-        {this.drawFrets()}
-        {/* finger position circles */}
-        {this.drawDots()}
-        {/* open/muted strings */}
-        {this.openStringSymbols()}
-        {this.mutedStringSymbols()}
-      </svg>
+      <div>
+        <button onClick={this.props.deleteChord.bind(null, this.id)}>Delete</button>
+        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={140} height={160}>
+          {/* strings */}
+          {this.drawStrings()}
+          {/* nut */}
+          <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black"/>
+          {/* frets */}
+          {this.drawFrets()}
+          {/* finger position circles */}
+          {this.drawDots()}
+          {/* open/muted strings */}
+          {this.openStringSymbols()}
+          {this.mutedStringSymbols()}
+        </svg>
+      </div>
     )
   }
 }
