@@ -22,20 +22,25 @@ class App extends Component {
     // Set state
     this.state = {
       chords: [
-        {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, 6: undefined}
+        {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined}
       ]
     }
   }
 
-  toggleVisibility(id, string, fret) {
+  toggleVisibility = (id, string, fret) => {
+    // id is the id of the specific chord that you are working on
+    // string is the string of the chords (0 - 5)
+    // fret is the fret of the chord (-1 - 5)
+
+    var currentChords = this.state.chords.slice();
+    currentChords[id][string] = fret;
     this.setState({
-      chords[id]: [string]: fret
+      chords: currentChords
     })
   }
 
   componentDidUpdate() {
     console.log('component did update')
-    console.log(this.state)
   }
 
   handleSave = () => {
@@ -70,7 +75,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.chords.map((chord, index) => {
-          return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={toggleVisibility}/>)
+          return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility}/>)
         })}
         <SaveButton handleSave={this.handleSave} />
       </div>

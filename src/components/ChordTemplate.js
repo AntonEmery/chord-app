@@ -37,7 +37,7 @@ class ChordTemplate extends Component {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       return this.numOfStringsAsArray.slice(0).map((fret) => {
         return <GuitarCircle isVisible={this.props.state[string] === fret}
-          onClick={this.props.toggleVisibility(this.id, string, fret)}
+          onClick={this.props.toggleVisibility.bind(null, this.id, string, fret)}
           string={string} fret={fret}
         />
       })
@@ -48,7 +48,7 @@ class ChordTemplate extends Component {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       let fret = -1
       return <OpenStrings key={string} isVisible={this.props.state[string] === fret}
-        string={string} onClick={this.props.toggleVisibility(this.id, string, fret)}
+        string={string} onClick={this.props.toggleVisibility.bind(null, this.id, string, fret)}
       />
     })
   }
@@ -57,7 +57,7 @@ class ChordTemplate extends Component {
     return this.numOfStringsAsArray.slice(0).map((string) => {
       let fret = -2
       return <MutedStrings key={string} isVisible={this.props.state[string] === fret}
-        string={string} onClick={this.props.toggleVisibility(this.id, string, fret)}
+        string={string} onClick={this.props.toggleVisibility.bind(null, this.id, string, fret)}
       />
     })
   }
