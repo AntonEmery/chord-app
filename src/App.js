@@ -6,6 +6,7 @@ import Util from './Util.js'
 
 
 
+import AddChord from './components/AddChord'
 import SaveButton from './components/SaveButton'
 import ChordTemplate from './components/ChordTemplate'
 
@@ -22,7 +23,7 @@ class App extends Component {
     // Set state
     this.state = {
       chords: [
-        {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined}
+        {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined},
       ]
     }
   }
@@ -33,6 +34,7 @@ class App extends Component {
     // fret is the fret of the chord (-1 - 5)
 
     var currentChords = this.state.chords.slice();
+    //set value of current chord and string to the fret you are on
     currentChords[id][string] = fret;
     this.setState({
       chords: currentChords
@@ -41,6 +43,15 @@ class App extends Component {
 
   componentDidUpdate() {
     console.log('component did update')
+  }
+
+  addChord = () => {
+    const blankChord = {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined};
+    let newChordState = this.state.chords.slice();
+    newChordState.push(blankChord);
+    this.setState({
+      chords: newChordState
+    })
   }
 
   handleSave = () => {
@@ -78,6 +89,7 @@ class App extends Component {
           return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility}/>)
         })}
         <SaveButton handleSave={this.handleSave} />
+        <AddChord addChord={this.addChord} />
       </div>
     )
   }
