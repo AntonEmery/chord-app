@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class ChordSheets extends Component {
+class AllChordSheets extends Component {
   render() {
     return (
       <p>Chord Sheets</p>
@@ -8,4 +8,4 @@ class ChordSheets extends Component {
   }
 }
 
-export default ChordSheets
+export default AllChordSheets
