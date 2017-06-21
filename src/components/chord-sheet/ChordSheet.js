@@ -3,9 +3,6 @@ import '../../App.css'
 import axios from 'axios'
 
 import Util from '../../Util.js'
-
-
-
 import AddChord from '../AddChord'
 import SaveButton from '../SaveButton'
 import ChordTemplate from '../ChordTemplate'
@@ -93,7 +90,7 @@ class ChordSheet extends Component {
 
   render() {
     return (
-      <div>
+      <div className="chord-sheet-wrapper">
       <div className="App">
         {this.state.chords.map((chord, index) => {
           return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility} deleteChord={this.deleteChord}/>)
