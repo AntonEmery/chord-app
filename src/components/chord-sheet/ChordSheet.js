@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import '../../App.css'
 import axios from 'axios'
 
 import Util from '../../Util.js'
 import AddChord from '../AddChord'
 import SaveButton from '../SaveButton'
 import ChordTemplate from '../ChordTemplate'
+import ToolBar from './ToolBar'
 
 class ChordSheet extends Component {
 
@@ -91,13 +91,15 @@ class ChordSheet extends Component {
   render() {
     return (
       <div className="chord-sheet-wrapper">
-      <div className="App">
-        {this.state.chords.map((chord, index) => {
-          return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility} deleteChord={this.deleteChord}/>)
-        })}
-      </div>
-      <SaveButton handleSave={this.handleSave} />
-      <AddChord addChord={this.addChord} />
+        <ToolBar
+          handleSave={this.handleSave}
+          addChord={this.addChord}
+        />
+        <div className="App">
+          {this.state.chords.map((chord, index) => {
+            return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility} deleteChord={this.deleteChord}/>)
+          })}
+        </div>
       </div>
     )
   }

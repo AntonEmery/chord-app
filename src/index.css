@@ -13,3 +13,27 @@ body {
   width: 80%;
   margin: 0 auto;
 }
+
+/* Chord Sheet main */
+.App {
+}
+
+.invisible {
+  opacity: 0;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.invisible:hover {
+  opacity: .5 !important;
+}
+
+/* Menu Bar */
+.menu-bar {
+  margin-bottom: 3%;
+}
+.menu-bar button {
+  margin-left: 3%;
+}
