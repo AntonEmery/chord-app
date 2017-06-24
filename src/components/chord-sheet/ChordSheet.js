@@ -95,7 +95,7 @@ class ChordSheet extends Component {
           handleSave={this.handleSave}
           addChord={this.addChord}
         />
-        <div className="App">
+        <div className="App pure-g">
           {this.state.chords.map((chord, index) => {
             return (<ChordTemplate key={index} id={index} state={chord} toggleVisibility={this.toggleVisibility} deleteChord={this.deleteChord}/>)
           })}
