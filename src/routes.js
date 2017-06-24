@@ -16,7 +16,7 @@ const Routes = () => (
 <Router>
   <div>
     {/* Links component is rendered on every route */}
-    <Links />
+    {/* <Links /> */}
     <Route exact path="/" component={App}/>
     <Route path="/chordsheet" component={ChordSheet}/>
     <Route path="/chordsheets" component={AllChordSheets}/>

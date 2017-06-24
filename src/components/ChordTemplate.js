@@ -78,7 +78,7 @@ class ChordTemplate extends Component {
           {this.openStringSymbols()}
           {this.mutedStringSymbols()}
         </svg>
-        <button className="pure-button" onClick={this.props.deleteChord.bind(null, this.id)}>Delete</button>
+        <button className="pure-button button-delete" onClick={this.props.deleteChord.bind(null, this.id)}>Delete</button>
       </div>
     )
   }

@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+#root {
+  margin-top: 3%;
+}
+
 .chord-template {
   display: inline;
 }
@@ -27,12 +31,24 @@ body {
   opacity: .5 !important;
 }
 
+/* Chord Template */
+.chord-template {
+  text-align: center;
+}
+
+.button-delete {
+  border-radius: 4px;
+  background: rgb(66, 184, 221);
+  font-size: 70%;
+  margin-bottom: 3px;
+}
+
 /* Menu Bar */
 .menu-bar {
   margin-bottom: 3%;
 }
 .menu-bar button {
-  margin-left: 3%;
+  /*margin-left: 3%;*/
 }
 
 /* Chord Template Component */
