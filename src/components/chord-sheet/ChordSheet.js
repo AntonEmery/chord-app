@@ -6,6 +6,7 @@ import AddChord from '../AddChord'
 import SaveButton from '../SaveButton'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
+import Chordsheets from '../../seed-data.js'
 
 class ChordSheet extends Component {
 
@@ -36,6 +37,10 @@ class ChordSheet extends Component {
     this.setState({
       chords: currentChords
     })
+  }
+
+  componentDidMount() {
+    console.log(Chordsheets);
   }
 
   componentDidUpdate() {

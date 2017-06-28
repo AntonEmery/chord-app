@@ -6,7 +6,6 @@ class App extends Component {
       <p>Main app page</p>
     )
   }
-
 }
 
 export default App;
