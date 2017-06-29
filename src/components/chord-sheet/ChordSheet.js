@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import axios from 'axios'
 
 import Util from '../../Util.js'
-import AddChord from '../AddChord'
-import SaveButton from '../SaveButton'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 import Chordsheets from '../../seed-data.js'
+import { match } from 'react-router-dom'
 
 class ChordSheet extends Component {
 
@@ -40,7 +39,12 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    console.log(Chordsheets);
+    console.log(this.props);
+    let chords = this.state.chords.slice();
+    chords.push(Chordsheets[this.props.match.params.id].chords[0])
+    this.setState({
+      chords: chords
+    })
   }
 
   componentDidUpdate() {

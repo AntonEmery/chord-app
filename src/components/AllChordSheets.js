@@ -1,24 +1,25 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import Chordsheets from '../seed-data.js';
+import { Link } from 'react-router-dom'
+
 
 
 class AllChordSheets extends Component {
 
   componentDidMount() {
-    console.log(Chordsheets)
+    console.log(Chordsheets[0].chords)
   }
 
 
 
   render() {
-    let sheets = Chordsheets.map((item) => {
-      return <p>{item.user_id}</p>
+    let sheets = Chordsheets.map((item, index) => {
+      return <p key={index}><Link to={"chordsheet/" + index}>Chord Sheet</Link></p>
     })
     return (
       <div>
         <p>Blah</p>
-        {sheets}
+          {sheets}
       </div>
     )
   }
