@@ -39,16 +39,17 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props);
-    let chords = this.state.chords.slice();
-    chords.push(Chordsheets[this.props.match.params.id].chords[0])
-    this.setState({
-      chords: chords
-    })
+    const chords = this.state.chords.slice();
+    const newChordState = Chordsheets[this.props.match.params.id].chords.map(
+      (chord) => {
+        console.log(chords);
+        return chords.push(chord);
+      }
+    )
+    this.setState({chords: chords})
   }
 
   componentDidUpdate() {
-    console.log('component did update')
   }
 
   addChord = () => {
