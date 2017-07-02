@@ -39,35 +39,46 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    const chords = this.state.chords.slice();
-    const newChordState = Chordsheets[this.props.match.params.id].chords.map(
-      (chord) => {
-        console.log(chords);
-        return chords.push(chord);
+    this.setState(
+      (prevState, props) => {
+        // Copy current chords in to temp var
+        const chords = prevState.chords.slice();
+
+        // Create a new chord state by iterating over seed data refrencing the
+        // current `props.match.params.id` and making a new ChordState
+        Chordsheets[props.match.params.id]
+          .chords
+          .forEach( (chord) => chords.push(chord) )
+
+        // Return the new chords state
+        return chords
       }
     )
-    this.setState({chords: chords})
   }
 
   componentDidUpdate() {
   }
 
   addChord = () => {
-    const blankChord = {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined};
-    let newChordState = this.state.chords.slice();
-    newChordState.push(blankChord);
-    this.setState({
-      chords: newChordState
-    })
+    this.setState(
+      (prevState, props) => {
+        const blankChord = {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined};
+        let newChordState = prevState.chords.slice();
+        newChordState.push(blankChord);
+        return { chords: newChordState }
+      }
+    )
   }
 
   deleteChord = (id) => {
     console.log(id);
-    let newChordState = this.state.chords.slice();
-    newChordState.splice(id, 1);
-    this.setState({
-      chords: newChordState
-    })
+    this.setState(
+      (prevState, props) => {
+        let newChordState = this.state.chords.slice();
+        newChordState.splice(id, 1);
+        return { chords: newChordState }
+      }
+    )
   }
 
   handleSave = () => {
