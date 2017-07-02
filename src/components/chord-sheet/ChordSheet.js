@@ -5,7 +5,6 @@ import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 import Chordsheets from '../../seed-data.js'
-import { match } from 'react-router-dom'
 
 class ChordSheet extends Component {
 
