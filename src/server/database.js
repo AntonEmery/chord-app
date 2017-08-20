@@ -34,7 +34,7 @@ var ChordSheets = db.define('chord_sheets', {
     type: Sequelize.TEXT
   },
   chords: {
-    type: Sequelize.TEXT
+    type: Sequelize.ARRAY(Sequelize.JSON)
   },
   user_id: {
     type: Sequelize.INTEGER

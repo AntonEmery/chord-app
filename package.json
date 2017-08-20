@@ -13,7 +13,7 @@
     "url": "git+https://github.com/AntonEmery/chord-app-server-side.git"
   },
   "author": "Anton Emery",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/AntonEmery/chord-app-server-side/issues"
   },

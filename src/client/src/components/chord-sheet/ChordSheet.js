@@ -85,31 +85,22 @@ class ChordSheet extends Component {
   }
 
   handleSave = () => {
-    //this.state = {0: -1..5, 1: -1..6, ...}
-    //this.state -> [[-1..5, -1..5, ...]
-    var chord = []
 
-    for (let i = 0; i < 6; i++) {
-      if (this.state[i] === undefined) {
-        chord.push(-1)
-      } else {
-        chord.push(this.state[i])
-      }
-    }
-
-    console.log(chord)
+    const jsonArray = this.state.chords.map((chord) => {
+      return JSON.stringify(chord)
+    })
 
     axios.post('/saveChordSheet', {
         name: 'Untitled',
-        chords: `[[${chord}]]`,
+        chords: jsonArray,
         user_id: 1
       }, {responseType: 'json'})
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(function (response) {
+      console.log(response);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   render() {
