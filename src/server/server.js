@@ -1,13 +1,16 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import routes from './routes.js';
+import path from 'path';
 
 
 let app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.use(express.static('public'))
+const pathToClient = path.join(__dirname, '..', 'client', 'build');
+
+app.use(express.static(pathToClient));
 app.use(routes);
 
 
