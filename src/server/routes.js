@@ -6,10 +6,6 @@ const chordSheetController = require('./controllers/chordSheetController');
 
 let router = express.Router();
 
-//loads home route
-// router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
-
-
 //returns chord sheet with a given id
 router.get('/chordSheets/:id', chordSheetController.returnChordSheetById);
 

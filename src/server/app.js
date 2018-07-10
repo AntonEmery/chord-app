@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 app.use(express.static(pathToClient));
-app.use('/', routes);
+app.use(routes);
 
 module.exports = app;
 

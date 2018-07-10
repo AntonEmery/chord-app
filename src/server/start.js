@@ -2,10 +2,10 @@ const mongoose = require('mongoose');
 
 
 // Import variables.env file
-require('dotenv').config({path: 'variables.env'});
+require('dotenv').config({path: 'src/server/variables.env'});
 
 // Connect to database
-mongoose.connect(process.env.DATABASE);
+mongoose.connect(process.env.DATABASE, { useNewUrlParser: true });
 mongoose.Promise = global.Promise;
 
 mongoose.connection.on('error', err => {
