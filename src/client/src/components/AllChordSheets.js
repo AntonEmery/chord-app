@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chordsheets from '../seed-data.js';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 
 

@@ -3,5 +3,4 @@ node_modules
 npm-debug.log
 credentials.js
 notes.txt
-
-src/server/variables.env
+variables.env

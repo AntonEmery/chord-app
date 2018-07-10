@@ -2,15 +2,15 @@
   "name": "chord-app-server-side",
   "version": "1.0.0",
   "description": "Server side code for React chord app",
-  "main": "src/server/server.js",
+  "main": "src/server/start.js",
   "scripts": {
     "buildClient": "cd src/client && npm run build",
-    "dev": "npm run buildClient && nodemon --exec babel-node src/server/server.js",
-    "devNoClient": "nodemon --exec babel-node src/server/server.js"
+    "dev": "npm run buildClient && nodemon --exec babel-node src/server/start.js",
+    "devNoClient": "nodemon --exec babel-node src/server/start.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AntonEmery/chord-app-server-side.git"
+    "url": "git+https://github.com/AntonEmery/chord-app.git"
   },
   "author": "Anton Emery",
   "license": "MIT",
