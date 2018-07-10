@@ -1,21 +1,22 @@
 import express from 'express';
 import path from 'path';
 import { Users, ChordSheets } from './database.js';
+const chordSheetController = require('./controllers/chordSheetController');
 
 
 let router = express.Router();
 
 //loads home route
-router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
+// router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
 
 
 //returns chord sheet with a given id
-router.get('/chordSheets/:id', (req, res) => {
-  ChordSheets.findById(req.params.id)
-    .then((chordSheet) => res.send(chordSheet))
-});
+router.get('/chordSheets/:id', chordSheetController.returnChordSheetById);
 
 //returns chord sheets associated with a user id
+router.get('/chordSheets/:id', chordSheetController.returnChordSheetByUser);
+
+/* Old request
 router.get('/userChordSheets/:id', (req, res) => {
   ChordSheets.findAll({
     where: {
@@ -24,8 +25,12 @@ router.get('/userChordSheets/:id', (req, res) => {
   })
   .then((chordSheet) => res.send(chordSheet))
 });
+*/
 
 //saves a chord sheet
+router.post('/chordSheets/:id', chordSheetController.saveChordSheet);
+
+/* Old request
 router.post('/saveChordSheet/', (req, res) => {
   ChordSheets.create({
     name: req.body.name,
@@ -39,6 +44,7 @@ router.post('/saveChordSheet/', (req, res) => {
     res.status(500).json(error);
   })
 })
+*/
 
 //updates a chord sheet
 router.post('/updateChordSheet', (req, res) => {

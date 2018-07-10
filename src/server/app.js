@@ -5,13 +5,14 @@ import path from 'path';
 
 
 const app = express();
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 app.use(express.static(pathToClient));
-app.use(routes);
+app.use('/', routes);
 
 module.exports = app;
 
