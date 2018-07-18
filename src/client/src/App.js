@@ -3,7 +3,11 @@ import React, { Component } from 'react'
 class App extends Component {
   render() {
     return (
-      <p>Main app page</p>
+      <form action="http://localhost:8080/login" method="POST">
+        <input name="username" type="text"/>
+        <input name="password" type="text"/>
+        <button type="submit">Login</button>
+      </form>
     )
   }
 }

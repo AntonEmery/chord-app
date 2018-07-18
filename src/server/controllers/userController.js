@@ -9,3 +9,8 @@ exports.createUser = async (req, res) => {
   await user.save();
   res.send('done');
 }
+
+exports.loginUser = (req, res) => {
+  console.log(req.body);
+  res.send('done');
+}

@@ -5,7 +5,12 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: 'Please enter a name'
   },
-  chordSheets: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ChordSheet'}]
+  chordSheets: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'ChordSheet'
+    }
+  ]
 });
 
 module.exports = mongoose.model('User', userSchema);

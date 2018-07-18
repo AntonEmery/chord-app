@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
 
 import AllChordSheets from './components/AllChordSheets'
 import ChordSheet from './components/chord-sheet/ChordSheet'

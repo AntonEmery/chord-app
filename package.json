@@ -4,8 +4,8 @@
   "description": "Server side code for React chord app",
   "main": "src/server/start.js",
   "scripts": {
-    "buildClient": "cd src/client && npm run build",
-    "dev": "npm run buildClient && nodemon --exec babel-node src/server/start.js",
+    "buildClient": "cd src/client && npm run start",
+    "dev": "concurrently \"npm run buildClient\" \"nodemon --exec babel-node src/server/start.js\" ",
     "devNoClient": "nodemon --exec babel-node src/server/start.js"
   },
   "repository": {
@@ -21,6 +21,7 @@
   "dependencies": {
     "body-parser": "^1.16.0",
     "connect-mongo": "^2.0.1",
+    "cors": "^2.8.4",
     "dotenv": "^6.0.0",
     "es6-promisify": "^6.0.0",
     "express": "^4.14.0",
@@ -30,6 +31,7 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
+    "concurrently": "^3.6.0",
     "nodemon": "^1.11.0"
   }
 }
