@@ -1,3 +1,4 @@
+require('newrelic');
 const mongoose = require('mongoose');
 
 

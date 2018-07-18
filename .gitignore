@@ -2,3 +2,5 @@
 node_modules
 npm-debug.log
 src/server/variables.env
+newrelic.js
+newrelic_agent.log

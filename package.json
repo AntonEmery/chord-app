@@ -24,7 +24,8 @@
     "dotenv": "^6.0.0",
     "es6-promisify": "^6.0.0",
     "express": "^4.14.0",
-    "mongoose": "^5.2.2"
+    "mongoose": "^5.2.2",
+    "newrelic": "^4.5.0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
