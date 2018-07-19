@@ -3,10 +3,20 @@ import bodyParser from 'body-parser';
 import routes from './routes.js';
 import path from 'path';
 import cors from 'cors';
+import session from 'express-session';
 
 
 const app = express();
 app.use(cors());
+
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  domain: 'http://localhost:3000',
+  secret: 'keyboard dog',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false, httpOnly: false }
+}))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

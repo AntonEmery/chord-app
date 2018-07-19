@@ -13,8 +13,11 @@ router.post('/login', userController.loginUser);
 // create user
 router.post('/createUser', userController.createUser);
 
-//returns chord sheet with a given id
-router.get('/chordSheets/:id', chordSheetController.returnChordSheetById);
+// create chord sheet
+router.post('/createChordSheet', userController.createChordSheet);
+
+//returns chord sheets based on a user
+router.get('/getChordSheets', userController.getChordSheets);
 
 //returns chord sheets associated with a user id
 router.get('/chordSheets/:id', chordSheetController.returnChordSheetByUser);
