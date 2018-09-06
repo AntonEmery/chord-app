@@ -11,7 +11,7 @@ let router = express.Router();
 router.post('/login', userController.loginUser);
 
 // create user
-router.post('/createUser', userController.createUser);
+router.post('/register', userController.createUser);
 
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);
