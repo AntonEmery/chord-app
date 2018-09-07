@@ -3,13 +3,16 @@ import React, { Component } from 'react';
 class Register extends Component {
   state = {
     isEnabled: false,
+    username: '',
+    email: '',
     password: '',
     confirmedPassword: ''
   };
 
-  storePassword = (e) => {
+  // use the same function to set input contents to state on all inputs
+  setInputToState = (e) => {
     this.setState({
-      password: e.target.value
+      [e.target.name]: e.target.value
     })
   }
 
@@ -23,12 +26,14 @@ class Register extends Component {
     return (
       <form action="http://localhost:8080/register" method="POST">
         <label htmlFor="username">Username</label>
-        <input name="username" type="text" />
+        <input name="username" type="text" value={this.state.username} onChange={this.setInputToState}/>
+        <label htmlFor="email">Email</label>
+        <input name="email" type="text" value={this.state.email} onChange={this.setInputToState}/>
         <label htmlFor="password">Password</label>
-        <input name="password" onChange={this.storePassword} type="text" />
+        <input name="password" onChange={this.setInputToState} type="text" value={this.state.password}/>
         <label htmlFor="confirm-password">Confirm Password</label>
-        <input name="confirm-password" onChange={this.checkPasswords} type="text" />
-        <button disabled={!this.state.isEnabled} type="submit">Create Account</button>
+        <input name="confirmedPassword" onChange={this.setInputToState} type="text" value={this.state.confirmedPassword}/>
+        <button type="submit">Create Account</button>
       </form>
     );
   }
