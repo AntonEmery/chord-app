@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
   ]
 });
 
-// using passport to handle passwords and hashing. this specifies the email as the field they will login with
+// uses passport to handle passwords and hashing. this specifies the email as the field they will login with
 userSchema.plugin(passportLocalMongoose, { usernameField: 'email' });
 userSchema.plugin(mongodbErrorHandler);
 

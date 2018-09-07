@@ -4,10 +4,20 @@ import routes from './routes.js';
 import path from 'path';
 import cors from 'cors';
 import session from 'express-session';
+import passport from 'passport';
+import mongoose from 'mongoose';
+const MongoStore = require('connect-mongo')(session);
+
+
 
 
 const app = express();
 app.use(cors());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 app.set('trust proxy', 1) // trust first proxy
 app.use(session({
@@ -15,13 +25,14 @@ app.use(session({
   secret: 'keyboard dog',
   resave: false,
   saveUninitialized: true,
+  store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { secure: false, httpOnly: false }
 }))
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(passport.initialize());
+app.use(passport.session());
 
-const pathToClient = path.join(__dirname, '..', 'client', 'build');
+
 
 app.use(express.static(pathToClient));
 app.use(routes);
