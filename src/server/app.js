@@ -8,10 +8,7 @@ import passport from 'passport';
 import mongoose from 'mongoose';
 const MongoStore = require('connect-mongo')(session);
 const expressValidator = require('express-validator');
-
-
-
-
+const { promisify } = require('es6-promisify');
 
 const app = express();
 app.use(cors());
@@ -32,6 +29,12 @@ app.use(session({
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { secure: false, httpOnly: false }
 }))
+
+// promisify some callback based APIs
+app.use((req, res, next) => {
+  req.login = promisify(req.login, req);
+  next();
+});
 
 // Exposes a bunch of methods for validating data. Used heavily on userController.validateRegister
 app.use(expressValidator());

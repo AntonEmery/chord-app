@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const mongodbErrorHandler = require('mongoose-mongodb-errors');
 const validator = require('validator');  // validation package for node
+mongoose.promise = global.Promise;
 
 const userSchema = new mongoose.Schema({
   email: {

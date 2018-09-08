@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
+const { promisify } = require('es6-promisify');
 
 // exports.createUser = async (req, res) => {
 //   const chordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
@@ -15,7 +16,8 @@ exports.createUser = (req, res, next) => {
   res.redirect('http://localhost:3000');
 }
 
-exports.validateRegister = (req, res) => {
+exports.validateRegister = (req, res, next) => {
+  // sanitize data from form and ensure they are not blank
   req.sanitizeBody('name');
   req.checkBody('name', 'You must supply a name').notEmpty();
   req.checkBody('email', 'That email is not valid').isEmail();
@@ -29,10 +31,25 @@ exports.validateRegister = (req, res) => {
   // checks that passwords match
   req.checkBody('confirmedPassword', 'Your passwords do not match').equals(req.body.password);
 
+  // if errors log them and end the function
   const errors = req.validationErrors();
   if (errors) {
     errors.map(err => console.log(err))
+    res.redirect('http://localhost:3000/register')
+    return;
   }
+  // else proceed to next middleware
+  next();
+};
+
+exports.register = async (req, res) => {
+  console.log(req.body)
+  const user = new User({ email: req.body.email, name: req.body.name, password: req.body.password });
+  // .register is exposed from the passportLocalMongoose plugin used in our User schema
+  const register = promisify(User.register, User);
+  await register(user, req.body.password).then(() => {}).catch(err => console.log(err));
+  res.redirect('http://localhost:3000')
+
 }
 
 exports.loginUser = async (req, res) => {
