@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Register extends Component {
   state = {
     isEnabled: false,
-    username: '',
+    name: '',
     email: '',
     password: '',
     confirmedPassword: ''
@@ -25,8 +25,8 @@ class Register extends Component {
   render() {
     return (
       <form action="http://localhost:8080/register" method="POST">
-        <label htmlFor="username">Username</label>
-        <input name="username" type="text" value={this.state.username} onChange={this.setInputToState}/>
+        <label htmlFor="name">Username</label>
+        <input name="name" type="text" value={this.state.username} onChange={this.setInputToState}/>
         <label htmlFor="email">Email</label>
         <input name="email" type="text" value={this.state.email} onChange={this.setInputToState}/>
         <label htmlFor="password">Password</label>

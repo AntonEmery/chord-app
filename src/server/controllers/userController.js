@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
 
-
 // exports.createUser = async (req, res) => {
 //   const chordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
 //   await chordSheet.save();
