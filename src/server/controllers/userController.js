@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
 
+
 // exports.createUser = async (req, res) => {
 //   const chordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
 //   await chordSheet.save();
@@ -10,9 +11,29 @@ const ChordSheet = mongoose.model('ChordSheet');
 //   res.send('done');
 // }
 
-exports.createUser = (req, res) => {
+exports.createUser = (req, res, next) => {
   console.log(req.body)
   res.redirect('http://localhost:3000');
+}
+
+exports.validateRegister = (req, res) => {
+  req.sanitizeBody('name');
+  req.checkBody('name', 'You must supply a name').notEmpty();
+  req.checkBody('email', 'That email is not valid').isEmail();
+  req.sanitizeBody('email').normalizeEmail({
+    remove_dots: false,
+    remove_extension: false,
+    gmail_remove_subaddress: false
+  });
+  req.checkBody('password', 'You must supply a password').notEmpty();
+  req.checkBody('confirmedPassword', 'Confirmed password cannot be blank').notEmpty();
+  // checks that passwords match
+  req.checkBody('confirmedPassword', 'Your passwords do not match').equals(req.body.password);
+
+  const errors = req.validationErrors();
+  if (errors) {
+    errors.map(err => console.log(err))
+  }
 }
 
 exports.loginUser = async (req, res) => {
