@@ -5,8 +5,10 @@ class App extends Component {
     return (
       <div>
         <form action="http://localhost:8080/login" method="POST">
-          <input name="username" type="text" value="Anton" />
-          <input name="password" type="text" value="password" />
+          <label htmlFor="email">Email</label>
+          <input name="email" type="text" />
+          <label htmlFor="password">Password</label>
+          <input name="password" type="text" />
           <button type="submit">Login</button>
         </form>
         <form action="http://localhost:8080/createChordSheet" method="POST">

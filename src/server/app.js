@@ -1,14 +1,15 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import routes from './routes.js';
-import path from 'path';
-import cors from 'cors';
-import session from 'express-session';
-import passport from 'passport';
-import mongoose from 'mongoose';
+const express = require('express');
+const bodyParser = require ('body-parser');
+const routes = require ('./routes.js');
+const path = require ('path');
+const cors = require ('cors');
+const session = require ('express-session');
+const passport = require('passport');
+const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const expressValidator = require('express-validator');
 const { promisify } = require('es6-promisify');
+require('./handlers/passport');
 
 const app = express();
 app.use(cors());

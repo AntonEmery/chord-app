@@ -3,15 +3,16 @@ import path from 'path';
 import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
+const authController = require('./controllers/authController');
 
 
 let router = express.Router();
 
 // user login
-router.post('/login', userController.loginUser);
+router.post('/login', authController.login);
 
 // create user
-router.post('/register', userController.validateRegister, userController.register);
+router.post('/register', userController.validateRegister, userController.register, authController.login);
 
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);

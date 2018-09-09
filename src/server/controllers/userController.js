@@ -42,7 +42,7 @@ exports.validateRegister = (req, res, next) => {
   next();
 };
 
-exports.register = async (req, res) => {
+exports.register = async (req, res, next) => {
   const user = new User({ email: req.body.email, name: req.body.name, password: req.body.password });
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
   await User.register(user, req.body.password);
