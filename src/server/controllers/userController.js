@@ -43,11 +43,9 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res) => {
-  console.log(req.body)
   const user = new User({ email: req.body.email, name: req.body.name, password: req.body.password });
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
-  const register = promisify(User.register, User);
-  await register(user, req.body.password).then(() => {}).catch(err => console.log(err));
+  await User.register(user, req.body.password);
   res.redirect('http://localhost:3000')
 
 }
