@@ -1,44 +1,30 @@
 import express from 'express';
 import path from 'path';
 import { Users, ChordSheets } from './database.js';
+const chordSheetController = require('./controllers/chordSheetController');
+const userController = require('./controllers/userController');
+const authController = require('./controllers/authController');
 
 
 let router = express.Router();
 
-//loads home route
-router.get('/', (req, res) => res.sendFile(path.join(__dirname + '/public/index.html')) );
+// user login
+router.post('/login', authController.login);
 
+// create user
+router.post('/register', userController.validateRegister, userController.register, authController.login);
 
-//returns chord sheet with a given id
-router.get('/chordSheets/:id', (req, res) => {
-  ChordSheets.findById(req.params.id)
-    .then((chordSheet) => res.send(chordSheet))
-});
+// create chord sheet
+router.post('/createChordSheet', userController.createChordSheet);
+
+//returns chord sheets based on a user
+router.get('/getChordSheets', userController.getChordSheets);
 
 //returns chord sheets associated with a user id
-router.get('/userChordSheets/:id', (req, res) => {
-  ChordSheets.findAll({
-    where: {
-      user_id: req.params.id
-    }
-  })
-  .then((chordSheet) => res.send(chordSheet))
-});
+router.get('/chordSheets/:id', chordSheetController.returnChordSheetByUser);
 
 //saves a chord sheet
-router.post('/saveChordSheet/', (req, res) => {
-  ChordSheets.create({
-    name: req.body.name,
-    chords: req.body.chords,
-    user_id: req.body.user_id
-  })
-  .then(function(data) {
-      res.status(200).json(data);
-  })
-  .catch(function(error) {
-    res.status(500).json(error);
-  })
-})
+router.post('/chordSheets/:id', chordSheetController.saveChordSheet);
 
 //updates a chord sheet
 router.post('/updateChordSheet', (req, res) => {
