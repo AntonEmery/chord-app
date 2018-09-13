@@ -5,5 +5,13 @@ const User = mongoose.model('User');
 
 exports.login = passport.authenticate('local', {
   failureRedirect: 'http://localhost:3000',
-  successRedirect: 'http://localhost:3000/chordsheets'
+  successRedirect: 'http://localhost:3000/chordsheets',
 });
+
+exports.isLoggedIn = (req, res) => {
+  if(req.isAuthenticated()) {
+  console.log('logged in');
+  } else {
+    console.log('not logged in')
+  }
+}

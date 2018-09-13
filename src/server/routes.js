@@ -14,6 +14,8 @@ router.post('/login', authController.login);
 // create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);
 
+router.get('/isLoggedIn', authController.isLoggedIn);
+
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);
 
