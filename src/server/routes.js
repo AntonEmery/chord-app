@@ -4,12 +4,17 @@ import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
 const authController = require('./controllers/authController');
+const passport = require('passport');
+
 
 
 let router = express.Router();
 
 // user login
-router.post('/login', authController.login);
+router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000'}), function(req, res) {
+  res.redirect('http://localhost:3000/chordsheets')
+});
+// router.post('/login', authController.login);
 
 // create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);

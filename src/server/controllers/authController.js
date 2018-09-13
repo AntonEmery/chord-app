@@ -12,6 +12,6 @@ exports.isLoggedIn = (req, res) => {
   if(req.isAuthenticated()) {
   console.log('logged in');
   } else {
-    console.log('not logged in')
+    res.body.test = 'not logged in'
   }
 }
