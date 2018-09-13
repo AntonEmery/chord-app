@@ -11,9 +11,12 @@ const passport = require('passport');
 let router = express.Router();
 
 // user login
-router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000'}), function(req, res) {
-  res.redirect('http://localhost:3000/chordsheets')
-});
+router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000'}), (req, res) => {
+  console.log(req.isAuthenticated())
+  console.log(req.user)
+  console.log(req.sessionID)
+    res.redirect('http://localhost:3000/chordsheets')
+})
 // router.post('/login', authController.login);
 
 // create user

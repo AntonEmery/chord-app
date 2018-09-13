@@ -26,7 +26,7 @@ app.use(session({
   domain: 'http://localhost:3000',
   secret: 'keyboard dog',
   resave: false,
-  saveUninitialized: true,
+  saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
   cookie: { secure: false, httpOnly: false }
 }))
