@@ -10,8 +10,9 @@ exports.login = passport.authenticate('local', {
 
 exports.isLoggedIn = (req, res) => {
   if(req.isAuthenticated()) {
-  console.log('logged in');
+    res.send({status: 'logged in'})
   } else {
-    res.body.test = 'not logged in'
+    res.send({status: 'not logged in'})
   }
+  res.end();
 }

@@ -10,13 +10,6 @@ const passport = require('passport');
 
 let router = express.Router();
 
-// user login
-// router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }), (req, res) => {
-//   console.log(req.isAuthenticated())
-//   console.log(req.user)
-//   console.log(req.sessionID)
-//     res.redirect('http://localhost:3000/chordsheets')
-// })
 
 router.post('/login', authController.login);
 
@@ -24,17 +17,6 @@ router.post('/login', authController.login);
 router.post('/register', userController.validateRegister, userController.register, authController.login);
 
 router.get('/isLoggedIn', authController.isLoggedIn);
-
-router.get('/info', (req, res) => {
-
-  console.log(req.isAuthenticated())
-  if(req.isAuthenticated()) {
-    res.send({status: 'logged in'})
-  } else {
-    res.send('not logged in')
-  }
-  res.end();
-})
 
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);
