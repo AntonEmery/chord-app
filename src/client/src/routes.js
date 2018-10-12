@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, Redirect } from 'react-router-dom'
 import AllChordSheets from './components/AllChordSheets'
 import ChordSheet from './components/chord-sheet/ChordSheet'
 import App from './App'
@@ -34,6 +34,30 @@ const routes = [
   }
 ]
 
+const login = {
+  isAuthenticated: false,
+  authenticate() {
+    this.isAuthenticated = true;
+    // fetch(`http://localhost:8080/isLoggedIn`, { credentials: 'include', mode: 'cors' })
+    // .then(response => { return response.json() })
+    // .then(data => {
+    //   if(data.status === 'logged in') {
+    //     console.log('true')
+    //     this.isAuthenticated = true
+    //   }
+    // })
+  }
+}
+
+
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route { ...rest } render={(props) => (
+    login.isAuthenticated === true
+      ? <Component {...props} />
+      : <Redirect to='/' />
+  )} />
+)
+
 
 const Routes = () => (
 <Router>
@@ -51,7 +75,7 @@ const Routes = () => (
     <Route exact path="/" component={App}/>
     <Route path="/register" component={Register}/>
     <Route path="/chordsheet/:id" component={ChordSheet}/>
-    <Route path="/chordsheets" component={AllChordSheets}/>
+    <PrivateRoute path="/chordsheets" component={AllChordSheets}/>
   </div>
 </Router>
 )

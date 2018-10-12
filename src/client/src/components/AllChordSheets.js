@@ -8,7 +8,7 @@ class AllChordSheets extends Component {
 
   componentDidMount() {
     console.log(Chordsheets[0].chords)
-      fetch('http://localhost:8080/isLoggedIn', { credentials: 'include', mode: 'cors' })
+      fetch(`http://localhost:8080/isLoggedIn`, { credentials: 'include', mode: 'cors' })
       .then(response => { return response.json() })
       .then(data => console.log(data))
       }
