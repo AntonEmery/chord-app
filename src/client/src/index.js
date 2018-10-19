@@ -1,12 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.scss';
-import Routes from './routes.js'
+import App from './App';
 
 
-ReactDOM.render(
-  (
-    <Routes />
-  ),
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById('root'))

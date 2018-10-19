@@ -34,25 +34,20 @@ const routes = [
   }
 ]
 
-const login = {
-  isAuthenticated: false,
-  authenticate() {
-    this.isAuthenticated = true;
-    // fetch(`http://localhost:8080/isLoggedIn`, { credentials: 'include', mode: 'cors' })
-    // .then(response => { return response.json() })
-    // .then(data => {
-    //   if(data.status === 'logged in') {
-    //     console.log('true')
-    //     this.isAuthenticated = true
-    //   }
-    // })
-  }
-}
+const isLoggedIn = () => {
+    fetch (`http://localhost:8080/isLoggedIn`, { credentials: 'include', mode: 'cors' })
+    .then(response => { return response.json() })
+    .then(data => {
+      if(data.status === 'logged in') {
+        return true;
+      }
+    }
+  )}
 
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route { ...rest } render={(props) => (
-    login.isAuthenticated === true
+    isLoggedIn()
       ? <Component {...props} />
       : <Redirect to='/' />
   )} />
