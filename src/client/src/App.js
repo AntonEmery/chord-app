@@ -11,6 +11,30 @@ import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 
 class App extends Component {
+  isLoggedIn = () => {
+    fetch(`http://localhost:8080/isLoggedIn`, {
+      credentials: 'include',
+      mode: 'cors'
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(data => {
+        if (data.status === 'logged in') {
+          return true;
+        }
+      });
+  };
+
+  PrivateRoute = ({ component: Component, ...rest }) => (
+    <Route
+      {...rest}
+      render={props =>
+        isLoggedIn() ? <Component {...props} /> : <Redirect to="/" />
+      }
+    />
+  );
+
   render() {
     return (
       <Router>
