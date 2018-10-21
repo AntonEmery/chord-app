@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import {
   BrowserRouter as Router,
   Route,
@@ -6,6 +6,7 @@ import {
   Redirect
 } from 'react-router-dom';
 import LoginForm from './components/Login';
+import Register from './components/forms/Register';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 
@@ -13,11 +14,12 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <Fragment>
           <Login />
+          <Route path="/register" component={Register} />
           <Chordsheets />
           <Chordsheet />
-        </div>
+        </Fragment>
       </Router>
     );
   }
@@ -32,17 +34,17 @@ const Login = () => (
 );
 
 const Chordsheets = () => (
-  <div>
+  <Fragment>
     <Route path="/chordsheets" component={Header} />
     <Route path="/chordsheets" component={AllChordSheets} />
-  </div>
+  </Fragment>
 );
 
 const Chordsheet = () => (
-  <div>
+  <Fragment>
     <Route path="/chordsheet/:id" component={Header} />
     <Route path="/chordsheet/:id" component={ChordSheet} />
-  </div>
+  </Fragment>
 );
 
 const Header = () => {
