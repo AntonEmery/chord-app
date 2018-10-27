@@ -9,38 +9,30 @@ import LoginForm from './components/Login';
 import Register from './components/forms/Register';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
+import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
-  isLoggedIn = () => {
-    fetch(`http://localhost:8080/isLoggedIn`, {
-      credentials: 'include',
-      mode: 'cors'
-    })
-      .then(response => {
-        return response.json();
-      })
-      .then(data => {
-        if (data.status === 'logged in') {
-          return true;
-        }
-      });
-  };
-
-  PrivateRoute = ({ component: Component, ...rest }) => (
-    <Route
-      {...rest}
-      render={props =>
-        isLoggedIn() ? <Component {...props} /> : <Redirect to="/" />
-      }
-    />
-  );
+  // isLoggedIn = () => {
+  //   fetch(`http://localhost:8080/isLoggedIn`, {
+  //     credentials: 'include',
+  //     mode: 'cors'
+  //   })
+  //     .then(response => {
+  //       return response.json();
+  //     })
+  //     .then(data => {
+  //       if (data.status === 'logged in') {
+  //         return true;
+  //       }
+  //     });
+  // };
 
   render() {
     return (
       <Router>
         <Fragment>
           <Login />
-          <Route path="/register" component={Register} />
+          <PrivateRoute path="/register" component={Register} />
           <Chordsheets />
           <Chordsheet />
         </Fragment>

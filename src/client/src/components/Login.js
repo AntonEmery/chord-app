@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import auth from '../Auth';
+import { PromiseProvider } from 'mongoose';
 
 class Login extends Component {
-  state = {  };
-
   render() {
     return (
       <div>
@@ -19,6 +19,15 @@ class Login extends Component {
         <form action="http://localhost:8080/getChordSheets" method="GET">
           <button type="submit">Get Chords</button>
         </form>
+        <button
+          onClick={() => {
+            auth.login(() => {
+              this.props.history.push('/register');
+            });
+          }}
+        >
+          Login
+        </button>
       </div>
     );
   }
