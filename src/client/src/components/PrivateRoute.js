@@ -6,7 +6,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => {
-      if (auth.isAuthenticated()) {
+      if (auth.getCookie()) {
         return <Component {...props} />;
       } else {
         return <Redirect to="/" />;

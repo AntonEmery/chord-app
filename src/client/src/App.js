@@ -12,21 +12,6 @@ import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
 
 class App extends Component {
-  // isLoggedIn = () => {
-  //   fetch(`http://localhost:8080/isLoggedIn`, {
-  //     credentials: 'include',
-  //     mode: 'cors'
-  //   })
-  //     .then(response => {
-  //       return response.json();
-  //     })
-  //     .then(data => {
-  //       if (data.status === 'logged in') {
-  //         return true;
-  //       }
-  //     });
-  // };
-
   render() {
     return (
       <Router>
@@ -51,8 +36,8 @@ const Login = () => (
 
 const Chordsheets = () => (
   <Fragment>
-    <Route path="/chordsheets" component={Header} />
-    <Route path="/chordsheets" component={AllChordSheets} />
+    <PrivateRoute path="/chordsheets" component={Header} />
+    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
   </Fragment>
 );
 
