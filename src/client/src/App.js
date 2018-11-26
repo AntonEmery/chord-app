@@ -10,6 +10,7 @@ import Register from './components/forms/Register';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
+import auth from './Auth';
 
 class App extends Component {
   render() {
@@ -48,7 +49,7 @@ const Chordsheet = () => (
   </Fragment>
 );
 
-const Header = () => {
+const Header = ({ history }) => {
   return (
     <header>
       <nav className="links">
@@ -58,6 +59,15 @@ const Header = () => {
           </li>
           <li>
             <Link to="/chordsheets/0">My Chordsheets</Link>
+          </li>
+          <li
+            onClick={() => {
+              auth.logout(() => {
+                history.push('/');
+              });
+            }}
+          >
+            Logout
           </li>
         </ul>
       </nav>

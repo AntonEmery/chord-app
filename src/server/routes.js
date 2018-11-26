@@ -18,6 +18,8 @@ router.post('/register', userController.validateRegister, userController.registe
 
 router.get('/isLoggedIn', authController.isLoggedIn);
 
+router.get('/logout', authController.logout)
+
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);
 

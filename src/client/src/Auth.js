@@ -36,7 +36,10 @@ class Auth {
   }
 
   logout(callback) {
-    this.authenticated = false;
+    fetch('http://localhost:8080/logout', {
+      credentials: 'include',
+      mode: 'cors'
+    })
     callback();
   }
 

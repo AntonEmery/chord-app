@@ -8,6 +8,16 @@ exports.login = passport.authenticate('local', {
   failureRedirect: 'http://localhost:3000'
 });
 
+exports.logout = (req, res) => {
+  req.logout();
+  req.session.destroy(function() {
+    res
+      .clearCookie('connect.sid', { path: '/' })
+      .status(200)
+      .send('Cookie deleted.');
+  });
+};
+
 exports.isLoggedIn = (req, res) => {
   if (req.isAuthenticated()) {
     res.send({ status: 'logged in' });
