@@ -4,15 +4,21 @@ import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
 const authController = require('./controllers/authController');
+const passport = require('passport');
+
 
 
 let router = express.Router();
 
-// user login
+
 router.post('/login', authController.login);
 
 // create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);
+
+router.get('/isLoggedIn', authController.isLoggedIn);
+
+router.get('/logout', authController.logout)
 
 // create chord sheet
 router.post('/createChordSheet', userController.createChordSheet);
