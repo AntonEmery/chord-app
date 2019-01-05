@@ -1,0 +1,13 @@
+// Fonts
+$heading-font: 'Sarabun', sans-serif;
+$body-font: 'Roboto', sans-serif;
+
+// Text Styling
+h1, h2, h3, h4, h5, h6 { font-family: $heading-font; }
+p { font-family: $body-font }
+
+// Set base font size for rems
+html { font-size: 100%; }
+
+h1, .h1 { font-size: 2rem; }
+h2, .h2 { font-size: 1.5rem; }
