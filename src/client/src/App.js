@@ -30,9 +30,9 @@ class App extends Component {
 export default App;
 
 const Login = () => (
-  <div>
+  <Fragment>
     <Route exact path="/" component={LoginForm} />
-  </div>
+  </Fragment>
 );
 
 const Chordsheets = () => (

@@ -11,3 +11,27 @@ html { font-size: 100%; }
 
 h1, .h1 { font-size: 2rem; }
 h2, .h2 { font-size: 1.5rem; }
+
+// Colors
+$input-grey: #e8e8e8;
+
+//Box Shadows
+$button-box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.23); // login button
+
+
+// Buttons
+button, .button {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+
+  &--large {
+    font-size: 1rem;
+    padding: 11px 132px;
+    box-shadow: $button-box-shadow;
+  }
+
+  &--grey {
+    background-color: $input-grey;
+  }
+}

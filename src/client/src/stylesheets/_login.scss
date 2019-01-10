@@ -1,0 +1,17 @@
+.card {
+  width: 500px;
+  margin: 0 auto;
+
+  &__login {
+    text-align: center;
+  }
+}
+
+.login {
+
+  &__input {
+    background-color: $input-grey;
+    border-style: none;
+    padding: .5rem .5rem;
+  }
+}
