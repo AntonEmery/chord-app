@@ -1,17 +1,32 @@
 .card {
-  width: 500px;
+  width: 300px;
   margin: 0 auto;
+  background: linear-gradient(#fff,#f2f6f9);
+  box-shadow: $card-box-shadow;
+  padding: 2rem 1rem;
 
   &__login {
     text-align: center;
   }
+
+  &__input-item {
+    margin-bottom: 1rem;
+    text-align: left;
+  }
 }
 
-.login {
+input {
+  display: block;
+  background-color: $input-grey;
+  margin-top: 5px;
+  border-style: none;
+  padding: 10px 12px;
+  border-radius: 5px;
+  box-shadow: $input-box-shadow;
+  box-sizing: border-box;
+  width: 100%;
+}
 
-  &__input {
-    background-color: $input-grey;
-    border-style: none;
-    padding: .5rem .5rem;
-  }
+label {
+  font-size: .75rem;
 }

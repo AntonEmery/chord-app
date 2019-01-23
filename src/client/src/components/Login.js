@@ -9,9 +9,15 @@ class Login extends Component {
         <h1>Log into Chord App</h1>
         <p>or Create Account</p>
         <form className="login">
-          <input className="login__input" type="text" placeholder="Username" />
-          <input className="login__input" type="password" placeholder="Password" />
-          <button className="button button--grey button--large">Log In</button>
+          <div className="card__input-item">
+            <label htmlFor="username">Username</label>
+            <input name="username " type="text" placeholder="Username" />
+          </div>
+          <div className="card__input-item">
+            <label htmlFor="password">Password</label>
+            <input name="password" type="password" placeholder="Password" />
+          </div>
+          <button className="button button--grey button--med">Log In</button>
         </form>
       </div>
     )
