@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import auth from '../Auth';
 import { PromiseProvider } from 'mongoose';
 
@@ -7,7 +8,7 @@ class Login extends Component {
     return (
       <div className="card card__login">
         <h1>Log into Chord App</h1>
-        <p>or Create Account</p>
+        or <Link to="/register">Create Account</Link>
         <form className="login">
           <div className="card__input-item">
             <label htmlFor="username">Username</label>

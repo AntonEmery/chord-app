@@ -18,7 +18,7 @@ class App extends Component {
       <Router>
         <Fragment>
           <Login />
-          <PrivateRoute path="/register" component={Register} />
+          <Route path="/register" component={Register} />
           <Chordsheets />
           <Chordsheet />
         </Fragment>

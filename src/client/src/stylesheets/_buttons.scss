@@ -1,0 +1,26 @@
+// Buttons
+button, .button {
+  text-align: center;
+  border: none;
+  text-decoration: none;
+  box-shadow: $button-box-shadow;
+  transition: transform .15s ease-in-out;
+
+  &--large {
+    font-size: 1rem;
+    padding: 11px 132px;
+  }
+
+  &--med {
+    padding: .75rem 5rem;
+    font-size: 1rem;
+  }
+
+  &--grey {
+    background-color: $input-grey;
+  }
+
+  &:hover {
+    transform: translateY(-3px);
+  }
+}
