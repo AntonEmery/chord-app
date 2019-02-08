@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../Auth';
+import auth from '../../Auth';
 import { PromiseProvider } from 'mongoose';
 
 class Login extends Component {

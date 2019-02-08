@@ -1,0 +1,26 @@
+.nav {
+  position: static;
+  width: 100%;
+  text-transform: uppercase;
+  padding: 2rem 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 1.25rem;
+
+  &__item {
+    text-decoration: none;
+  }
+}
+
+nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav li {
+  display: inline-block;
+  margin: 0 0.25em;
+}

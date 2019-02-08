@@ -2,15 +2,15 @@ import React, { Component, Fragment } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom';
-import LoginForm from './components/Login';
+import LoginForm from './components/forms/Login';
 import Register from './components/forms/Register';
+import Reset from './components/forms/Reset';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
-import auth from './Auth';
+import Nav from './components/Nav';
 
 class App extends Component {
   render() {
@@ -19,6 +19,7 @@ class App extends Component {
         <Fragment>
           <Login />
           <Route path="/register" component={Register} />
+          <Route path="/reset" component={Reset} />
           <Chordsheets />
           <Chordsheet />
         </Fragment>
@@ -37,8 +38,8 @@ const Login = () => (
 
 const Chordsheets = () => (
   <Fragment>
-    <PrivateRoute path="/chordsheets" component={Header} />
-    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
+    <Route path="/chordsheets" component={Header} />
+    <Route path="/chordsheets" component={AllChordSheets} />
   </Fragment>
 );
 
@@ -52,25 +53,7 @@ const Chordsheet = () => (
 const Header = ({ history }) => {
   return (
     <header>
-      <nav className="links">
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/chordsheets/0">My Chordsheets</Link>
-          </li>
-          <li
-            onClick={() => {
-              auth.logout(() => {
-                history.push('/');
-              });
-            }}
-          >
-            Logout
-          </li>
-        </ul>
-      </nav>
+      <Nav history={history} />
     </header>
   );
 };
