@@ -16,6 +16,15 @@ button, .button {
     font-size: 1rem;
   }
 
+  &--small {
+    padding: .5rem 2.5rem;
+    font-size: .75rem;
+  }
+
+  &--x-small {
+    padding: .25rem 2rem;
+  }
+
   &--grey {
     background-color: $input-grey;
   }

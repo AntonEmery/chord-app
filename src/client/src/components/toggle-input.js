@@ -1,4 +1,5 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
+
 
 class ChordName extends Component {
   state = {
@@ -20,7 +21,7 @@ class ChordName extends Component {
   }
 
   ifEmpty(value) {
-    if(value.length <= 0) {
+    if (value.length <= 0) {
       return '...'
     } else {
       return value;
@@ -29,12 +30,12 @@ class ChordName extends Component {
 
   render() {
     return (
-      <div>
+      <Fragment>
         {this.state.editable ?
-          <input type="text" placeholder="test" autoFocus onBlur={this.setName}/> :
-          <p style={{display:"inline-block", width: "120px", height: "30px"}} onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
+          <input type="text" placeholder="test" autoFocus onBlur={this.setName} /> :
+          <p style={{ display: "inline-block", width: "120px", height: "30px" }} onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
         }
-      </div>
+      </Fragment>
     )
   }
 }

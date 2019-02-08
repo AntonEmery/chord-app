@@ -19,7 +19,7 @@ class ChordSheet extends Component {
     // Set state
     this.state = {
       chords: [
-        {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, name: 'Chord Name'},
+        { 0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, name: 'Chord Name' },
       ]
     }
   }
@@ -46,16 +46,16 @@ class ChordSheet extends Component {
         // Create a new chord state by iterating over seed data refrencing the
         // current `props.match.params.id` and making a new ChordState
         Chordsheets[props.match.params.id]
-        .chords.forEach((chord) => chords.push(chord))
+          .chords.forEach((chord) => chords.push(chord))
         // Return the new chords state
-        return {chords: chords}
+        return { chords: chords }
       })
   }
 
   addChord = () => {
     this.setState(
       (prevState, props) => {
-        const blankChord = {0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, name: 'Chord Name'};
+        const blankChord = { 0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, name: 'Chord Name' };
         let newChordState = prevState.chords.slice();
         newChordState.push(blankChord);
         return { chords: newChordState }
@@ -91,16 +91,16 @@ class ChordSheet extends Component {
     })
 
     axios.post('/saveChordSheet', {
-        name: 'Untitled',
-        chords: jsonArray,
-        user_id: 1
-      }, {responseType: 'json'})
-    .then(function (response) {
-      console.log(response);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      name: 'Untitled',
+      chords: jsonArray,
+      user_id: 1
+    }, { responseType: 'json' })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   render() {
@@ -110,7 +110,7 @@ class ChordSheet extends Component {
           handleSave={this.handleSave}
           addChord={this.addChord}
         />
-        <div className="App pure-g">
+        <div className="App">
           {this.state.chords.map((chord, index) => {
             return (
               <ChordTemplate

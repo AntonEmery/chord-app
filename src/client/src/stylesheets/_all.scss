@@ -3,6 +3,7 @@
 @import "forms.scss";
 @import "buttons.scss";
 @import "nav.scss";
+@import "chord-template.scss";
 
 
 // temp styles while things get reorganized
@@ -16,9 +17,7 @@ body {
   padding: 0;
 }
 
-.chord-template {
-  display: inline;
-}
+
 
 /* Chord Sheet */
 .chord-sheet-wrapper {
@@ -40,9 +39,7 @@ body {
 }
 
 /* Chord Template */
-.chord-template {
-  text-align: center;
-}
+
 
 .button-delete {
   border-radius: 4px;
@@ -66,8 +63,4 @@ header {
   /*margin-left: 3%;*/
 }
 
-/* Chord Template Component */
-.chord-template {
-  width: 140px;
-  height: 180px;
-}
+

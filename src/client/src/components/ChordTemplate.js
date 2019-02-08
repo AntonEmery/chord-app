@@ -70,7 +70,7 @@ class ChordTemplate extends Component {
 
   render() {
     return (
-      <div className="chord-template pure-u-1-5">
+      <div className="chord-template">
         <ChordName
           name={this.props.state.name}
           chordName={this.chordName}
@@ -80,7 +80,7 @@ class ChordTemplate extends Component {
           {/* strings */}
           {this.drawStrings()}
           {/* nut */}
-          <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black"/>
+          <line x1={19} y1={20} x2={121} y2={20} strokeWidth={4} stroke="black" />
           {/* frets */}
           {this.drawFrets()}
           {/* finger position circles */}
@@ -89,7 +89,7 @@ class ChordTemplate extends Component {
           {this.openStringSymbols()}
           {this.mutedStringSymbols()}
         </svg>
-        <button className="pure-button button-delete" onClick={this.props.deleteChord.bind(null, this.id)}>Delete</button>
+        <button className="button button--x-small button-delete" onClick={this.props.deleteChord.bind(null, this.id)}>Delete</button>
       </div>
     )
   }
