@@ -58,6 +58,8 @@ header {
 /* Menu Bar */
 .menu-bar {
   margin-bottom: 3%;
+  display: flex;
+  flex-direction: row;
 }
 .menu-bar button {
   /*margin-left: 3%;*/

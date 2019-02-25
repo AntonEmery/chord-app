@@ -1,3 +1,19 @@
-.chord-template {
 
+.chords {
+  &__container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  &__template {
+    display: flex;
+    flex-direction: column;
+    width: 150px;
+    align-items: center;
+  }
+
+  &__name {
+    margin-bottom: .25rem;
+  }
 }

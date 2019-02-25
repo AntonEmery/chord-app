@@ -70,7 +70,7 @@ class ChordTemplate extends Component {
 
   render() {
     return (
-      <div className="chord-template">
+      <div className="chords__template">
         <ChordName
           name={this.props.state.name}
           chordName={this.chordName}

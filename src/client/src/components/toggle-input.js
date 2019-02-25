@@ -33,7 +33,7 @@ class ChordName extends Component {
       <Fragment>
         {this.state.editable ?
           <input type="text" placeholder="test" autoFocus onBlur={this.setName} /> :
-          <p style={{ display: "inline-block", width: "120px", height: "30px" }} onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
+          <p className="chords__name" onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
         }
       </Fragment>
     )

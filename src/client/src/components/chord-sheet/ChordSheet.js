@@ -110,7 +110,7 @@ class ChordSheet extends Component {
           handleSave={this.handleSave}
           addChord={this.addChord}
         />
-        <div className="App">
+        <div className="chords__container">
           {this.state.chords.map((chord, index) => {
             return (
               <ChordTemplate
