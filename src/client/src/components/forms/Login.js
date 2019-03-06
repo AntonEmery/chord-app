@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import auth from '../../Auth';
-import { PromiseProvider } from 'mongoose';
 
 class Login extends Component {
   constructor(props) {
@@ -17,7 +15,6 @@ class Login extends Component {
       <div className="card card__login">
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
-        {/* ToDo submit button needs to send email and p/w to via post request,  */}
         <form className="login" action="http://localhost:8080/login" method="POST">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
@@ -27,12 +24,7 @@ class Login extends Component {
             <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Password" />
           </div>
-          <button type="submit" className="button button--grey button--med" onClick={() => {
-            auth.login(() => {
-              this.props.history.push('/register');
-            });
-          }}
-          >Log In</button>
+          <button type="submit" className="button button--grey button--med">Log In</button>
         </form>
       </div>
     )

@@ -2,7 +2,6 @@ import React, { Component, Fragment } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Redirect
 } from 'react-router-dom';
 import LoginForm from './components/forms/Login';
 import Register from './components/forms/Register';
@@ -45,8 +44,8 @@ const Chordsheets = () => (
 
 const Chordsheet = () => (
   <Fragment>
-    <Route path="/chordsheet/:id" component={Header} />
-    <Route path="/chordsheet/:id" component={ChordSheet} />
+    <PrivateRoute path="/chordsheet/:id" component={Header} />
+    <PrivateRoute path="/chordsheet/:id" component={ChordSheet} />
   </Fragment>
 );
 
