@@ -85,7 +85,7 @@ class ChordSheet extends Component {
   }
 
   handleSave = () => {
-
+    console.log(this.state.chords);
     const jsonArray = this.state.chords.map((chord) => {
       return JSON.stringify(chord)
     })

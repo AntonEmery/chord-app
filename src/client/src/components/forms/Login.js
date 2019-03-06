@@ -4,21 +4,35 @@ import auth from '../../Auth';
 import { PromiseProvider } from 'mongoose';
 
 class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { value: '' }
+  }
+
+  handleChange = (event) => {
+    this.setState({ value: event.target.value })
+  }
   render() {
     return (
       <div className="card card__login">
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
-        <form className="login">
+        {/* ToDo submit button needs to send email and p/w to via post request,  */}
+        <form className="login" action="http://localhost:8080/login" method="POST">
           <div className="card__input-item">
-            <label htmlFor="username">Username</label>
-            <input name="username " type="text" placeholder="Username" />
+            <label htmlFor="email">Email</label>
+            <input name="email" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Email" />
           </div>
           <div className="card__input-item">
             <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Password" />
           </div>
-          <button className="button button--grey button--med">Log In</button>
+          <button type="submit" className="button button--grey button--med" onClick={() => {
+            auth.login(() => {
+              this.props.history.push('/register');
+            });
+          }}
+          >Log In</button>
         </form>
       </div>
     )

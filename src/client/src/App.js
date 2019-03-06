@@ -38,8 +38,8 @@ const Login = () => (
 
 const Chordsheets = () => (
   <Fragment>
-    <Route path="/chordsheets" component={Header} />
-    <Route path="/chordsheets" component={AllChordSheets} />
+    <PrivateRoute path="/chordsheets" component={Header} />
+    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
   </Fragment>
 );
 

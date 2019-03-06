@@ -31,7 +31,7 @@ class Auth {
   };
 
   login(callback) {
-    this.authenticated = true;
+    this.authenticated = this.isLoggedIn();
     callback();
   }
 
