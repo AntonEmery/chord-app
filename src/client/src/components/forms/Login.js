@@ -4,12 +4,9 @@ import { Link } from 'react-router-dom';
 class Login extends Component {
   constructor(props) {
     super(props);
-    this.state = { value: '' }
   }
 
-  handleChange = (event) => {
-    this.setState({ value: event.target.value })
-  }
+
   render() {
     return (
       <div className="card card__login">
@@ -18,7 +15,7 @@ class Login extends Component {
         <form className="login" action="http://localhost:8080/login" method="POST">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
-            <input name="email" value={this.state.value} onChange={this.handleChange} type="text" placeholder="Email" />
+            <input name="email" type="text" placeholder="Email" />
           </div>
           <div className="card__input-item">
             <label htmlFor="password">Password</label>

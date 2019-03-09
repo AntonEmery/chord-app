@@ -1,12 +1,12 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import auth from '../Auth';
+import Auth from '../Auth'
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props => {
-      if (auth.getCookie()) {
+      if (Auth.getCookie()) {
         return <Component {...props} />;
       } else {
         return <Redirect to="/" />;

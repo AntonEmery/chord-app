@@ -1,10 +1,10 @@
 const express = require('express');
-const bodyParser = require ('body-parser');
+const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const routes = require ('./routes.js');
-const path = require ('path');
-const cors = require ('cors');
-const session = require ('express-session');
+const routes = require('./routes.js');
+const path = require('path');
+const cors = require('cors');
+const session = require('express-session');
 const passport = require('passport');
 const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
@@ -37,7 +37,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { secure: false, httpOnly: false, maxAge: 60000 }
+  cookie: { secure: false, httpOnly: false, maxAge: 600000 }
 }))
 
 // promisify some callback based APIs

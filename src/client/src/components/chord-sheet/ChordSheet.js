@@ -85,15 +85,20 @@ class ChordSheet extends Component {
   }
 
   handleSave = () => {
-    console.log(this.state.chords);
+    const { chordSheetId } = this.props.match.params;
+    console.log(this.state.chords)
     const jsonArray = this.state.chords.map((chord) => {
       return JSON.stringify(chord)
     })
 
-    axios.post('/saveChordSheet', {
-      name: 'Untitled',
-      chords: jsonArray,
-      user_id: 1
+    fetch(`http://localhost:8080/chordSheets/${chordSheetId}`, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      body: this.state.chords
+      // name: 'Untitled',
+      // chords: jsonArray,
+      // user_id: 1
     }, { responseType: 'json' })
       .then(function (response) {
         console.log(response);
