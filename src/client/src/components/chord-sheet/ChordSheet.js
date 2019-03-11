@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 
 import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
@@ -85,27 +84,28 @@ class ChordSheet extends Component {
   }
 
   handleSave = () => {
-    const { chordSheetId } = this.props.match.params;
+    const { id } = this.props.match.params;
+    // const jsonArray = this.state.chords.map((chord) => {
+    //   return JSON.stringify(chord)
+    // })
     console.log(this.state.chords)
-    const jsonArray = this.state.chords.map((chord) => {
-      return JSON.stringify(chord)
-    })
-
-    fetch(`http://localhost:8080/chordSheets/${chordSheetId}`, {
+    fetch(`http://localhost:8080/chordSheets/${id}`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
-      body: this.state.chords
-      // name: 'Untitled',
-      // chords: jsonArray,
-      // user_id: 1
-    }, { responseType: 'json' })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+      body: JSON.stringify(this.state.chords),
+      headers: {
+        // "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+    })
+    // }, { responseType: 'json' })
+    //   .then(function (response) {
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
   }
 
   render() {

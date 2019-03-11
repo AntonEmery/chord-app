@@ -10,8 +10,14 @@ const passport = require('passport');
 
 let router = express.Router();
 
+// router.post('/login', authController.login);
 
-router.post('/login', authController.login);
+router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
+  function (req, res) {
+    res.redirect('http://localhost:3000/chordsheets');
+  }
+);
+
 
 // create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);
@@ -34,17 +40,17 @@ router.post('/chordSheets/:id', chordSheetController.saveChordSheet);
 
 //updates a chord sheet
 router.post('/updateChordSheet', (req, res) => {
-  ChordSheets.findById(req.body.id).then(function(chordSheet) {
+  ChordSheets.findById(req.body.id).then(function (chordSheet) {
     chordSheet.updateAttributes({
       chords: req.body.chords,
       user_id: req.body.user_id
     })
-    .then(function(data) {
+      .then(function (data) {
         res.status(200).json(data);
-    })
-    .catch(function(error) {
-      res.status(500).json(error);
-    })
+      })
+      .catch(function (error) {
+        res.status(500).json(error);
+      })
   })
 })
 
@@ -54,13 +60,13 @@ router.get('/users', (req, res) => {
 })
 
 //creates a new user
-router.post('/users', (req,res) => {
+router.post('/users', (req, res) => {
   Users.create({
     name: req.body.name,
     email: req.body.email
   })
-  .then((data) => res.status(200).json(data))
-  .catch((error) => res.status(500).json(error))
+    .then((data) => res.status(200).json(data))
+    .catch((error) => res.status(500).json(error))
 })
 
 //deletes a user
@@ -70,8 +76,8 @@ router.delete('/users', (req, res) => {
       id: req.body.id
     }
   })
-  .then((data) => res.status(200).json(data))
-  .catch((error) => res.status(500).json(data))
+    .then((data) => res.status(200).json(data))
+    .catch((error) => res.status(500).json(data))
 })
 
 module.exports = router;

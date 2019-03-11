@@ -10,7 +10,7 @@ exports.login = passport.authenticate('local', {
 
 exports.logout = (req, res) => {
   req.logout();
-  req.session.destroy(function() {
+  req.session.destroy(function () {
     res
       .clearCookie('connect.sid', { path: '/' })
       .status(200)
