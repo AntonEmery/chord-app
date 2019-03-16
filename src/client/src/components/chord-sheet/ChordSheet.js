@@ -91,15 +91,12 @@ class ChordSheet extends Component {
 
   handleSave = () => {
     const { id } = this.props.match.params;
-    const jsonArray = this.state.chords.map((chord) => {
-      return JSON.stringify(chord)
-    })
-    console.log(this.state.chords)
+    console.log(this.state)
     fetch(`http://localhost:8080/chordSheets/${id}`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
-      body: JSON.stringify(this.state.chords),
+      body: JSON.stringify(this.state),
       headers: {
         "Content-Type": "application/json",
       },
