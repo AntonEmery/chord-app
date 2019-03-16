@@ -12,7 +12,7 @@ exports.returnChordSheetByUser = (req, res) => {
 };
 
 exports.saveChordSheet = async (req, res) => {
-  console.log(req.body);
+  console.log(req.user._id);
   const userQuery = User.where({ _id: req.user._id });
   const user = await userQuery.findOne();
   const newChordSheet = new ChordSheet({ title: 'My Best Chords', chords: req.body });

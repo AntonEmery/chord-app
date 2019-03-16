@@ -7,7 +7,7 @@ class ChordName extends Component {
   }
 
   setName = (e) => {
-    this.props.chordName(e.target.value, this.props.id);
+    this.props.setName(e.target.value, this.props.id);
     this.setState({
       editable: !this.state.editable
     })

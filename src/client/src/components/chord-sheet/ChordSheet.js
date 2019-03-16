@@ -4,6 +4,7 @@ import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 import Chordsheets from '../../seed-data.js'
+import ChordSheetTitle from '../toggle-input'
 
 class ChordSheet extends Component {
 
@@ -17,6 +18,7 @@ class ChordSheet extends Component {
     this.numOfStringsAsArray = Util.fillArrayWithNumbers(this.numOfStrings)
     // Set state
     this.state = {
+      title: 'untitled',
       chords: [
         { 0: undefined, 1: undefined, 2: undefined, 3: undefined, 4: undefined, 5: undefined, name: 'Chord Name' },
       ]
@@ -72,6 +74,10 @@ class ChordSheet extends Component {
     )
   }
 
+  updateSheetTitle = (name) => {
+    this.setState({ title: name })
+  }
+
   deleteChord = (id) => {
     console.log(id);
     this.setState(
@@ -85,9 +91,9 @@ class ChordSheet extends Component {
 
   handleSave = () => {
     const { id } = this.props.match.params;
-    // const jsonArray = this.state.chords.map((chord) => {
-    //   return JSON.stringify(chord)
-    // })
+    const jsonArray = this.state.chords.map((chord) => {
+      return JSON.stringify(chord)
+    })
     console.log(this.state.chords)
     fetch(`http://localhost:8080/chordSheets/${id}`, {
       method: 'POST',
@@ -95,8 +101,7 @@ class ChordSheet extends Component {
       mode: 'cors',
       body: JSON.stringify(this.state.chords),
       headers: {
-        // "Content-Type": "application/json",
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
     })
     // }, { responseType: 'json' })
@@ -114,6 +119,13 @@ class ChordSheet extends Component {
         <ToolBar
           handleSave={this.handleSave}
           addChord={this.addChord}
+        />
+        <span>Chord Sheet Title</span>
+        <ChordSheetTitle
+          setName={this.updateSheetTitle}
+          className="chords__title"
+          name={this.state.title}
+          id={this.props.id}
         />
         <div className="chords__container">
           {this.state.chords.map((chord, index) => {

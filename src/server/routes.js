@@ -5,6 +5,7 @@ const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
 const authController = require('./controllers/authController');
 const passport = require('passport');
+const cors = require('cors');
 
 
 

@@ -73,7 +73,7 @@ class ChordTemplate extends Component {
       <div className="chords__template">
         <ChordName
           name={this.props.state.name}
-          chordName={this.chordName}
+          setName={this.chordName}
           id={this.props.id}
         />
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={140} height={160}>

@@ -6,6 +6,10 @@
     flex-wrap: wrap;
   }
 
+  &__title {
+    width: 4rem;
+  }
+
   &__template {
     display: flex;
     flex-direction: column;
