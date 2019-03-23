@@ -59,23 +59,23 @@ exports.register = async (req, res, next) => {
 // }
 
 exports.createChordSheet = async (req, res) => {
-  if(req.session.userId) {
+  if (req.session.userId) {
     const userQuery = User.where({ _id: req.session.userId });
     const user = await userQuery.findOne();
-    const newChordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
+    const newChordSheet = new ChordSheet({ title: 'Test Chord Sheet', chords: [['Em', '0', '2', '2', '0', '0', '0']] });
     let chordSheet = await newChordSheet.save();
     // add chord sheet to user's chord sheets array on model
-    user.chordSheets.push({_id: chordSheet._id});
+    user.chordSheets.push({ _id: chordSheet._id });
     user.save();
-    res.redirect('http://localhost:3000');
   }
 }
 
 exports.getChordSheets = async (req, res) => {
-  if(req.session.userId) {
-    const userQuery = User.where({ _id: req.session.userId });
+  console.log('get chord sheets')
+  if (req.user._id) {
+    const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne().populate('chordSheets');
     console.log(user.chordSheets);
-    res.redirect('http://localhost:3000');
+    res.send('success')
   }
 }
