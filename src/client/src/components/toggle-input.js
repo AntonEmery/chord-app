@@ -11,7 +11,12 @@ class ChordName extends Component {
     this.setState({
       editable: !this.state.editable
     })
+  }
 
+  handleKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      this.setName(e)
+    }
   }
 
   toggleState = () => {
@@ -32,7 +37,7 @@ class ChordName extends Component {
     return (
       <Fragment>
         {this.state.editable ?
-          <input type="text" placeholder="test" autoFocus onBlur={this.setName} /> :
+          <input type="text" placeholder="test" autoFocus onKeyDown={this.handleKeyDown} onBlur={this.setName} /> :
           <p className="chords__name" onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
         }
       </Fragment>
