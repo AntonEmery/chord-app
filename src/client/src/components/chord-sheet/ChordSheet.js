@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
-import Chordsheets from '../../seed-data.js'
+// import Chordsheets from '../../seed-data.js'
 import ChordSheetTitle from '../toggle-input'
 
 class ChordSheet extends Component {
@@ -39,6 +39,8 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
+    const { chords } = this.props.location.state;
+    console.log(this.props.location.state)
     this.setState(
       (prevState, props) => {
         // Copy current chords in to temp var
@@ -46,7 +48,7 @@ class ChordSheet extends Component {
 
         // Create a new chord state by iterating over seed data refrencing the
         // current `props.match.params.id` and making a new ChordState
-        Chordsheets[props.match.params.id]
+        chords[props.match.params.id]
           .chords.forEach((chord) => chords.push(chord))
         // Return the new chords state
         return { chords: chords }

@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 
-
-
 class AllChordSheets extends Component {
 
   constructor(props) {
@@ -26,7 +24,10 @@ class AllChordSheets extends Component {
 
   render() {
     let sheets = this.state.chordSheets.map((sheet, index) => {
-      return <p key={index}><Link to={"/chordsheet/" + sheet._id}>{sheet.title}</Link></p>
+      return <p key={index}><Link to={{
+        pathname: '/chordsheet/' + sheet._id,
+        state: { chordSheets: this.state.chordSheets }
+      }}>{sheet.title}</Link></p>
     })
     return (
       <div>

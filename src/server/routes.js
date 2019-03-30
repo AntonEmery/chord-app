@@ -28,10 +28,10 @@ router.get('/isLoggedIn', authController.isLoggedIn);
 router.get('/logout', authController.logout)
 
 // create chord sheet
-router.post('/createChordSheet', userController.createChordSheet);
+router.post('/createChordSheet', chordSheetController.createChordSheet);
 
 //returns chord sheets based on a user
-router.get('/getChordSheets', userController.getChordSheets);
+router.get('/getChordSheets', chordSheetController.returnChordSheetsByUser);
 
 //returns chord sheets associated with a user id
 router.get('/chordSheets/:id', chordSheetController.returnChordSheetByUser);
