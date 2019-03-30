@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
-import Chordsheets from '../seed-data.js';
 import { Link } from 'react-router-dom'
 
 
 
 class AllChordSheets extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      chordSheets: []
+    }
+  }
 
   componentDidMount() {
     fetch('http://localhost:8080/getChordSheets/', {
@@ -13,13 +20,13 @@ class AllChordSheets extends Component {
       mode: 'cors',
     })
       .then((response) => {
-        console.log(response.status)
-      })
+        return response.json();
+      }).then(data => this.setState({ chordSheets: data }));
   }
 
   render() {
-    let sheets = Chordsheets.map((item, index) => {
-      return <p key={index}><Link to={"/chordsheet/" + index}>Chord Sheet</Link></p>
+    let sheets = this.state.chordSheets.map((sheet, index) => {
+      return <p key={index}><Link to={"/chordsheet/" + sheet._id}>{sheet.title}</Link></p>
     })
     return (
       <div>

@@ -71,11 +71,10 @@ exports.createChordSheet = async (req, res) => {
 }
 
 exports.getChordSheets = async (req, res) => {
-  console.log('get chord sheets')
   if (req.user._id) {
     const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne().populate('chordSheets');
-    console.log(user.chordSheets);
-    res.send('success')
+    const chordSheets = await user.chordSheets;
+    res.send(chordSheets)
   }
 }

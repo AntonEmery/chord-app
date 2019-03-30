@@ -30,7 +30,7 @@ class ChordSheet extends Component {
     // string is the string of the chords (0 - 5)
     // fret is the fret of the chord (-1 - 5)
 
-    var currentChords = this.state.chords.slice();
+    let currentChords = this.state.chords.slice();
     //set value of current chord and string to the fret you are on
     currentChords[id][string] = fret;
     this.setState({
