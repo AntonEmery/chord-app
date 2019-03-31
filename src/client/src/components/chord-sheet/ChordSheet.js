@@ -39,8 +39,8 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    const { chords } = this.props.location.state;
-    console.log(this.props.location.state)
+    const chords = this.props.location.state.chordSheets.filter(sheet => sheet._id === this.props.match.params.id);
+    console.log(chords)
     this.setState(
       (prevState, props) => {
         // Copy current chords in to temp var
