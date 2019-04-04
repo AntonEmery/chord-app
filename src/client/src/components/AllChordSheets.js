@@ -25,8 +25,7 @@ class AllChordSheets extends Component {
   render() {
     let sheets = this.state.chordSheets.map((sheet, index) => {
       return <p key={index}><Link to={{
-        pathname: '/chordsheet/' + sheet._id,
-        state: { chordSheets: this.state.chordSheets }
+        pathname: '/chordsheet/' + sheet._id
       }}>{sheet.title}</Link></p>
     })
     return (

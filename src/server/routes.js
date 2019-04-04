@@ -33,11 +33,11 @@ router.post('/createChordSheet', chordSheetController.createChordSheet);
 //returns chord sheets based on a user
 router.get('/getChordSheets', chordSheetController.returnChordSheetsByUser);
 
-//returns chord sheets associated with a user id
-router.get('/chordSheets/:id', chordSheetController.returnChordSheetByUser);
+//returns individual chord sheet
+router.get('/getChordSheet/', chordSheetController.returnChordSheetById);
 
 //saves a chord sheet
-router.post('/chordSheets/:id', chordSheetController.saveChordSheet);
+router.post('/saveChordSheet/:id', chordSheetController.saveChordSheet);
 
 //updates a chord sheet
 router.post('/updateChordSheet', (req, res) => {

@@ -39,20 +39,10 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    const chords = this.props.location.state.chordSheets.filter(sheet => sheet._id === this.props.match.params.id);
-    console.log(chords)
-    this.setState(
-      (prevState, props) => {
-        // Copy current chords in to temp var
-        let chords = prevState.chords.slice();
-
-        // Create a new chord state by iterating over seed data refrencing the
-        // current `props.match.params.id` and making a new ChordState
-        chords[props.match.params.id]
-          .chords.forEach((chord) => chords.push(chord))
-        // Return the new chords state
-        return { chords: chords }
-      })
+    const { id } = this.props.match.params;
+    fetch(`http://localhost:8080/getChordSheet/`, {
+      method: 'GET',
+    })
   }
 
   addChord = () => {
@@ -94,7 +84,7 @@ class ChordSheet extends Component {
   handleSave = () => {
     const { id } = this.props.match.params;
     console.log(this.state)
-    fetch(`http://localhost:8080/chordSheets/${id}`, {
+    fetch(`http://localhost:8080/saveChordSheet/${id}`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',

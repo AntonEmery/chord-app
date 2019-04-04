@@ -3,16 +3,12 @@ const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
 
 
-exports.returnChordSheetById = (req, res) => {
-  console.log('getting chord sheet by id');
-};
-
-exports.returnChordSheetByUser = (req, res) => {
-  console.log('getting chord sheet by id');
+exports.returnChordSheetById = async (req, res) => {
+  console.log('returning chord sheet')
+  // const userQuery = User.where({ _id: req.user._id })
 };
 
 exports.saveChordSheet = async (req, res) => {
-  console.log(req.body);
   const userQuery = User.where({ _id: req.user._id });
   const user = await userQuery.findOne();
   const newChordSheet = new ChordSheet({ title: req.body.title, chords: req.body.chords });
