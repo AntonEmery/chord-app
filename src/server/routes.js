@@ -34,7 +34,7 @@ router.post('/createChordSheet', chordSheetController.createChordSheet);
 router.get('/getChordSheets', chordSheetController.returnChordSheetsByUser);
 
 //returns individual chord sheet
-router.get('/getChordSheet/', chordSheetController.returnChordSheetById);
+router.get('/getChordSheet/:id', chordSheetController.returnChordSheetById);
 
 //saves a chord sheet
 router.post('/saveChordSheet/:id', chordSheetController.saveChordSheet);
