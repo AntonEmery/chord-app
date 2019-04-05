@@ -4,9 +4,12 @@ const ChordSheet = mongoose.model('ChordSheet');
 
 
 exports.returnChordSheetById = async (req, res) => {
-  console.log(req.params.id)
+  const chordSheetId = req.params.id;
+  const userQuery = await User.where({ _id: req.user._id });
+  // filter chord sheet array attached to that user
+  // return id that matches chordSheetId
+  // query chord sheet collection for that id
   res.send('received chord sheet');
-  // const userQuery = User.where({ _id: req.user._id })
 };
 
 exports.saveChordSheet = async (req, res) => {
