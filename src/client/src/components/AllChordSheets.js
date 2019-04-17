@@ -11,6 +11,10 @@ class AllChordSheets extends Component {
     }
   }
 
+  deleteChordSheet = (event) => {
+    console.log(event.target.dataset.sheet)
+  }
+
   componentDidMount() {
     fetch('http://localhost:8080/getChordSheets/', {
       method: 'GET',
@@ -24,9 +28,11 @@ class AllChordSheets extends Component {
 
   render() {
     let sheets = this.state.chordSheets.map((sheet, index) => {
-      return <p key={index}><Link to={{
+      return <div key={index}><p><Link to={{
         pathname: '/chordsheet/' + sheet._id
       }}>{sheet.title}</Link></p>
+        <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
+      </div>
     })
     return (
       <div>

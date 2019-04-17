@@ -48,13 +48,8 @@ class ChordSheet extends Component {
       .then(result => {
         const chords = result.chords.map((chord) => {
           return chord[0]
-
-
         })
-        console.log(chords)
-        this.setState({
-          chords
-        })
+        this.setState({ chords })
       })
   }
 
