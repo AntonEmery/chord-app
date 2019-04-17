@@ -44,6 +44,18 @@ class ChordSheet extends Component {
       method: 'GET',
       credentials: 'include'
     })
+      .then(res => res.json())
+      .then(result => {
+        const chords = result.chords.map((chord) => {
+          return chord[0]
+
+
+        })
+        console.log(chords)
+        this.setState({
+          chords
+        })
+      })
   }
 
   addChord = () => {

@@ -5,11 +5,17 @@ const ChordSheet = mongoose.model('ChordSheet');
 
 exports.returnChordSheetById = async (req, res) => {
   const chordSheetId = req.params.id;
-  const userQuery = await User.where({ _id: req.user._id });
-  // filter chord sheet array attached to that user
-  // return id that matches chordSheetId
+  const userQuery = User.where({ _id: req.user._id });
+  const user = await userQuery.findOne();
+  const targetId = await user.chordSheets.filter(chordSheet => {
+    return chordSheet == chordSheetId.toString();
+  });
   // query chord sheet collection for that id
-  res.send('received chord sheet');
+  ChordSheet.findById(targetId, (err, data) => {
+    console.log(data)
+    res.send(data);
+
+  })
 };
 
 exports.saveChordSheet = async (req, res) => {
