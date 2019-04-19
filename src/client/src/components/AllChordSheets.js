@@ -12,7 +12,13 @@ class AllChordSheets extends Component {
   }
 
   deleteChordSheet = (event) => {
-    console.log(event.target.dataset.sheet)
+    fetch('http://localhost:8080/deleteChordSheet/', {
+      method: 'DELETE',
+      credentials: 'include',
+      mode: 'cors',
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id: event.target.dataset.sheet })
+    })
   }
 
   componentDidMount() {

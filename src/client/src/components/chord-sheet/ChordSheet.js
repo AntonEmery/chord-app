@@ -91,8 +91,7 @@ class ChordSheet extends Component {
 
   handleSave = () => {
     const { id } = this.props.match.params;
-    console.log(this.state)
-    fetch(`http://localhost:8080/saveChordSheet/${id}`, {
+    fetch(`http://localhost:8080/saveChordSheet/`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',

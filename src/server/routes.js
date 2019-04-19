@@ -37,7 +37,10 @@ router.get('/getChordSheets', chordSheetController.returnChordSheetsByUser);
 router.get('/getChordSheet/:id', chordSheetController.returnChordSheetById);
 
 //saves a chord sheet
-router.post('/saveChordSheet/:id', chordSheetController.saveChordSheet);
+router.post('/saveChordSheet/', chordSheetController.saveChordSheet);
+
+//deletes a chord sheet
+router.delete('/deleteChordSheet/', chordSheetController.deleteChordSheet);
 
 //updates a chord sheet
 router.post('/updateChordSheet', (req, res) => {
