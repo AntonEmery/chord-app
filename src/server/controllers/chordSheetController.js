@@ -12,7 +12,6 @@ exports.returnChordSheetById = async (req, res) => {
   });
   // query chord sheet collection for that id
   ChordSheet.findById(targetId, (err, data) => {
-    console.log(data)
     res.send(data);
 
   })
@@ -43,13 +42,17 @@ exports.createChordSheet = async (req, res) => {
 
 exports.deleteChordSheet = async (req, res) => {
   const chordSheetId = req.body.id;
-  const userQuery = User.where({ _id: req.user._id });
-  ChordSheet.deleteOne({ _id: chordSheetId }, (err) => {
-    console.log(err)
-  })
-  const user = await userQuery.findOne().populate('chordSheets');
+  const deleteStatus = await ChordSheet.deleteOne({ _id: chordSheetId })
+  console.log(deleteStatus);
+  const deleteSuccess = deleteStatus.n > 0;
 
-  res.send('sheet deleted');
+  if (deleteSuccess) {
+    const userQuery = User.where({ _id: req.user._id });
+    const user = await userQuery.findOne();
+    const a = await user.update({ $pull: { chordSheets: chordSheetId } })
+    console.log(a)
+    res.send('sheet deleted');
+  }
 }
 
 exports.returnChordSheetsByUser = async (req, res) => {
