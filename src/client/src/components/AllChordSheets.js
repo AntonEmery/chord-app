@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 
 class AllChordSheets extends Component {
@@ -21,6 +21,14 @@ class AllChordSheets extends Component {
     })
   }
 
+  createChordSheet = () => {
+    fetch('http://localhost:8080/createChordSheet/', {
+      method: 'GET',
+      credentials: 'include',
+      mode: 'cors',
+    })
+  };
+
   componentDidMount() {
     fetch('http://localhost:8080/getChordSheets/', {
       method: 'GET',
@@ -41,10 +49,13 @@ class AllChordSheets extends Component {
       </div>
     })
     return (
-      <div>
-        <p>Chord Sheets</p>
-        {sheets}
-      </div>
+      <Fragment>
+        <button onClick={this.createChordSheet}>New Sheet</button>
+        <div>
+          <p>Chord Sheets</p>
+          {sheets}
+        </div>
+      </Fragment>
     )
   }
 }
