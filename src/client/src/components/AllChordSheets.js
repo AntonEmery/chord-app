@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 class AllChordSheets extends Component {
 
@@ -7,7 +7,9 @@ class AllChordSheets extends Component {
     super(props);
 
     this.state = {
-      chordSheets: []
+      chordSheets: [],
+      redirect: false,
+      id: ''
     }
   }
 
@@ -27,7 +29,11 @@ class AllChordSheets extends Component {
       credentials: 'include',
       mode: 'cors',
     })
-  };
+      .then((response) => response.json())
+      .then((sheet) => {
+        this.setState({ redirect: true, id: sheet.id })
+      });
+  }
 
   componentDidMount() {
     fetch('http://localhost:8080/getChordSheets/', {
@@ -41,6 +47,7 @@ class AllChordSheets extends Component {
   }
 
   render() {
+    const { redirect, id } = this.state;
     let sheets = this.state.chordSheets.map((sheet, index) => {
       return <div key={index}><p><Link to={{
         pathname: '/chordsheet/' + sheet._id
@@ -48,14 +55,17 @@ class AllChordSheets extends Component {
         <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
       </div>
     })
-    return (
-      <Fragment>
-        <button onClick={this.createChordSheet}>New Sheet</button>
-        <div>
-          <p>Chord Sheets</p>
-          {sheets}
-        </div>
-      </Fragment>
+    if (redirect)
+      return (<Redirect to={{
+        pathname: `/chordsheet/${id}`
+      }} />)
+    return (<Fragment>
+      <button onClick={this.createChordSheet}>New Sheet</button>
+      <div>
+        <p>Chord Sheets</p>
+        {sheets}
+      </div>
+    </Fragment>
     )
   }
 }

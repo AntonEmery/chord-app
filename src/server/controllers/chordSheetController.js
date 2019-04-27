@@ -41,7 +41,7 @@ exports.createChordSheet = async (req, res) => {
     // add chord sheet to user's chord sheets array on model
     user.chordSheets.push({ _id: chordSheet._id });
     user.save();
-    res.send('sheet created');
+    res.send({ id: chordSheet._id });
   }
 }
 
