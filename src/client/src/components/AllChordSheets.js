@@ -14,6 +14,7 @@ class AllChordSheets extends Component {
   }
 
   deleteChordSheet = (event) => {
+    console.log('delete')
     fetch('http://localhost:8080/deleteChordSheet/', {
       method: 'DELETE',
       credentials: 'include',
@@ -21,6 +22,18 @@ class AllChordSheets extends Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ id: event.target.dataset.sheet })
     })
+      .then(response => response.json())
+      .then(result => {
+        if (result.response === 'sheet deleted') {
+          this.setState((prevState, props) => {
+            let newSheetsState = [...this.state.chordSheets];
+            let currentSheets = newSheetsState.filter(sheet => {
+              return sheet._id !== result.id;
+            });
+            return { chordSheets: currentSheets };
+          })
+        }
+      })
   }
 
   createChordSheet = () => {
@@ -29,8 +42,8 @@ class AllChordSheets extends Component {
       credentials: 'include',
       mode: 'cors',
     })
-      .then((response) => response.json())
-      .then((sheet) => {
+      .then(response => response.json())
+      .then(sheet => {
         this.setState({ redirect: true, id: sheet.id })
       });
   }
@@ -47,6 +60,7 @@ class AllChordSheets extends Component {
   }
 
   render() {
+    console.log(this.state.chordSheets)
     const { redirect, id } = this.state;
     let sheets = this.state.chordSheets.map((sheet, index) => {
       return <div key={index}><p><Link to={{

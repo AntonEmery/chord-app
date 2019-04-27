@@ -48,7 +48,6 @@ exports.createChordSheet = async (req, res) => {
 exports.deleteChordSheet = async (req, res) => {
   const chordSheetId = req.body.id;
   const deleteStatus = await ChordSheet.deleteOne({ _id: chordSheetId })
-  console.log(deleteStatus);
   const deleteSuccess = deleteStatus.n > 0;
 
   if (deleteSuccess) {
@@ -56,7 +55,7 @@ exports.deleteChordSheet = async (req, res) => {
     const user = await userQuery.findOne();
     const a = await user.update({ $pull: { chordSheets: chordSheetId } })
     console.log(a)
-    res.send('sheet deleted');
+    res.send({ response: 'sheet deleted', id: chordSheetId });
   }
 }
 
