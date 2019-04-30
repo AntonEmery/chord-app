@@ -13,7 +13,7 @@ class Nav extends Component {
             <Link className="nav__item" to="/">Home</Link>
           </li>
           <li>
-            <Link className="nav__item" to="/chordsheets/0">My Chordsheets</Link>
+            <Link className="nav__item" to="/chordsheets/">My Chordsheets</Link>
           </li>
           <li className="nav__item"
             onClick={() => {

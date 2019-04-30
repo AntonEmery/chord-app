@@ -49,7 +49,7 @@ class ChordSheet extends Component {
         const chords = result.chords.map((chord) => {
           return chord[0]
         })
-        this.setState({ chords })
+        this.setState({ title: result.title, chords })
       })
   }
 
@@ -79,7 +79,6 @@ class ChordSheet extends Component {
   }
 
   deleteChord = (id) => {
-    console.log(id);
     this.setState(
       (prevState, props) => {
         let newChordState = this.state.chords.slice();
@@ -89,9 +88,9 @@ class ChordSheet extends Component {
     )
   }
 
-  handleSave = () => {
+  saveChordSheet = () => {
     const { id } = this.props.match.params;
-    fetch(`http://localhost:8080/saveChordSheet/`, {
+    fetch(`http://localhost:8080/saveChordSheet/${id}`, {
       method: 'POST',
       credentials: 'include',
       mode: 'cors',
@@ -113,7 +112,7 @@ class ChordSheet extends Component {
     return (
       <div className="chord-sheet-wrapper">
         <ToolBar
-          handleSave={this.handleSave}
+          saveChordSheet={this.saveChordSheet}
           addChord={this.addChord}
         />
         <span>Chord Sheet Title</span>

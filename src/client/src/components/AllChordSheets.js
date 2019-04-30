@@ -60,12 +60,13 @@ class AllChordSheets extends Component {
   }
 
   render() {
-    console.log(this.state.chordSheets)
     const { redirect, id } = this.state;
     let sheets = this.state.chordSheets.map((sheet, index) => {
-      return <div key={index}><p><Link to={{
-        pathname: '/chordsheet/' + sheet._id
-      }}>{sheet.title}</Link></p>
+      return <div key={index}><p><
+        Link to={{
+          pathname: '/chordsheet/' + sheet._id
+        }}>{sheet.title}</Link>
+      </p>
         <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
       </div>
     })
