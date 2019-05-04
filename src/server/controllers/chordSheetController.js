@@ -10,15 +10,18 @@ exports.returnChordSheetById = async (req, res) => {
   const targetId = await user.chordSheets.filter(chordSheet => {
     return chordSheet == chordSheetId.toString();
   });
-  // query chord sheet collection for that id
+  // Query chord sheet collection for that id
   ChordSheet.findById(targetId, (err, data) => {
     res.send(data);
-
   })
 };
 
 exports.saveChordSheet = async (req, res) => {
-  const saveChordSheet = await ChordSheet.findByIdAndUpdate(req.params.id, { title: req.body.title, chords: req.body.chords });
+  const saveChordSheet = await ChordSheet.findByIdAndUpdate(req.params.id,
+    {
+      title: req.body.title,
+      chords: req.body.chords
+    });
   res.send('chord sheet saved');
 };
 
@@ -27,12 +30,13 @@ exports.createChordSheet = async (req, res) => {
     const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne();
     const newChordSheet = new ChordSheet({
-      title: 'Test Chord Sheet', chords: [
+      title: 'Untitled Chord Sheet',
+      chords: [
         { name: 'Em', 0: 0, 1: 3, 2: 2, 3: 2, 4: 0, 5: 0 }
       ]
     });
     let chordSheet = await newChordSheet.save();
-    // add chord sheet to user's chord sheets array on model
+    // Add chord sheet to user's chord sheets array on model
     user.chordSheets.push({ _id: chordSheet._id });
     user.save();
     res.send({ id: chordSheet._id });
@@ -48,7 +52,6 @@ exports.deleteChordSheet = async (req, res) => {
     const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne();
     const a = await user.update({ $pull: { chordSheets: chordSheetId } })
-    console.log(a)
     res.send({ response: 'sheet deleted', id: chordSheetId });
   }
 }
@@ -58,6 +61,6 @@ exports.returnChordSheetsByUser = async (req, res) => {
     const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne().populate('chordSheets');
     const chordSheets = await user.chordSheets;
-    res.send(chordSheets)
+    res.send(chordSheets);
   }
 }

@@ -19,51 +19,34 @@ router.post('/login', passport.authenticate('local', { failureRedirect: 'http://
   }
 );
 
-
-// create user
+// Create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);
 
 router.get('/isLoggedIn', authController.isLoggedIn);
 
 router.get('/logout', authController.logout)
 
-// create chord sheet
+// Create chord sheet
 router.get('/createChordSheet', chordSheetController.createChordSheet);
 
-//returns chord sheets based on a user
+// Returns chord sheets based on a user
 router.get('/getChordSheets', chordSheetController.returnChordSheetsByUser);
 
-//returns individual chord sheet
+// Returns individual chord sheet
 router.get('/getChordSheet/:id', chordSheetController.returnChordSheetById);
 
-//saves a chord sheet
+// Saves a chord sheet
 router.post('/saveChordSheet/:id', chordSheetController.saveChordSheet);
 
-//deletes a chord sheet
+// Deletes a chord sheet
 router.delete('/deleteChordSheet/', chordSheetController.deleteChordSheet);
 
-//updates a chord sheet
-router.post('/updateChordSheet', (req, res) => {
-  ChordSheets.findById(req.body.id).then(function (chordSheet) {
-    chordSheet.updateAttributes({
-      chords: req.body.chords,
-      user_id: req.body.user_id
-    })
-      .then(function (data) {
-        res.status(200).json(data);
-      })
-      .catch(function (error) {
-        res.status(500).json(error);
-      })
-  })
-})
-
-//returns all users
+// Returns all users
 router.get('/users', (req, res) => {
   Users.findAll().then((allUsers) => res.send(allUsers))
 })
 
-//creates a new user
+// Creates a new user
 router.post('/users', (req, res) => {
   Users.create({
     name: req.body.name,
@@ -73,7 +56,7 @@ router.post('/users', (req, res) => {
     .catch((error) => res.status(500).json(error))
 })
 
-//deletes a user
+// Deletes a user
 router.delete('/users', (req, res) => {
   Users.destroy({
     where: {

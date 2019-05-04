@@ -46,9 +46,7 @@ class ChordSheet extends Component {
     })
       .then(res => res.json())
       .then(result => {
-        const chords = result.chords.map((chord) => {
-          return chord[0]
-        })
+        const chords = result.chords.map(chord => chord[0])
         this.setState({ title: result.title, chords })
       })
   }
