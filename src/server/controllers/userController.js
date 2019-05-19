@@ -46,14 +46,6 @@ exports.register = async (req, res, next) => {
   const user = new User({ email: req.body.email, name: req.body.name, password: req.body.password });
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
   await User.register(user, req.body.password);
-  res.redirect('http://localhost:3000');
+  res.redirect('http://localhost:3000/chordsheets');
   next();
 }
-
-// exports.loginUser = async (req, res) => {
-//   console.log('Session', req.session.userId);
-//   const userQuery = User.where({ name: req.body.username, password: req.body.password });
-//   const user = await userQuery.findOne();
-//   req.session.userId = user._id;
-//   res.redirect('http://localhost:3000');
-// }
