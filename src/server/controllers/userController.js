@@ -43,7 +43,16 @@ exports.validateRegister = (req, res, next) => {
 };
 
 exports.register = async (req, res, next) => {
-  const user = new User({ email: req.body.email, name: req.body.name, password: req.body.password });
+  const user = new User({
+    email: req.body.email,
+    name: req.body.name,
+    password: req.body.password
+  },
+    (err) => {
+      if (err) {
+        console.log(err);
+      }
+    });
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
   await User.register(user, req.body.password);
   res.redirect('http://localhost:3000/chordsheets');
@@ -51,6 +60,6 @@ exports.register = async (req, res, next) => {
 }
 
 exports.resetPassword = (req, res) => {
-  console.log(req.body);
+  const user = User.findOne({ email: req.body.email });
   res.send('valid email');
 }
