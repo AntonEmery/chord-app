@@ -49,3 +49,8 @@ exports.register = async (req, res, next) => {
   res.redirect('http://localhost:3000/chordsheets');
   next();
 }
+
+exports.resetPassword = (req, res) => {
+  console.log(req.body);
+  res.send('valid email');
+}

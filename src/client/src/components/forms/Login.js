@@ -19,6 +19,7 @@ class Login extends Component {
           </div>
           <button type="submit" className="button button--grey button--med">Log In</button>
         </form>
+        <Link to="/reset">Forgot Password?</Link>
       </div>
     )
   }

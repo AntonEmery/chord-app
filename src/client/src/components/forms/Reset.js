@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-
-
 class Reset extends Component {
 
   render() {
@@ -9,16 +7,12 @@ class Reset extends Component {
       <div className="card card__login">
         <h1>Reset Your Password</h1>
         <p>A reset link will be sent to your email</p>
-        <form className="reset">
+        <form className="reset" action="http://localhost:8080/reset" method="POST">
           <div className="card__input-item">
             <label htmlFor="email">Email address</label>
-            <input name="email " type="text" placeholder="Username" />
+            <input name="email " type="text" placeholder="Email" />
           </div>
-          <div className="card__input-item">
-            <label htmlFor="password">Password</label>
-            <input name="password" type="password" placeholder="Password" />
-          </div>
-          <button className="button button--grey button--med">Reset</button>
+          <button type="submit" className="button button--grey button--med">Reset</button>
         </form>
       </div>
     );
