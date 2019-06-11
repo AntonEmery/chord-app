@@ -11,11 +11,6 @@ const { promisify } = require('es6-promisify');
 //   res.send('done');
 // }
 
-exports.createUser = (req, res, next) => {
-  console.log(req.body)
-  res.redirect('http://localhost:3000');
-}
-
 exports.validateRegister = (req, res, next) => {
   // sanitize data from form and ensure they are not blank
   req.sanitizeBody('name');
@@ -46,16 +41,12 @@ exports.register = async (req, res, next) => {
   const user = new User({
     email: req.body.email,
     name: req.body.name,
-    password: req.body.password
-  },
-    (err) => {
-      if (err) {
-        console.log(err);
-      }
-    });
+  });
+  console.log(user)
+
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
-  await User.register(user, req.body.password);
-  res.redirect('http://localhost:3000/chordsheets');
+  const register = promisify(User.register.bind(User));
+  await register(user, req.body.password).catch((err) => { console.log(err) })
   next();
 }
 
