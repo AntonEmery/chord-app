@@ -1,5 +1,5 @@
 const nodemailer = require('nodemailer')
-const promisify = require('es6-promisify')
+const { promisify } = require('es6-promisify')
 
 const transport = nodemailer.createTransport({
   host: process.env.MAIL_HOST,
@@ -19,6 +19,6 @@ exports.send = async (options) => {
     text: 'Filled in later'
   };
 
-  const sendMail = promisify(transport.sendMail, transport);
+  const sendMail = promisify(transport.sendMail.bind(transport));
   return sendMail(mailOptions)
 }

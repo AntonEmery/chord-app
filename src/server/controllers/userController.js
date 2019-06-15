@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
 const { promisify } = require('es6-promisify');
+const mail = require('../handlers/mail');
 
 // exports.createUser = async (req, res) => {
 //   const chordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
@@ -42,7 +43,6 @@ exports.register = async (req, res, next) => {
     email: req.body.email,
     name: req.body.name,
   });
-  console.log(user)
 
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
   const register = promisify(User.register.bind(User));
@@ -50,7 +50,15 @@ exports.register = async (req, res, next) => {
   next();
 }
 
-exports.resetPassword = (req, res) => {
-  const user = User.findOne({ email: req.body.email });
-  res.send('valid email');
+exports.resetPassword = async (req, res) => {
+  const user = await User.findOne({ email: req.body.email });
+  if (user) {
+    await mail.send({
+      user,
+      subject: 'Password Reset'
+    })
+    res.send('valid email');
+  } else {
+    res.send('email not found');
+  }
 }
