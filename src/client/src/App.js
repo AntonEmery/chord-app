@@ -6,6 +6,7 @@ import {
 import LoginForm from './components/forms/Login';
 import Register from './components/forms/Register';
 import Reset from './components/forms/Reset';
+import NewPassword from './components/forms/NewPassword';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
@@ -18,7 +19,8 @@ class App extends Component {
         <Fragment>
           <Login />
           <Route path="/register" component={Register} />
-          <Route path="/reset" component={Reset} />
+          <Route path="/reset-password" component={Reset} />
+          <Route path="/new-password" component={NewPassword} />
           <Chordsheets />
           <Chordsheet />
         </Fragment>

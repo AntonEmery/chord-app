@@ -3,6 +3,7 @@ const User = mongoose.model('User');
 const ChordSheet = mongoose.model('ChordSheet');
 const { promisify } = require('es6-promisify');
 const mail = require('../handlers/mail');
+const crypto = require('crypto');
 
 // exports.createUser = async (req, res) => {
 //   const chordSheet = new ChordSheet({title: 'Test Chord Sheet', chords: [['Em','0','2','2','0','0','0' ]]});
@@ -50,15 +51,32 @@ exports.register = async (req, res, next) => {
   next();
 }
 
-exports.resetPassword = async (req, res) => {
+exports.requestReset = async (req, res) => {
   const user = await User.findOne({ email: req.body.email });
   if (user) {
+    // https://itnext.io/password-reset-emails-in-your-react-app-made-easy-with-nodemailer-bb27968310d7
+    // Set token on user in database, one hour time limit
+    user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordExpires = Date.now() + 3600000 // 1 hour from now
+    await user.save();
+
+    // email password reset page url, contains token
+    const resetUrl = `http://localhost:3000/new-password/${user.resetPasswordToken}`;
     await mail.send({
       user,
-      subject: 'Password Reset'
+      subject: 'Password Reset',
+      html: resetUrl
     })
     res.send('valid email');
+    // When they click on link, it directs them to the react route
+    // Component gets token from url, checks in database if token still exists and is valid
+    // If so, load component with form for email.
+    // Submit form with new password, use the username that you got earlier to change that user's pw in the database
   } else {
     res.send('email not found');
   }
+}
+
+exports.setPassword = (req, res) => {
+  console.log(req.body.token)
 }

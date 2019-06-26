@@ -15,8 +15,8 @@ exports.send = async (options) => {
     from: 'Anton Emery <noreply@chordapp.com>',
     to: options.user.email,
     subject: options.subject,
-    html: 'Filled in later',
-    text: 'Filled in later'
+    html: options.html,
+    text: options.html,
   };
 
   const sendMail = promisify(transport.sendMail.bind(transport));

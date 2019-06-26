@@ -68,6 +68,7 @@ router.delete('/users', (req, res) => {
 })
 
 // Reset User Password
-router.post('/reset', userController.resetPassword);
+router.post('/requestReset', userController.requestReset);
+router.post('/setPassword', userController.setPassword)
 
 module.exports = router;
