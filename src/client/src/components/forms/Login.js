@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 class Login extends Component {
 
+  // Do fetch instead of a form action
+
   render() {
     return (
       <div className="card card__login">

@@ -11,8 +11,16 @@ import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
 import Nav from './components/Nav';
+// import authentication from './components/Authentication'
+import Auth from './Auth'
 
 class App extends Component {
+  state = { loggedIn: false }
+  async componentDidMount() {
+    if (await Auth.getCookie()) {
+      this.setState({ loggedIn: true })
+    }
+  }
   render() {
     return (
       <Router>
@@ -21,8 +29,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/reset-password" component={Reset} />
           <Route path="/new-password" component={NewPassword} />
-          <Chordsheets />
-          <Chordsheet />
+          <Route path="/chordsheets" render={protectedRoute(ChordSheets, this.state)} />
         </Fragment>
       </Router>
     );
@@ -31,25 +38,30 @@ class App extends Component {
 
 export default App;
 
+const protectedRoute = (WrappedComponent, state) => (props) => {
+  return state.loggedIn ? <WrappedComponent {...props} /> : <LoginForm />
+}
+
 const Login = () => (
   <Fragment>
     <Route exact path="/" component={LoginForm} />
   </Fragment>
 );
 
-const Chordsheets = () => (
-  <Fragment>
-    <PrivateRoute path="/chordsheets" component={Header} />
-    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
+const ChordSheets = (props) => {
+  return (<Fragment>
+    <Header {...props} />
+    <AllChordSheets />
   </Fragment>
-);
+  )
+};
 
-const Chordsheet = () => (
-  <Fragment>
-    <PrivateRoute path="/chordsheet/:id" component={Header} />
-    <PrivateRoute path="/chordsheet/:id" component={ChordSheet} />
-  </Fragment>
-);
+// const Chordsheet = () => (
+//   <Fragment>
+//     <PrivateRoute path="/chordsheet/:id" component={Header} />
+//     <PrivateRoute path="/chordsheet/:id" component={ChordSheet} />
+//   </Fragment>
+// );
 
 const Header = ({ history }) => {
   return (
