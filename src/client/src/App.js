@@ -58,7 +58,7 @@ const Chordsheets = (props) => {
 const Chordsheet = (props) => {
   return (<Fragment>
     <Header {...props} />
-    <ChordSheet />
+    <ChordSheet {...props} />
   </Fragment>
   )
 };
