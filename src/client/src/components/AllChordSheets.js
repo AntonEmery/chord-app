@@ -14,7 +14,6 @@ class AllChordSheets extends Component {
   }
 
   deleteChordSheet = (event) => {
-    console.log('delete')
     fetch('http://localhost:8080/deleteChordSheet/', {
       method: 'DELETE',
       credentials: 'include',
