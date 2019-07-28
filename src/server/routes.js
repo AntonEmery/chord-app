@@ -15,6 +15,7 @@ let router = express.Router();
 
 router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
   function (req, res) {
+    res.send('success');
     res.redirect('http://localhost:3000/chordsheets');
   }
 );

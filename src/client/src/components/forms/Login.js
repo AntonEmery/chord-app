@@ -17,11 +17,22 @@ class Login extends Component {
     })
   }
 
-
-  // Do fetch instead of a form action
   handleLoginSubmit = (event) => {
-    // submit form data
     event.preventDefault()
+    const url = 'http://localhost:8080/login';
+    fetch(url, {
+      method: 'POST',
+      credentials: 'include',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'Content-Type: application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(response => console.log('Success', response))
+      .catch(error => console.log('Error', error))
+
   }
 
   render() {
@@ -29,7 +40,7 @@ class Login extends Component {
       <div className="card card__login">
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
-        <form className="login" action="http://localhost:8080/login" method="POST">
+        <form className="login">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
             <input name="email" type="text" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
