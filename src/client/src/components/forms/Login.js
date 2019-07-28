@@ -27,7 +27,8 @@ class Login extends Component {
       headers: {
         'Content-Type': 'Content-Type: application/x-www-form-urlencoded',
       },
-      body: JSON.stringify(this.state)
+      referrer: 'no-referrer',
+      body: this.state
     })
       .then(res => res.json())
       .then(response => console.log('Success', response))
