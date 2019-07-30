@@ -48,7 +48,7 @@ class AllChordSheets extends Component {
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/getChordSheets/', {
+    fetch('http://localhost:8080/getChordSheets', {
       method: 'GET',
       credentials: 'include',
       mode: 'cors',

@@ -19,20 +19,24 @@ class Login extends Component {
 
   handleLoginSubmit = (event) => {
     event.preventDefault()
-    const url = 'http://localhost:8080/login';
+    const url = 'http://localhost:8080/login/';
+    const data = { email: this.state.email, password: this.state.password }
     fetch(url, {
       method: 'POST',
-      credentials: 'include',
       mode: 'cors',
       headers: {
-        'Content-Type': 'Content-Type: application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
       },
       referrer: 'no-referrer',
-      body: this.state
+      body: JSON.stringify(data),
     })
       .then(res => res.json())
-      .then(response => console.log('Success', response))
-      .catch(error => console.log('Error', error))
+      .then((response) => {
+        if (response.login === 'success') {
+          this.props.history.push('/chordsheets');
+        }
+      })
+      .catch(error => console.log('Error', error));
 
   }
 

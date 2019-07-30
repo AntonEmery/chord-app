@@ -13,18 +13,13 @@ let router = express.Router();
 
 // router.post('/login', authController.login);
 
-// router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
-//   function (req, res) {
-//     console.log(req.body)
-//     // res.send('success');
-//     res.redirect('http://localhost:3000/chordsheets');
-//   }
-// );
-
-router.post('/login', (req, res) => {
-  console.log(req.body)
-  res.send('success')
-})
+router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
+  function (req, res) {
+    console.log(res)
+    res.send({ login: 'success' })
+    // res.redirect('http://localhost:3000/chordsheets');
+  }
+);
 
 // Create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);

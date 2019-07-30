@@ -14,11 +14,11 @@ import Auth from './Auth'
 
 class App extends Component {
   state = { loggedIn: false }
-  async componentDidMount() {
-    if (await Auth.getCookie()) {
-      this.setState({ loggedIn: true })
-    }
-  }
+  // async componentDidMount() {
+  //   if (await Auth.getCookie()) {
+  //     this.setState({ loggedIn: true })
+  //   }
+  // }
   render() {
     return (
       <Router>
@@ -27,7 +27,7 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/reset-password" component={Reset} />
           <Route path="/new-password" component={NewPassword} />
-          <Route path="/chordsheets" render={protectedRoute(Chordsheets, this.state)} />
+          <Route path="/chordsheets" render={Chordsheets} />
           <Route path="/chordsheet/:id" render={protectedRoute(Chordsheet, this.state)} />
         </Fragment>
       </Router>
