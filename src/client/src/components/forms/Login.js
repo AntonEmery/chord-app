@@ -24,6 +24,7 @@ class Login extends Component {
     fetch(url, {
       method: 'POST',
       mode: 'cors',
+      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -37,6 +38,8 @@ class Login extends Component {
         }
       })
       .catch(error => console.log('Error', error));
+
+    // if response code is 401 not valid login, redirect
 
   }
 

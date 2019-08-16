@@ -15,9 +15,9 @@ let router = express.Router();
 
 router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
   function (req, res) {
-    console.log(res)
-    res.send({ login: 'success' })
-    // res.redirect('http://localhost:3000/chordsheets');
+    res.send({ login: 'success' });
+
+    // if req.user is null, send failure message?
   }
 );
 
