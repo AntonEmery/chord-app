@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 //stores data on visitors from request to request and keeps them logged in
 app.use(session({
-  domain: 'http://localhost:3000',
+  domain: 'http://localhost:3000/',
   secret: 'keyboard dog',
   resave: false,
   saveUninitialized: false,

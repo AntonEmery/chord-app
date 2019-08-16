@@ -9,16 +9,10 @@ import Reset from './components/forms/Reset';
 import NewPassword from './components/forms/NewPassword';
 import AllChordSheets from './components/AllChordSheets';
 import ChordSheet from './components/chord-sheet/ChordSheet';
+import PrivateRoute from './components/PrivateRoute';
 import Nav from './components/Nav';
-import Auth from './Auth'
 
 class App extends Component {
-  state = { loggedIn: false }
-  async componentDidMount() {
-    if (await Auth.getCookie()) {
-      this.setState({ loggedIn: true })
-    }
-  }
   render() {
     return (
       <Router>
@@ -27,8 +21,8 @@ class App extends Component {
           <Route path="/register" component={Register} />
           <Route path="/reset-password" component={Reset} />
           <Route path="/new-password" component={NewPassword} />
-          <Route path="/chordsheets" render={protectedRoute(Chordsheets, this.state)} />
-          <Route path="/chordsheet/:id" render={protectedRoute(Chordsheet, this.state)} />
+          <Chordsheets />
+          <Chordsheet />
         </Fragment>
       </Router>
     );
@@ -47,21 +41,19 @@ const Login = () => (
   </Fragment>
 );
 
-const Chordsheets = (props) => {
-  return (<Fragment>
-    <Header {...props} />
-    <AllChordSheets />
+const Chordsheets = () => (
+  <Fragment>
+    <PrivateRoute path="/chordsheets" component={Header} />
+    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
   </Fragment>
-  )
-};
+);
 
-const Chordsheet = (props) => {
-  return (<Fragment>
-    <Header {...props} />
-    <ChordSheet {...props} />
+const Chordsheet = () => (
+  <Fragment>
+    <PrivateRoute path="/chordsheet/:id" component={Header} />
+    <PrivateRoute path="/chordsheet/:id" component={ChordSheet} />
   </Fragment>
-  )
-};
+);
 
 const Header = ({ history }) => {
   return (
