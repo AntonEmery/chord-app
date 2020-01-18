@@ -53,7 +53,7 @@ exports.register = async (req, res, next) => {
 
 exports.requestReset = async (req, res) => {
   console.log(req.body)
-  const user = await User.findOne({ email: 'test@email.com' });
+  const user = await User.findOne({ email: req.body.email });
   if (user) {
     // https://itnext.io/password-reset-emails-in-your-react-app-made-easy-with-nodemailer-bb27968310d7
     // Set token on user in database, one hour time limit
@@ -78,6 +78,11 @@ exports.requestReset = async (req, res) => {
   }
 }
 
-exports.setPassword = (req, res) => {
+exports.verifyToken = async (req, res) => {
   console.log(req.body.token)
+  const userToken = await User.findOne({ resetPasswordToken: req.body.token })
+  console.log(userToken)
+
 }
+
+exports.setPassword = (req, res) => { }

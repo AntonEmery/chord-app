@@ -13,7 +13,7 @@ class NewPassword extends Component {
 
   componentDidMount() {
     const token = this.props.location.pathname.split('/')[2];
-    fetch('http://localhost:8080/resetPassword', {
+    fetch('http://localhost:8080/verifyToken', {
       method: 'POST',
       body: JSON.stringify(token),
       mode: 'cors'
