@@ -52,7 +52,8 @@ exports.register = async (req, res, next) => {
 }
 
 exports.requestReset = async (req, res) => {
-  const user = await User.findOne({ email: req.body.email });
+  console.log(req.body)
+  const user = await User.findOne({ email: 'test@email.com' });
   if (user) {
     // https://itnext.io/password-reset-emails-in-your-react-app-made-easy-with-nodemailer-bb27968310d7
     // Set token on user in database, one hour time limit
@@ -67,7 +68,7 @@ exports.requestReset = async (req, res) => {
       subject: 'Password Reset',
       html: resetUrl
     })
-    res.send('valid email');
+    res.send({ data: 'valid email' });
     // When they click on link, it directs them to the react route
     // Component gets token from url, checks in database if token still exists and is valid
     // If so, load component with form for email.

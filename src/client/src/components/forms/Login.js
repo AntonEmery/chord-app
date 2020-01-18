@@ -59,7 +59,7 @@ class Login extends Component {
           </div>
           <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med">Log In</button>
         </form>
-        <Link to="/reset">Forgot Password?</Link>
+        <Link to="/reset-password">Forgot Password?</Link>
       </div>
     )
   }

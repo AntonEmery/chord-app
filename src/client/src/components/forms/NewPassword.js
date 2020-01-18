@@ -1,3 +1,5 @@
+// Password reset page that is accessed from link in email
+
 import React, { Component, Fragment } from 'react';
 
 class NewPassword extends Component {
