@@ -7,21 +7,30 @@ class NewPassword extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { verified: false };
+    this.state = { verified: 'loading' };
   }
 
 
   componentDidMount() {
-    const token = this.props.location.pathname.split('/')[2];
+    const data = { token: this.props.location.pathname.split('/')[2] };
     fetch('http://localhost:8080/verifyToken', {
       method: 'POST',
-      body: JSON.stringify(token),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
       mode: 'cors'
     })
+      .then(data => data.json())
+      .then(({ data }) => {
+        if (data === 'valid reset') this.setState({ verified: 'verified' })
+        if (data === 'invalid reset') this.setState({ verified: 'not verified' })
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
-    if (this.state.verified) {
+    if (this.state.verified === 'verified') {
       return (
         <div className="card card__login">
           <h1>Reset Your Password</h1>
@@ -39,7 +48,10 @@ class NewPassword extends Component {
           </form>
         </div>
       )
-    } else {
+    } else if (this.state.verified === 'not verified') {
+      return (<p>Invalid login link</p>)
+    }
+    else if (this.state.verified === 'loading') {
       return (
         <p>Verifying User</p>
       )

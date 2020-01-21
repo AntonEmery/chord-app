@@ -52,7 +52,6 @@ exports.register = async (req, res, next) => {
 }
 
 exports.requestReset = async (req, res) => {
-  console.log(req.body)
   const user = await User.findOne({ email: req.body.email });
   if (user) {
     // https://itnext.io/password-reset-emails-in-your-react-app-made-easy-with-nodemailer-bb27968310d7
@@ -79,9 +78,13 @@ exports.requestReset = async (req, res) => {
 }
 
 exports.verifyToken = async (req, res) => {
-  console.log(req.body.token)
-  const userToken = await User.findOne({ resetPasswordToken: req.body.token })
-  console.log(userToken)
+  console.log('token', req.body)
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  })
+  if (user) res.send({ data: 'valid reset' })
+  if (!user) res.send({ data: 'invalid reset' })
 
 }
 
