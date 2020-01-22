@@ -6,7 +6,9 @@ class Reset extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { email: '' }
+    this.state = {
+      email: '',
+    }
   }
 
   handleChange = (event) => {
@@ -16,7 +18,7 @@ class Reset extends Component {
   }
 
   handleResetPassword = (event) => {
-    event.preventDefault()
+    event.preventDefault();
     const url = 'http://localhost:8080/requestReset/';
     const data = { email: this.state.email }
     fetch(url, {
@@ -31,30 +33,32 @@ class Reset extends Component {
     })
       .then(res => res.json())
       .then((response) => {
-        if (response.data !== 'valid email') throw 'invalid_email'
-        console.log('valid email');
+        if (response.data !== 'valid email') throw 'invalid_email';
+        this.setState({ isValidEmail: true })
       })
-      .catch(error => console.log('invalid email', error));
-
-    // if response code is 401 not valid login, redirect
-
+      .catch((error) => {
+        console.log('invalid email', error);
+      })
   }
 
-
   render() {
-    return (
-      <div className="card card__login">
-        <h1>Reset Your Password</h1>
-        <p>A reset link will be sent to your email</p>
-        <form className="reset">
-          <div className="card__input-item">
-            <label htmlFor="email">Email address</label>
-            <input name="email" value={this.state.email} onChange={this.handleChange} type="text" placeholder="Email" />
-          </div>
-          <button type="submit" onClick={this.handleResetPassword} className="button button--grey button--med">Reset</button>
-        </form>
-      </div>
-    );
+    if (this.state.isValidEmail === true) {
+      return (<p>A reset email has been sent!</p>)
+    } else {
+      return (
+        <div className="card card__login">
+          <h1>Reset Your Password</h1>
+          <p>A reset link will be sent to your email</p>
+          <form className="reset">
+            <div className="card__input-item">
+              <label htmlFor="email">Email address</label>
+              <input name="email" value={this.state.email} onChange={this.handleChange} type="text" placeholder="Email" />
+            </div>
+            <button type="submit" onClick={this.handleResetPassword} className="button button--grey button--med">Reset</button>
+          </form>
+        </div>
+      );
+    }
   }
 }
 

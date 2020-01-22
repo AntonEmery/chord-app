@@ -1,13 +1,17 @@
 // Password reset page that is accessed from link in email
 
 import React, { Component, Fragment } from 'react';
+const axios = require('axios');
 
 class NewPassword extends Component {
 
   constructor(props) {
     super(props);
 
-    this.state = { verified: 'loading' };
+    this.state = {
+      verified: 'loading',
+      password: '',
+    };
   }
 
 
@@ -29,22 +33,32 @@ class NewPassword extends Component {
       .catch(error => console.log(error))
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault();
+    axios.post('http://localhost:8080/resetPassword', {
+      passoword: this.state.password
+    })
+      .then(response => console.log(response.data))
+  }
+
+  handleChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+
   render() {
     if (this.state.verified === 'verified') {
       return (
         <div className="card card__login">
           <h1>Reset Your Password</h1>
           <p>Please choose a new password</p>
-          <form className="reset" action="http://localhost:8080/reset" method="POST">
+          <form className="reset">
             <div className="card__input-item">
               <label htmlFor="password">Password</label>
-              <input name="password" type="text" placeholder="Password" />
+              <input name="password" type="text" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
             </div>
-            <div className="card__input-item">
-              <label htmlFor="confirm-password">Password</label>
-              <input name="confirm-password" type="text" placeholder="Confirm Password" />
-            </div>
-            <button type="submit" className="button button--grey button--med">Set Password</button>
+            <button type="submit" onClick={this.handleSubmit} className="button button--grey button--med">Reset Password</button>
           </form>
         </div>
       )
@@ -53,7 +67,7 @@ class NewPassword extends Component {
     }
     else if (this.state.verified === 'loading') {
       return (
-        <p>Verifying User</p>
+        <p>Verifying Link</p>
       )
     }
   }

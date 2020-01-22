@@ -75,6 +75,6 @@ router.post('/requestReset', userController.requestReset);
 // verify token from URL
 router.post('/verifyToken', userController.verifyToken);
 // Set new password from user
-router.post('/resetPassword', userController.setPassword);
+router.post('/resetPassword', userController.resetPassword);
 
 module.exports = router;

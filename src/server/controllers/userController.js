@@ -88,4 +88,7 @@ exports.verifyToken = async (req, res) => {
 
 }
 
-exports.setPassword = (req, res) => { }
+exports.resetPassword = (req, res) => {
+  console.log(req.body)
+  res.send('password received')
+}
