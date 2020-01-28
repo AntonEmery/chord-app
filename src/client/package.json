@@ -4,7 +4,7 @@
   "private": true,
   "proxy": "http://localhost:8080/",
   "devDependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.18.1",
     "react-scripts": "^2.0.3"
   },
   "dependencies": {
