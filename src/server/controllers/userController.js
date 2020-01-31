@@ -78,7 +78,6 @@ exports.requestReset = async (req, res) => {
 }
 
 exports.verifyToken = async (req, res) => {
-  console.log('token', req.body)
   const user = await User.findOne({
     resetPasswordToken: req.body.token,
     resetPasswordExpires: { $gt: Date.now() }
@@ -88,7 +87,24 @@ exports.verifyToken = async (req, res) => {
 
 }
 
-exports.resetPassword = (req, res) => {
+exports.resetPassword = async (req, res) => {
   console.log(req.body)
-  res.send('password received')
+  const user = await User.findOne({
+    resetPasswordToken: req.body.token,
+    resetPasswordExpires: { $gt: Date.now() }
+  })
+
+  if (!user) {
+    res.send(no_user);
+    return;
+  }
+
+  const setPassword = promisify(user.setPassword, user)
+  await setPassword(body)
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpires = undefined;
+  const updatedUser = await user.save();
+  await req.login(updatedUser);
+  res.send('password updated')
+
 }
