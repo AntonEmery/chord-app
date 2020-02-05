@@ -1,5 +1,4 @@
 class Auth {
-  constructor() { }
 
   getCookie = () => {
     if (document.cookie.indexOf('connect.sid=') >= 0) {

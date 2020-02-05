@@ -31,9 +31,6 @@ class App extends Component {
 
 export default App;
 
-const protectedRoute = (WrappedComponent, state) => (props) => {
-  return state.loggedIn ? <WrappedComponent {...props} /> : <LoginForm />
-}
 
 const Login = () => (
   <Fragment>

@@ -33,7 +33,7 @@ class Reset extends Component {
     })
       .then(res => res.json())
       .then((response) => {
-        if (response.data !== 'valid email') throw 'invalid_email';
+        if (response.data !== 'valid email') throw new Error('invalid_email');
         this.setState({ isValidEmail: true })
       })
       .catch((error) => {

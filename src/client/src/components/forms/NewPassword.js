@@ -1,6 +1,6 @@
 // Password reset page that is accessed from link in email
 
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 const axios = require('axios');
 
 class NewPassword extends Component {
