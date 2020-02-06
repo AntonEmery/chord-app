@@ -84,11 +84,18 @@ exports.verifyToken = async (req, res) => {
   })
   if (user) res.send({ data: 'valid reset' })
   if (!user) res.send({ data: 'invalid reset' })
-
 }
 
-exports.resetPassword = async (req, res) => {
-  console.log(req.body)
+exports.confirmPassword = (req, res, next) => {
+  if (req.body.password === req.body.confirmedPassword) {
+    next();
+    return;
+  }
+  res.send('password_mismatch');
+}
+
+
+exports.updatePassword = async (req, res) => {
   const user = await User.findOne({
     resetPasswordToken: req.body.token,
     resetPasswordExpires: { $gt: Date.now() }
@@ -98,13 +105,12 @@ exports.resetPassword = async (req, res) => {
     res.send(no_user);
     return;
   }
-
-  const setPassword = promisify(user.setPassword, user)
-  await setPassword(body)
+  console.log('user exists')
+  await user.setPassword(req.body.password)
   user.resetPasswordToken = undefined;
   user.resetPasswordExpires = undefined;
-  const updatedUser = await user.save();
-  await req.login(updatedUser);
-  res.send('password updated')
-
+  await user.save();
+  await res.send('password updated')
 }
+
+

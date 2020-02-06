@@ -1,13 +1,11 @@
 import express from 'express';
 import path from 'path';
-import { Users, ChordSheets } from './database.js';
+// import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
 const authController = require('./controllers/authController');
 const passport = require('passport');
 const cors = require('cors');
-
-
 
 let router = express.Router();
 
@@ -75,6 +73,6 @@ router.post('/requestReset', userController.requestReset);
 // verify token from URL
 router.post('/verifyToken', userController.verifyToken);
 // Set new password from user
-router.post('/resetPassword', userController.resetPassword);
+router.post('/resetPassword', userController.confirmPassword, userController.updatePassword);
 
 module.exports = router;

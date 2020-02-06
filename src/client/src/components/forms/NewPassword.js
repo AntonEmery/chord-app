@@ -11,18 +11,19 @@ class NewPassword extends Component {
     this.state = {
       verified: 'loading',
       password: '',
+      confirmedPassword: '',
     };
   }
 
 
   componentDidMount() {
-    const data = { token: this.props.location.pathname.split('/')[2] };
+    const token = { token: this.props.location.pathname.split('/')[2] };
     fetch('http://localhost:8080/verifyToken', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(token),
       mode: 'cors'
     })
       .then(data => data.json())
@@ -35,8 +36,11 @@ class NewPassword extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    const token = this.props.location.pathname.split('/')[2];
     axios.post('http://localhost:8080/resetPassword', {
-      passoword: this.state.password
+      password: this.state.password,
+      confirmedPassword: this.state.confirmedPassword,
+      token: token,
     })
       .then(response => console.log(response.data))
   }
@@ -57,6 +61,7 @@ class NewPassword extends Component {
             <div className="card__input-item">
               <label htmlFor="password">Password</label>
               <input name="password" type="text" placeholder="Password" onChange={this.handleChange} value={this.state.password} />
+              <input name="confirmedPassword" type="text" placeholder="Password" onChange={this.handleChange} value={this.state.confirmedPassword} />
             </div>
             <button type="submit" onClick={this.handleSubmit} className="button button--grey button--med">Reset Password</button>
           </form>
