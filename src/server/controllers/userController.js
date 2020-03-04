@@ -112,5 +112,3 @@ exports.updatePassword = async (req, res) => {
   await user.save();
   await res.send('password updated')
 }
-
-

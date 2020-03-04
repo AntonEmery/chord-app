@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+const axios = require('axios');
 
 class Login extends Component {
   constructor(props) {
@@ -20,20 +21,19 @@ class Login extends Component {
   handleLoginSubmit = (event) => {
     event.preventDefault()
     const url = 'http://localhost:8080/login/';
-    const data = { email: this.state.email, password: this.state.password }
-    fetch(url, {
-      method: 'POST',
+    axios({
+      method: 'post',
+      url,
+      data: { email: this.state.email, password: this.state.password },
       mode: 'cors',
-      credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
+      withCredentials: true,
       referrer: 'no-referrer',
-      body: JSON.stringify(data),
     })
-      .then(res => res.json())
-      .then((response) => {
-        if (response.login === 'success') {
+      .then(({ data }) => {
+        if (data.response === 'success') {
           this.props.history.push('/chordsheets');
         }
       })
