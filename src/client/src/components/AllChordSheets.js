@@ -1,5 +1,6 @@
 import React, { Component, Fragment } from 'react'
 import { Link, Redirect } from 'react-router-dom'
+const axios = require('axios')
 
 class AllChordSheets extends Component {
 
@@ -14,15 +15,14 @@ class AllChordSheets extends Component {
   }
 
   deleteChordSheet = (event) => {
-    fetch('http://localhost:8080/deleteChordSheet/', {
-      method: 'DELETE',
-      credentials: 'include',
+    axios({
+      method: 'delete',
+      withCredentials: true,
       mode: 'cors',
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ id: event.target.dataset.sheet })
+      data: { id: event.target.dataset.sheet }
     })
-      .then(response => response.json())
-      .then(result => {
+      .then((result) => {
         if (result.response === 'sheet deleted') {
           this.setState((prevState, props) => {
             let newSheetsState = [...this.state.chordSheets];
@@ -36,26 +36,25 @@ class AllChordSheets extends Component {
   }
 
   createChordSheet = () => {
-    fetch('http://localhost:8080/createChordSheet/', {
-      method: 'GET',
-      credentials: 'include',
-      mode: 'cors',
+    axios({
+      url: 'http://localhost:8080/createChordSheet/',
+      method: 'get',
+      withCredentials: true,
+      mode: 'cors'
     })
-      .then(response => response.json())
-      .then(sheet => {
+      .then((sheet) => {
         this.setState({ redirect: true, id: sheet.id })
       });
   }
 
   componentDidMount() {
-    fetch('http://localhost:8080/getChordSheets', {
-      method: 'GET',
-      credentials: 'include',
+    axios({
+      url: 'http://localhost:8080/getChordSheets',
+      method: 'get',
+      withCredentials: true,
       mode: 'cors',
     })
-      .then((response) => {
-        return response.json();
-      }).then(data => this.setState({ chordSheets: data }));
+      .then(data => this.setState({ chordSheets: data }));
   }
 
   render() {

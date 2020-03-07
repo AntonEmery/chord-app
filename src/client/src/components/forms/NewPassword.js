@@ -18,15 +18,15 @@ class NewPassword extends Component {
 
   componentDidMount() {
     const token = { token: this.props.location.pathname.split('/')[2] };
-    fetch('http://localhost:8080/verifyToken', {
-      method: 'POST',
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/verifyToken',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(token),
-      mode: 'cors'
+      mode: 'cors',
+      data: token,
     })
-      .then(data => data.json())
       .then(({ data }) => {
         if (data === 'valid reset') this.setState({ verified: 'verified' })
         if (data === 'invalid reset') this.setState({ verified: 'not verified' })
@@ -45,11 +45,7 @@ class NewPassword extends Component {
       .then(response => console.log(response.data))
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
+  handleChange = (event) => this.setState({ [event.target.name]: event.target.value })
 
   render() {
     if (this.state.verified === 'verified') {

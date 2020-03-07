@@ -1,6 +1,9 @@
 // Page for user to input email to get password reset link
 
 import React, { Component } from 'react';
+import cookieParser from 'cookie-parser';
+const axios = require('axios');
+
 
 class Reset extends Component {
   constructor(props) {
@@ -19,19 +22,17 @@ class Reset extends Component {
 
   handleResetPassword = (event) => {
     event.preventDefault();
-    const url = 'http://localhost:8080/requestReset/';
-    const data = { email: this.state.email }
-    fetch(url, {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
+    axios({
+      method: 'post',
+      url: 'http://localhost:8080/requestReset/',
       headers: {
         'Content-Type': 'application/json',
       },
+      mode: 'cors',
+      withCredentials: true,
       referrer: 'no-referrer',
-      body: JSON.stringify(data),
+      data: { email: this.state.email }
     })
-      .then(res => res.json())
       .then((response) => {
         if (response.data !== 'valid email') throw new Error('invalid_email');
         this.setState({ isValidEmail: true })

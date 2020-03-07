@@ -1,3 +1,5 @@
+const axios = require('axios');
+
 class Auth {
 
   getCookie = () => {
@@ -8,8 +10,9 @@ class Auth {
   };
 
   logout(callback) {
-    fetch('http://localhost:8080/logout', {
-      credentials: 'include',
+    axios({
+      url: 'http://localhost:8080/logout',
+      withCredentials: true,
       mode: 'cors'
     })
     callback();

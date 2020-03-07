@@ -5,6 +5,7 @@ import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 // import Chordsheets from '../../seed-data.js'
 import ChordSheetTitle from '../toggle-input'
+const axios = require('axios');
 
 class ChordSheet extends Component {
 
@@ -40,11 +41,11 @@ class ChordSheet extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    fetch(`http://localhost:8080/getChordSheet/${id}`, {
-      method: 'GET',
-      credentials: 'include'
+    axios({
+      method: 'get',
+      url: `http://localhost:8080/getChordSheet/${id}`,
+      withCredentials: true
     })
-      .then(res => res.json())
       .then(result => {
         const chords = result.chords.map(chord => chord[0])
         this.setState({ title: result.title, chords })
@@ -88,22 +89,16 @@ class ChordSheet extends Component {
 
   saveChordSheet = () => {
     const { id } = this.props.match.params;
-    fetch(`http://localhost:8080/saveChordSheet/${id}`, {
-      method: 'POST',
-      credentials: 'include',
+    axios({
+      method: 'post',
+      url: `http://localhost:8080/saveChordSheet/${id}`,
+      withCredentials: true,
       mode: 'cors',
-      body: JSON.stringify(this.state),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
+      body: { data: this.state }
     })
-    // }, { responseType: 'json' })
-    //   .then(function (response) {
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   }
 
   render() {
