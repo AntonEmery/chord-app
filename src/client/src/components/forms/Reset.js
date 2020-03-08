@@ -1,7 +1,6 @@
 // Page for user to input email to get password reset link
 
 import React, { Component } from 'react';
-import cookieParser from 'cookie-parser';
 const axios = require('axios');
 
 
