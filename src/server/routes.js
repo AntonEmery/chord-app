@@ -46,6 +46,11 @@ router.get('/users', (req, res) => {
   Users.findAll().then((allUsers) => res.send(allUsers))
 })
 
+// To test API in Docker
+router.get('/', (req, res) => {
+  res.render('api working')
+})
+
 // Creates a new user
 router.post('/users', (req, res) => {
   Users.create({
