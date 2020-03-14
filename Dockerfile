@@ -10,7 +10,8 @@ RUN npm install
 COPY . /chord-app/
 # Make port 8080 available to the world outside this container
 EXPOSE 8080
-# Navigate to the directory where the server side code is located
-WORKDIR /chord-app/
 # Run the app when the container launches
-CMD ["npm", "devNoClient"]
+CMD ["npm", "run", "devNoClient"]
+
+
+

@@ -1,5 +1,4 @@
-import express from 'express';
-import path from 'path';
+const express = require('express');
 // import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
@@ -48,7 +47,7 @@ router.get('/users', (req, res) => {
 
 // To test API in Docker
 router.get('/', (req, res) => {
-  res.render('api working')
+  res.send('api working')
 })
 
 // Creates a new user
