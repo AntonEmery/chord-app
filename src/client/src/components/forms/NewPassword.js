@@ -20,7 +20,7 @@ class NewPassword extends Component {
     const token = { token: this.props.location.pathname.split('/')[2] };
     axios({
       method: 'post',
-      url: 'http://localhost:8080/verifyToken',
+      url: `${process.env.REACT_APP_API_URL}verifyToken`,
       headers: {
         'Content-Type': 'application/json',
       },

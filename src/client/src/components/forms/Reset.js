@@ -23,7 +23,7 @@ class Reset extends Component {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:8080/requestReset/',
+      url: `${process.env.REACT_APP_API_URL}requestReset/`,
       headers: {
         'Content-Type': 'application/json',
       },

@@ -17,7 +17,7 @@ class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8080/register', {
+    axios.post(`${process.env.REACT_APP_API_URL}/register`, {
       name: this.state.name,
       email: this.state.email,
       passoword: this.state.password,

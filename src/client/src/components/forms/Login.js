@@ -20,7 +20,7 @@ class Login extends Component {
 
   handleLoginSubmit = (event) => {
     event.preventDefault()
-    const url = 'http://localhost:8080/login/';
+    const url = `${process.env.REACT_APP_API_URL}login/`;
     axios({
       method: 'post',
       url,
