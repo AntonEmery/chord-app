@@ -6,8 +6,7 @@
   "scripts": {
     "buildClient": "cd src/client && npm run start",
     "dev": "concurrently \"npm run buildClient\" \"nodemon --exec babel-node src/server/start.js\" ",
-    "devNoClient": "nodemon --exec babel-node src/server/start.js",
-    "cypress:open": "cypress open"
+    "devNoClient": "nodemon --exec babel-node src/server/start.js"
   },
   "repository": {
     "type": "git",

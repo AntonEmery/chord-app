@@ -4,13 +4,6 @@ services:
     build: .
     ports:
       - target: 8080
-        published: 2020
-        protocol: tcp
-        mode: host
-  react-client:
-    build: ./src/client/
-    ports:
-      - target: 3000
-        published: 3030
+        published: 8080
         protocol: tcp
         mode: host

@@ -43,12 +43,12 @@ class ChordSheet extends Component {
     const { id } = this.props.match.params;
     axios({
       method: 'get',
-      url: `http://localhost:8080/getChordSheet/${id}`,
+      url: `${process.env.REACT_APP_API_URL}getChordSheet/${id}`,
       withCredentials: true
     })
       .then(result => {
-        const chords = result.chords.map(chord => chord[0])
-        this.setState({ title: result.title, chords })
+        const chords = result.data.chords.map(chord => chord[0])
+        this.setState({ title: result.data.title, chords })
       })
   }
 
@@ -91,7 +91,7 @@ class ChordSheet extends Component {
     const { id } = this.props.match.params;
     axios({
       method: 'post',
-      url: `http://localhost:8080/saveChordSheet/${id}`,
+      url: `${process.env.REACT_APP_API_URL}saveChordSheet/${id}`,
       withCredentials: true,
       mode: 'cors',
       headers: { "Content-Type": "application/json" },

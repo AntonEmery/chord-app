@@ -72,6 +72,7 @@ class ChordTemplate extends Component {
     return (
       <div className="chords__template">
         <ChordName
+          key={this.props.id}
           name={this.props.state.name}
           setName={this.chordName}
           id={this.props.id}

@@ -16,6 +16,7 @@ class AllChordSheets extends Component {
 
   deleteChordSheet = (event) => {
     axios({
+      url: `${process.env.REACT_APP_API_URL}deleteChordSheet/`,
       method: 'delete',
       withCredentials: true,
       mode: 'cors',
@@ -23,7 +24,8 @@ class AllChordSheets extends Component {
       data: { id: event.target.dataset.sheet }
     })
       .then((result) => {
-        if (result.response === 'sheet deleted') {
+        console.log(result)
+        if (result.data.response === 'sheet deleted') {
           this.setState((prevState, props) => {
             let newSheetsState = [...this.state.chordSheets];
             let currentSheets = newSheetsState.filter(sheet => {
@@ -33,28 +35,33 @@ class AllChordSheets extends Component {
           })
         }
       })
+      .catch(error => console.log(error))
   }
 
   createChordSheet = () => {
     axios({
-      url: 'http://localhost:8080/createChordSheet/',
+      url: `${process.env.REACT_APP_API_URL}createChordSheet/`,
       method: 'get',
       withCredentials: true,
       mode: 'cors'
     })
       .then((sheet) => {
         this.setState({ redirect: true, id: sheet.id })
-      });
+      })
+      .catch(error => console.log(error))
   }
 
   componentDidMount() {
     axios({
-      url: 'http://localhost:8080/getChordSheets',
+      url: `${process.env.REACT_APP_API_URL}getChordSheets`,
       method: 'get',
       withCredentials: true,
       mode: 'cors',
     })
-      .then(data => this.setState({ chordSheets: data }));
+      .then(result => {
+        this.setState({ chordSheets: result.data })
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
