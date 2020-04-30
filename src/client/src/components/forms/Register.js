@@ -17,7 +17,7 @@ class Register extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8080/register', {
+    axios.post(`${process.env.REACT_APP_API_URL}/register`, {
       name: this.state.name,
       email: this.state.email,
       passoword: this.state.password,
@@ -40,7 +40,7 @@ class Register extends Component {
       return key.length === 0;
     })
     return (
-      <div className="card card__register">
+      <div className="card card__form">
         <h1>Create an Account</h1>
         <form className="register">
           <div className="card__input-item">

@@ -1,5 +1,4 @@
-import express from 'express';
-import path from 'path';
+const express = require('express');
 // import { Users, ChordSheets } from './database.js';
 const chordSheetController = require('./controllers/chordSheetController');
 const userController = require('./controllers/userController');
@@ -44,6 +43,11 @@ router.delete('/deleteChordSheet/', chordSheetController.deleteChordSheet);
 // Returns all users
 router.get('/users', (req, res) => {
   Users.findAll().then((allUsers) => res.send(allUsers))
+})
+
+// To test API in Docker
+router.get('/', (req, res) => {
+  res.send('api working')
 })
 
 // Creates a new user

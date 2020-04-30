@@ -7,7 +7,7 @@ import LoginForm from './components/forms/Login';
 import Register from './components/forms/Register';
 import Reset from './components/forms/Reset';
 import NewPassword from './components/forms/NewPassword';
-import AllChordSheets from './components/AllChordSheets';
+import ChordSheetsContainer from './components/ChordSheetsContainer';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
 import Nav from './components/Nav';
@@ -41,7 +41,7 @@ const Login = () => (
 const Chordsheets = () => (
   <Fragment>
     <PrivateRoute path="/chordsheets" component={Header} />
-    <PrivateRoute path="/chordsheets" component={AllChordSheets} />
+    <PrivateRoute path="/chordsheets" component={ChordSheetsContainer} />
   </Fragment>
 );
 

@@ -1,7 +1,7 @@
 // Page for user to input email to get password reset link
 
 import React, { Component } from 'react';
-import cookieParser from 'cookie-parser';
+import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 
@@ -24,7 +24,7 @@ class Reset extends Component {
     event.preventDefault();
     axios({
       method: 'post',
-      url: 'http://localhost:8080/requestReset/',
+      url: `${process.env.REACT_APP_API_URL}requestReset/`,
       headers: {
         'Content-Type': 'application/json',
       },
@@ -47,16 +47,17 @@ class Reset extends Component {
       return (<p>A reset email has been sent!</p>)
     } else {
       return (
-        <div className="card card__login">
+        <div className="card card__form">
           <h1>Reset Your Password</h1>
           <p>A reset link will be sent to your email</p>
-          <form className="reset">
+          <form className="form__reset">
             <div className="card__input-item">
               <label htmlFor="email">Email address</label>
               <input name="email" value={this.state.email} onChange={this.handleChange} type="text" placeholder="Email" />
             </div>
             <button type="submit" onClick={this.handleResetPassword} className="button button--grey button--med">Reset</button>
           </form>
+        <Link to="/login">Or login</Link>
         </div>
       );
     }

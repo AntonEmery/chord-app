@@ -20,7 +20,7 @@ class Login extends Component {
 
   handleLoginSubmit = (event) => {
     event.preventDefault()
-    const url = 'http://localhost:8080/login/';
+    const url = `${process.env.REACT_APP_API_URL}login/`;
     axios({
       method: 'post',
       url,
@@ -45,10 +45,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="card card__login">
+      <div className="card card__form">
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
-        <form className="login">
+        <form className="form__login">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
             <input name="email" type="text" placeholder="Email" value={this.state.email} onChange={this.handleChange} />

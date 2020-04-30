@@ -4,7 +4,7 @@ import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 // import Chordsheets from '../../seed-data.js'
-import ChordSheetTitle from '../toggle-input'
+import ToggleInput from '../toggle-input'
 const axios = require('axios');
 
 class ChordSheet extends Component {
@@ -43,12 +43,12 @@ class ChordSheet extends Component {
     const { id } = this.props.match.params;
     axios({
       method: 'get',
-      url: `http://localhost:8080/getChordSheet/${id}`,
+      url: `${process.env.REACT_APP_API_URL}getChordSheet/${id}`,
       withCredentials: true
     })
       .then(result => {
-        const chords = result.chords.map(chord => chord[0])
-        this.setState({ title: result.title, chords })
+        const chords = result.data.chords.map(chord => chord[0])
+        this.setState({ title: result.data.title, chords })
       })
   }
 
@@ -91,7 +91,7 @@ class ChordSheet extends Component {
     const { id } = this.props.match.params;
     axios({
       method: 'post',
-      url: `http://localhost:8080/saveChordSheet/${id}`,
+      url: `${process.env.REACT_APP_API_URL}saveChordSheet/${id}`,
       withCredentials: true,
       mode: 'cors',
       headers: { "Content-Type": "application/json" },
@@ -108,11 +108,12 @@ class ChordSheet extends Component {
           saveChordSheet={this.saveChordSheet}
           addChord={this.addChord}
         />
-        <span>Chord Sheet Title</span>
-        <ChordSheetTitle
+        <p>Chord Sheet Title</p>
+        <ToggleInput
           setName={this.updateSheetTitle}
           className="chords__title"
           name={this.state.title}
+          inputName='chord-sheet__title'
           id={this.props.id}
         />
         <div className="chords__container">

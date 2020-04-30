@@ -16,6 +16,7 @@ class AllChordSheets extends Component {
 
   deleteChordSheet = (event) => {
     axios({
+      url: `${process.env.REACT_APP_API_URL}deleteChordSheet/`,
       method: 'delete',
       withCredentials: true,
       mode: 'cors',
@@ -23,7 +24,8 @@ class AllChordSheets extends Component {
       data: { id: event.target.dataset.sheet }
     })
       .then((result) => {
-        if (result.response === 'sheet deleted') {
+        console.log(result)
+        if (result.data.response === 'sheet deleted') {
           this.setState((prevState, props) => {
             let newSheetsState = [...this.state.chordSheets];
             let currentSheets = newSheetsState.filter(sheet => {
@@ -33,49 +35,57 @@ class AllChordSheets extends Component {
           })
         }
       })
+      .catch(error => console.log(error))
   }
 
   createChordSheet = () => {
     axios({
-      url: 'http://localhost:8080/createChordSheet/',
+      url: `${process.env.REACT_APP_API_URL}createChordSheet/`,
       method: 'get',
       withCredentials: true,
       mode: 'cors'
     })
       .then((sheet) => {
         this.setState({ redirect: true, id: sheet.id })
-      });
+      })
+      .catch(error => console.log(error))
   }
 
   componentDidMount() {
     axios({
-      url: 'http://localhost:8080/getChordSheets',
+      url: `${process.env.REACT_APP_API_URL}getChordSheets`,
       method: 'get',
       withCredentials: true,
       mode: 'cors',
     })
-      .then(data => this.setState({ chordSheets: data }));
+      .then(result => {
+        this.setState({ chordSheets: result.data })
+      })
+      .catch(error => console.log(error))
   }
 
   render() {
     const { redirect, id } = this.state;
     let sheets = this.state.chordSheets.map((sheet, index) => {
-      return <div key={index}><p><
-        Link to={{
-          pathname: '/chordsheet/' + sheet._id
-        }}>{sheet.title}</Link>
-      </p>
-        <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
-      </div>
+      return (
+        <Link key={index} className="chord-sheets__card" to={{ pathname: `/chordsheet/${sheet._id}` }}>
+          <span>
+            <p>{sheet.title}</p>
+            <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
+          </span>
+        </Link>
+      )
     })
     if (redirect)
       return (<Redirect to={{
         pathname: `/chordsheet/${id}`
       }} />)
     return (<Fragment>
-      <button onClick={this.createChordSheet}>New Sheet</button>
-      <div>
+      <div className="chord-sheets__header">
+        <button onClick={this.createChordSheet}>New Sheet</button>
         <p>Chord Sheets</p>
+      </div>
+      <div className="chord-sheets__container">
         {sheets}
       </div>
     </Fragment>

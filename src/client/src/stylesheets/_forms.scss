@@ -5,13 +5,21 @@
   box-shadow: $card-box-shadow;
   padding: 2rem 1rem;
 
-  &__login, &__register {
+  &__form {
     text-align: center;
+    position: relative;
+    margin: 0 auto;
   }
 
   &__input-item {
     margin-bottom: 1rem;
     text-align: left;
+  }
+}
+
+.form {
+  &__login, &__reset {
+    margin-bottom: 1rem;
   }
 }
 
