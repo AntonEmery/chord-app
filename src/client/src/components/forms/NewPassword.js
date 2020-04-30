@@ -50,7 +50,7 @@ class NewPassword extends Component {
   render() {
     if (this.state.verified === 'verified') {
       return (
-        <div className="card card__login">
+        <div className="card card__form">
           <h1>Reset Your Password</h1>
           <p>Please choose a new password</p>
           <form className="reset">

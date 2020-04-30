@@ -19,5 +19,16 @@
 
   &__name {
     margin-bottom: .25rem;
+    display: inline-block;
+  }
+
+  &__input-title {
+    width: 3rem;
+  }
+}
+
+.chord-sheet {
+  &__title {
+    width: 5rem;
   }
 }

@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from 'react'
 
 
-class ChordName extends Component {
+class ToggleInput extends Component {
   state = {
     editable: false
   }
 
   setName = (e) => {
-    this.props.setName(e.target.value, this.props.id);
+    this.props.setName(e.target.value || this.props.name, this.props.id);
     this.setState({
       editable: !this.state.editable
     })
@@ -37,7 +37,7 @@ class ChordName extends Component {
     return (
       <Fragment>
         {this.state.editable ?
-          <input type="text" placeholder="test" autoFocus onKeyDown={this.handleKeyDown} onBlur={this.setName} /> :
+          <input type="text" className={this.props.inputName} placeholder="test" autoFocus onKeyDown={this.handleKeyDown} onBlur={this.setName} /> :
           <p className="chords__name" onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
         }
       </Fragment>
@@ -46,4 +46,4 @@ class ChordName extends Component {
 }
 
 
-export default ChordName;
+export default ToggleInput;

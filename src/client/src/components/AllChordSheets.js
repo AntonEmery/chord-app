@@ -67,22 +67,25 @@ class AllChordSheets extends Component {
   render() {
     const { redirect, id } = this.state;
     let sheets = this.state.chordSheets.map((sheet, index) => {
-      return <div key={index}><p><
-        Link to={{
-          pathname: '/chordsheet/' + sheet._id
-        }}>{sheet.title}</Link>
-      </p>
-        <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
-      </div>
+      return (
+        <Link key={index} className="chord-sheets__card" to={{ pathname: `/chordsheet/${sheet._id}` }}>
+          <span>
+            <p>{sheet.title}</p>
+            <button data-sheet={sheet._id} onClick={this.deleteChordSheet}>Delete</button>
+          </span>
+        </Link>
+      )
     })
     if (redirect)
       return (<Redirect to={{
         pathname: `/chordsheet/${id}`
       }} />)
     return (<Fragment>
-      <button onClick={this.createChordSheet}>New Sheet</button>
-      <div>
+      <div className="chord-sheets__header">
+        <button onClick={this.createChordSheet}>New Sheet</button>
         <p>Chord Sheets</p>
+      </div>
+      <div className="chord-sheets__container">
         {sheets}
       </div>
     </Fragment>

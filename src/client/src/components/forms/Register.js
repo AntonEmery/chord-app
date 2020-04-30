@@ -40,7 +40,7 @@ class Register extends Component {
       return key.length === 0;
     })
     return (
-      <div className="card card__register">
+      <div className="card card__form">
         <h1>Create an Account</h1>
         <form className="register">
           <div className="card__input-item">

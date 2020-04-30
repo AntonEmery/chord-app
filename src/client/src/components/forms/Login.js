@@ -45,10 +45,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="card card__login">
+      <div className="card card__form">
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
-        <form className="login">
+        <form className="form__login">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
             <input name="email" type="text" placeholder="Email" value={this.state.email} onChange={this.handleChange} />

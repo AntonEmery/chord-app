@@ -6,7 +6,7 @@ import GuitarFret from './GuitarFret'
 import OpenStrings from './OpenStrings'
 import MutedStrings from './MutedStrings'
 
-import ChordName from './toggle-input'
+import ToggleInput from './toggle-input'
 
 import Util from '../Util.js'
 
@@ -71,10 +71,11 @@ class ChordTemplate extends Component {
   render() {
     return (
       <div className="chords__template">
-        <ChordName
+        <ToggleInput
           key={this.props.id}
           name={this.props.state.name}
           setName={this.chordName}
+          inputName='chords__input-title'
           id={this.props.id}
         />
         <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width={140} height={160}>

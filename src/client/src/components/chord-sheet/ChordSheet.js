@@ -4,7 +4,7 @@ import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
 import ToolBar from './ToolBar'
 // import Chordsheets from '../../seed-data.js'
-import ChordSheetTitle from '../toggle-input'
+import ToggleInput from '../toggle-input'
 const axios = require('axios');
 
 class ChordSheet extends Component {
@@ -108,11 +108,12 @@ class ChordSheet extends Component {
           saveChordSheet={this.saveChordSheet}
           addChord={this.addChord}
         />
-        <span>Chord Sheet Title</span>
-        <ChordSheetTitle
+        <p>Chord Sheet Title</p>
+        <ToggleInput
           setName={this.updateSheetTitle}
           className="chords__title"
           name={this.state.title}
+          inputName='chord-sheet__title'
           id={this.props.id}
         />
         <div className="chords__container">
