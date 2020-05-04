@@ -10,13 +10,16 @@ let router = express.Router();
 
 // router.post('/login', authController.login);
 
-router.post('/login', passport.authenticate('local', { failureRedirect: 'http://localhost:3000' }),
-  function (req, res) {
-    res.send({ response: 'success' });
+router.post('/login', function(req, res, next) {
+passport.authenticate('local', function (err, user, info) {
+  console.log('test')
+  console.log(err, user, info)
+    if (!user) return res.send({ response: 'invalid username' });
+    return res.send({ response: 'success' });
 
     // if req.user is null, send failure message?
-  }
-);
+  })(req, res, next)
+});
 
 // Create user
 router.post('/register', userController.validateRegister, userController.register, authController.login);

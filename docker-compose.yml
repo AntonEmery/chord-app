@@ -2,9 +2,8 @@ version: "3.7"
 services:
   node-api:
     build: .
-    command: nodemon --exec babel-node src/server/start.js
     volumes:
-      - /chord-app:/chord-app
+      - .:/chord-app
     ports:
       - target: 8080
         published: 8080
