@@ -35,12 +35,11 @@ class Login extends Component {
       .then(({ data }) => {
         if (data.response === 'success') {
           this.props.history.push('/chordsheets');
+        } else {
+          this.setState({error: data.response})
         }
       })
       .catch(error => console.log('Error', error));
-
-    // if response code is 401 not valid login, redirect
-
   }
 
   render() {
@@ -57,7 +56,8 @@ class Login extends Component {
             <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
           </div>
-          <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med">Log In</button>
+          {this.state.error ? <p>{this.state.error}</p> : ''}
+          <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med" disabled={!this.state.email || !this.state.password}>Log In</button>
         </form>
         <Link to="/reset-password">Forgot Password?</Link>
       </div>
