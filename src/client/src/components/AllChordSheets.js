@@ -45,8 +45,8 @@ class AllChordSheets extends Component {
       withCredentials: true,
       mode: 'cors'
     })
-      .then((sheet) => {
-        this.setState({ redirect: true, id: sheet.id })
+      .then(({ data }) => {
+        this.setState({ redirect: true, id: data.id })
       })
       .catch(error => console.log(error))
   }
