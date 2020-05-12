@@ -24,10 +24,10 @@ class Register extends Component {
       return;
     }
 
-    axios.post(`${process.env.REACT_APP_API_URL}/register`, {
+    axios.post(`${process.env.REACT_APP_API_URL}register`, {
       name: this.state.name,
       email: this.state.email,
-      passoword: this.state.password,
+      password: this.state.password,
       confirmedPassword: this.state.confirmedPassword,
     })
       .then(response => console.log(response.data))
