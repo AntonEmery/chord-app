@@ -33,13 +33,12 @@ class Login extends Component {
       referrer: 'no-referrer',
     })
       .then(({ data }) => {
+        console.log(data)
         if (data.response === 'success') {
           this.props.history.push('/chordsheets');
-        } else {
-          this.setState({error: data.response})
         }
       })
-      .catch(error => console.log('Error', error));
+      .catch(error => this.setState({ error: error.response.data.response }));
   }
 
   render() {

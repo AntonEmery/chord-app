@@ -11,16 +11,12 @@ let router = express.Router();
 // router.post('/login', authController.login);
 
 router.post('/login', function(req, res, next) {
-passport.authenticate('local', function (err, user, info) {
-  console.log(err, user, info)
-    if (!user) return res.send({ response: info.message });
-    req.logIn(user, function(err) {
-      return res.send({ response: 'success' });
-
-    })
-
-    // if req.user is null, send failure message?
-  })(req, res, next)
+  passport.authenticate('local', function (err, user, info) {
+      if (!user) return res.status(401).send({ response: info.message });
+      req.logIn(user, function(err) {
+        return res.send({ response: 'success' });
+      })
+    })(req, res, next)
 });
 
 // Create user
