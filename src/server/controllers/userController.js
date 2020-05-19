@@ -32,7 +32,7 @@ exports.validateRegister = (req, res, next) => {
   const errors = req.validationErrors();
   if (errors) {
     errors.map(err => console.log(err))
-    res.send({ data: error.message})
+    res.send({ data: error.message })
     return;
   }
   // else proceed to next middleware
@@ -48,8 +48,7 @@ exports.register = async (req, res, next) => {
   // .register is exposed from the passportLocalMongoose plugin used in our User schema
   const register = promisify(User.register.bind(User));
   await register(user, req.body.password).catch((err) => {
-    console.log(err)
-    res.send(err)
+    res.status(403).send({ response: err.message })
     return;
   })
   next();

@@ -31,7 +31,11 @@ class Register extends Component {
       confirmedPassword: this.state.confirmedPassword,
     })
       .then(response => console.log(response.data))
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error.response.data.response)
+        this.setState({ error: error.response.data.response })
+      }
+        )
   }
 
   handleChange = (event) => {
@@ -42,9 +46,9 @@ class Register extends Component {
   }
 
   render() {
-    const formIncomplete = Object.values(this.state).some((key) => {
-      return key.length === 0;
-    })
+    // const formIncomplete = Object.values(this.state).some((key) => {
+    //   return key.length === 0;
+    // })
     return (
       <div className="card card__form">
         <h1>Create an Account</h1>
@@ -65,8 +69,9 @@ class Register extends Component {
             <label htmlFor="confirmedPassword">Confirm Password</label>
             <input name="confirmedPassword" onChange={this.handleChange} type="password" placeholder="Confirm Password" value={this.state.confirmedPassword} />
           </div>
+          {this.state.error ? <p>{this.state.error}</p> : ''}
           {this.state.passwordMismatch ? <p>Passwords must match</p> : ''}
-          <button type="submit" onClick={this.handleSubmit} disabled={formIncomplete} className="button button--grey button--med">Create Account</button>
+          <button type="submit" onClick={this.handleSubmit} className="button button--grey button--med">Create Account</button>
         </form>
       </div>
     );
