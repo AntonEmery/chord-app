@@ -30,7 +30,9 @@ class Register extends Component {
       password: this.state.password,
       confirmedPassword: this.state.confirmedPassword,
     })
-      .then(response => console.log(response.data))
+      .then((response) => {
+        if (response.status === 200) this.props.history.push('/chordsheets');
+      })
       .catch(error => {
         console.log(error.response.data.response)
         this.setState({ error: error.response.data.response })
