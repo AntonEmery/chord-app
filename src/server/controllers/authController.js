@@ -7,7 +7,7 @@ exports.login = function(req, res, next) {
 
   passport.authenticate('local', function(err, user, info) {
     if (!user) {
-      res.status(400).send('error logging in');
+      res.status(400).send('User not found');
       return;
     }
     req.logIn(user, function(err) {

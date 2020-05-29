@@ -12,7 +12,6 @@ class Register extends Component {
       email: '',
       password: '',
       confirmedPassword: '',
-      passwordMismatch: false,
     }
   }
 
@@ -23,7 +22,7 @@ class Register extends Component {
       this.setState({ passwordMismatch: true });
       return;
     }
-
+    this.setState({ submitDisabled: true })
     axios.post(`${process.env.REACT_APP_API_URL}register`, {
       name: this.state.name,
       email: this.state.email,
@@ -31,9 +30,11 @@ class Register extends Component {
       confirmedPassword: this.state.confirmedPassword,
     })
       .then((response) => {
+        this.setState({ submitDisabled: false })
         if (response.status === 200) this.props.history.push('/chordsheets');
       })
       .catch(error => {
+        this.setState({ submitDisabled: false })
         console.log(error.response.data.response)
         this.setState({ error: error.response.data.response })
       }
@@ -41,16 +42,11 @@ class Register extends Component {
   }
 
   handleChange = (event) => {
-    const formIncomplete = Object.values(this.state).some((key) => {
-      return key.length === 0;
-    })
+    this.state.submitDisabled =
     this.setState({ [event.target.name]: event.target.value })
   }
 
   render() {
-    // const formIncomplete = Object.values(this.state).some((key) => {
-    //   return key.length === 0;
-    // })
     return (
       <div className="card card__form">
         <h1>Create an Account</h1>
@@ -73,7 +69,7 @@ class Register extends Component {
           </div>
           {this.state.error ? <p>{this.state.error}</p> : ''}
           {this.state.passwordMismatch ? <p>Passwords must match</p> : ''}
-          <button type="submit" onClick={this.handleSubmit} className="button button--grey button--med">Create Account</button>
+          <button type="submit" onClick={this.handleSubmit} disabled={this.state.submitDisabled} className="button button--grey button--med">Create Account</button>
         </form>
       </div>
     );
