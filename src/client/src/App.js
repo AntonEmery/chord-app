@@ -11,12 +11,14 @@ import ChordSheetsContainer from './components/ChordSheetsContainer';
 import ChordSheet from './components/chord-sheet/ChordSheet';
 import PrivateRoute from './components/PrivateRoute';
 import Nav from './components/Nav';
+import HomeContent from './components/home-page/home';
 
 class App extends Component {
   render() {
     return (
       <Router>
         <Fragment>
+          <HomeContent />
           <Login />
           <Route path="/register" component={Register} />
           <Route path="/reset-password" component={Reset} />

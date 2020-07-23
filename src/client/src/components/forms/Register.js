@@ -42,7 +42,6 @@ class Register extends Component {
   }
 
   handleChange = (event) => {
-    this.state.submitDisabled =
     this.setState({ [event.target.name]: event.target.value })
   }
 

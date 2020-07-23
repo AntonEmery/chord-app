@@ -5,6 +5,7 @@
 @import "nav.scss";
 @import "chord-template.scss";
 @import "chord-sheets.scss";
+@import "home.scss";
 
 
 // temp styles while things get reorganized
@@ -16,14 +17,34 @@
 body {
   margin: 0;
   padding: 0;
+  line-height: 1.5;
 }
 
 
 
 /* Chord Sheet */
-.chord-sheet-wrapper {
-  width: 80%;
-  margin: 0 auto;
+.chord-sheet {
+
+  &__wrapper {
+    width: 80%;
+    margin: 2rem auto;
+  }
+
+  &__container {
+    height: 100vh;
+    margin-top: 1rem;
+    box-shadow: $chord-sheet-box-shadow;
+  }
+
+  &__title {
+    margin-bottom: 2rem;
+    margin: 0 auto;
+
+    &-container {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+  }
 }
 
 /* Chord Sheet main */
@@ -58,12 +79,9 @@ header {
 
 /* Menu Bar */
 .menu-bar {
-  margin-bottom: 3%;
+  margin-top: 1rem;
   display: flex;
   flex-direction: row;
-}
-.menu-bar button {
-  /*margin-left: 3%;*/
 }
 
 

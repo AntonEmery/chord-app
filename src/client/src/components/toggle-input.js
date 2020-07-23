@@ -37,7 +37,7 @@ class ToggleInput extends Component {
     return (
       <Fragment>
         {this.state.editable ?
-          <input type="text" className={this.props.inputName} placeholder="test" autoFocus onKeyDown={this.handleKeyDown} onBlur={this.setName} /> :
+          <input type="text" className={this.props.inputName} placeholder="Title" autoFocus onKeyDown={this.handleKeyDown} onBlur={this.setName} /> :
           <p className="chords__name" onClick={this.toggleState}>{this.ifEmpty(this.props.name)}</p>
         }
       </Fragment>
