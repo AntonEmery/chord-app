@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import Util from '../../Util.js'
 import ChordTemplate from '../ChordTemplate'
-import ToolBar from './ToolBar'
+import Toolbar from './ToolBar'
 // import Chordsheets from '../../seed-data.js'
 import ToggleInput from '../toggle-input'
 const axios = require('axios');
@@ -40,16 +40,18 @@ class ChordSheet extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    axios({
-      method: 'get',
-      url: `${process.env.REACT_APP_API_URL}getChordSheet/${id}`,
-      withCredentials: true
-    })
-      .then(result => {
-        const chords = result.data.chords.map(chord => chord[0])
-        this.setState({ title: result.data.title, chords })
+    if (this.props.mode === 'PRIVATE') {
+      const { id } = this.props.match.params;
+      axios({
+        method: 'get',
+        url: `${process.env.REACT_APP_API_URL}getChordSheet/${id}`,
+        withCredentials: true
       })
+        .then(result => {
+          const chords = result.data.chords.map(chord => chord[0])
+          this.setState({ title: result.data.title, chords })
+        })
+      }
   }
 
   addChord = () => {
@@ -88,51 +90,59 @@ class ChordSheet extends Component {
   }
 
   saveChordSheet = () => {
-    const { id } = this.props.match.params;
-    axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API_URL}saveChordSheet/${id}`,
-      withCredentials: true,
-      mode: 'cors',
-      headers: { "Content-Type": "application/json" },
-      body: { data: this.state }
-    })
-      .then(response => console.log(response))
-      .catch(error => console.log(error))
+    if (this.props.mode === 'PRIVATE') {
+      const { id } = this.props.match.params;
+      axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}saveChordSheet/${id}`,
+        withCredentials: true,
+        mode: 'cors',
+        headers: { "Content-Type": "application/json" },
+        body: { data: this.state }
+      })
+        .then(response => console.log(response))
+        .catch(error => console.log(error))
+    }
   }
 
   render() {
     return (
       <div className="chord-sheet-wrapper">
-        <ToolBar
+        <Toolbar
+          mode={this.props.mode}
           saveChordSheet={this.saveChordSheet}
           addChord={this.addChord}
         />
-        <p>Chord Sheet Title</p>
-        <ToggleInput
-          setName={this.updateSheetTitle}
-          className="chords__title"
-          name={this.state.title}
-          inputName='chord-sheet__title'
-          id={this.props.id}
-        />
-        <div className="chords__container">
-          {this.state.chords.map((chord, index) => {
-            return (
-              <ChordTemplate
-                updateChordName={this.updateChordName}
-                key={index}
-                id={index}
-                state={chord}
-                toggleVisibility={this.toggleVisibility}
-                deleteChord={this.deleteChord}
-              />
-            )
-          })}
+        <div className="chord-sheet__container">
+          <div className="chord-sheet__title-container">
+            <ToggleInput
+              setName={this.updateSheetTitle}
+              className="chords__title"
+              name={this.state.title}
+              inputName='chord-sheet__title'
+              id={this.props.id}
+            />
+          </div>
+          <div className="chords__container">
+            {this.state.chords.map((chord, index) => {
+              return (
+                <ChordTemplate
+                  updateChordName={this.updateChordName}
+                  key={index}
+                  id={index}
+                  state={chord}
+                  toggleVisibility={this.toggleVisibility}
+                  deleteChord={this.deleteChord}
+                />
+              )
+            })}
+          </div>
         </div>
       </div>
     )
   }
 }
+
+ChordSheet.defaultProps = { mode: 'PRIVATE' } // DEMO, PRIVATE
 
 export default ChordSheet

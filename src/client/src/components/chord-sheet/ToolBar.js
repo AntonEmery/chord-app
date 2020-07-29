@@ -2,18 +2,22 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom'
 
 
-class ToolBar extends Component {
+class Toolbar extends Component {
   render() {
     return (
       <div className="menu-bar">
-        <button onClick={this.props.saveChordSheet}>Save Sheet</button>
+        {this.props.mode === 'PRIVATE' ? <button onClick={this.props.saveChordSheet}>Save Sheet</button> : ''}
         <button onClick={this.props.addChord}>Add Chord</button>
-        <Link to="/chordsheets">
-          <button>View All Sheets</button>
-        </Link>
+        { this.props.mode === 'PRIVATE'
+        ? <Link to="/chordsheets">
+            <button>View All Sheets</button>
+          </Link>
+        : '' }
       </div>
     )
   }
 }
 
-export default ToolBar
+Toolbar.defaulProps = { mode: 'PRIVATE'} // PRIVATE, DEMO
+
+export default Toolbar
