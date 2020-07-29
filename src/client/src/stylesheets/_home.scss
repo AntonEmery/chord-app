@@ -1,3 +1,39 @@
+header {
+  width: 100%;
+  text-align: center;
+  background-color: $blue;
+  padding: 1rem 0;
+
+  h1 {
+    margin: 0;
+  }
+
+  p {
+    font-size: 1.25rem;
+  }
+
+  a {
+    text-decoration: none;
+
+    &:visited {
+      transition: none;
+      color: $white;
+    }
+  }
+}
+
+
+.header {
+  &__link {
+    padding: .25rem .5rem;
+    border: 2px solid $white;
+    border-radius: .25rem;
+    transition: none;
+  }
+
+
+}
+
 .home {
   &__intro {
     margin: 0 auto;
