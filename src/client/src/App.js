@@ -3,7 +3,6 @@ import {
   BrowserRouter as Router,
   Route,
 } from 'react-router-dom';
-import LoginForm from './components/forms/Login';
 import Register from './components/forms/Register';
 import Reset from './components/forms/Reset';
 import NewPassword from './components/forms/NewPassword';
@@ -18,8 +17,7 @@ class App extends Component {
     return (
       <Router>
         <Fragment>
-          <Home />
-          <Login />
+          <HomePage />
           <Route path="/register" component={Register} />
           <Route path="/reset-password" component={Reset} />
           <Route path="/new-password" component={NewPassword} />
@@ -34,9 +32,9 @@ class App extends Component {
 export default App;
 
 
-const Login = () => (
+const HomePage = () => (
   <Fragment>
-    <Route exact path="/" component={LoginForm} />
+    <Route exact path="/" component={Home} />
   </Fragment>
 );
 

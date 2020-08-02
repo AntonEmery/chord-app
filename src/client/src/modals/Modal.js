@@ -1,16 +1,13 @@
 import React from 'react';
-import { createPortal } from 'react-dom';
+import ReactDOM from 'react-dom';
 
-const JSX_MODAL = (
-  <div className="modal__outer">
-    <div className="modal__inner">
-      <p>Login Form</p>
-    </div>
-  </div>
+const Modal = (props) => (
+  ReactDOM.createPortal(
+    <div className="modal" onClick={props.hide}>
+      {props.children}
+    </div>,
+    document.getElementById('modal-root')
+  )
 )
-
-function Modal(props) {
-  return createPortal(JSX_MODAL, document.getElementById('modal'))
-}
 
 export default Modal;
