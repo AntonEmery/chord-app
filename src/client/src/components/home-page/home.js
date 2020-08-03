@@ -3,6 +3,7 @@ import ChordSheet from '../chord-sheet/ChordSheet';
 import ToggleContent from '../ToggleContent';
 import Modal from '../../modals/Modal';
 import LoginForm from '../forms/Login';
+import { ReactComponent as CloseIcon } from '../../svg/close-icon.svg';
 
 function Home() {
   return (
@@ -18,8 +19,8 @@ function Home() {
           content={hide => (
             <>
               <Modal hide={hide}>
-                <LoginForm />
-                <button onClick={hide}>Close</button>
+                <LoginForm hide={hide} />
+                <button className="button button--transparent" onClick={hide}><CloseIcon /></button>
               </Modal>
             </>
           )}
