@@ -34,4 +34,9 @@ button, .button {
     box-shadow: none;
   }
 
+  &--icon {
+    width: 2rem;
+    padding: .375rem;
+  }
+
 }

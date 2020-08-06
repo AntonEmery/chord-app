@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { ReactComponent as CloseIcon } from '../../svg/close-icon.svg';
+import Button from '../buttons/Button';
 const axios = require('axios');
+
 
 class Login extends Component {
   constructor(props) {
@@ -44,6 +47,11 @@ class Login extends Component {
   render() {
     return (
       <div className="card card__form">
+        <div className="card__header">
+          <Button onClick={this.props.hide} className='button--transparent button--icon'>
+            <CloseIcon />
+          </Button>
+        </div>
         <h1>Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
         <form className="form__login">
