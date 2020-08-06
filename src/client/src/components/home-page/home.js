@@ -14,10 +14,10 @@ function Home() {
       </header>
       <div className="home__intro">
         <ToggleContent
-          toggle={show => <button onClick={show}>Login</button>}
-          content={hide => (
+          toggle={showFn => <button onClick={showFn}>Login</button>}
+          content={hideFn => (
             <>
-              <Modal hide={hide} width='365px'>
+              <Modal hide={hideFn} width='365px'>
                 <LoginForm />
               </Modal>
             </>

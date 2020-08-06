@@ -31,7 +31,6 @@ class App extends Component {
 
 export default App;
 
-
 const HomePage = () => (
   <Fragment>
     <Route exact path="/" component={Home} />

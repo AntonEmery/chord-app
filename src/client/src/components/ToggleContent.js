@@ -1,9 +1,9 @@
 import React, { useState, Fragment } from 'react';
 
- function ToggleContent ({ toggle, content }) {
+function ToggleContent ({ toggle, content }) {
   const [isShown, setIsShown] = useState(false);
-  const hide = () => setIsShown(false);
   const show = () => setIsShown(true);
+  const hide = () => setIsShown(false);
 
   return (
     <Fragment>

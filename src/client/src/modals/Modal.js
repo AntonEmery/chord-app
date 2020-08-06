@@ -5,21 +5,31 @@ import { ReactComponent as CloseIcon } from '../svg/close-icon.svg';
 
 
 const Modal = (props) => {
+
+  const handleChildClick = (e) => {
+    e.stopPropagation();
+  }
+
+  const closeModal = (e, props) => {
+    e.stopPropagation();
+    props.hide();
+  }
+
   return (
     ReactDOM.createPortal(
-    <div className="modal" onClick={props.hide}>
-      <div className="modal__inner" style={{width: props.width}}>
-        <div className="modal__header">
-          <Button onClick={props.hide} className='button--transparent button--icon'>
-            <CloseIcon />
-          </Button>
+      <div className="modal__overlay" onClick={props.hide}>
+        <div className="modal__inner" style={{width: props.width}} onClick={handleChildClick}>
+          <div className="modal__header">
+            <Button onClick={(e) => closeModal(e, props)} className='button--transparent button--icon'>
+              <CloseIcon />
+            </Button>
+          </div>
+          {props.children}
         </div>
-        {props.children}
-      </div>
-    </div>,
-    document.getElementById('modal-root')
+      </div>,
+      document.getElementById('modal-root')
+    )
   )
-  )
-  }
+}
 
 export default Modal;
