@@ -11,4 +11,15 @@
   justify-content: center;
   overflow: auto;
   background-color: rgba(0,0,0,0.4);
+
+  &__inner {
+    border-radius: 3px;
+  }
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+  }
 }

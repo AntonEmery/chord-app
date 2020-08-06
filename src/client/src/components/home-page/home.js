@@ -17,8 +17,8 @@ function Home() {
           toggle={show => <button onClick={show}>Login</button>}
           content={hide => (
             <>
-              <Modal hide={hide}>
-                <LoginForm hide={hide} />
+              <Modal hide={hide} width='365px'>
+                <LoginForm />
               </Modal>
             </>
           )}
