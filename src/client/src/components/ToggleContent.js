@@ -2,13 +2,13 @@ import React, { useState, Fragment } from 'react';
 
 function ToggleContent ({ toggle, content }) {
   const [isShown, setIsShown] = useState(false);
-  const show = () => setIsShown(true);
-  const hide = () => setIsShown(false);
+  const showFn = () => setIsShown(true);
+  const hideFn = () => setIsShown(false);
 
   return (
     <Fragment>
-      {toggle(show)}
-      {isShown && content(hide)}
+      {toggle(showFn)}
+      {isShown && content(hideFn)}
     </Fragment>
   );
 };

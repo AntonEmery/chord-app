@@ -51,7 +51,7 @@ class Login extends Component {
       <div className="card card__form">
         <h1 className="card__heading">Log into Chord App</h1>
         or <ToggleContent
-              toggle={showFn => <p onClick={showFn}>Create Account</p>}
+              toggle={showFn => <button className="button button--text" onClick={showFn}>Create Account</button>}
               content={hideFn => (
                 <>
                   <Modal hide={hideFn} width='365px'>
@@ -74,7 +74,7 @@ class Login extends Component {
           <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med" disabled={!this.state.email || !this.state.password}>Log In</button>
         </form>
         <ToggleContent
-          toggle={showFn => <p onClick={showFn}>Forgot Password?</p>}
+          toggle={showFn => <button className="button button--text" onClick={showFn}>Forgot Password?</button>}
           content={hideFn => (
             <>
               <Modal hide={hideFn} width='365px'>

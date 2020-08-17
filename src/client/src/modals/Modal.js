@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useEffect, Fragment } from 'react';
 import ReactDOM from 'react-dom';
 import Button from '../components/buttons/Button';
 import { ReactComponent as CloseIcon } from '../svg/close-icon.svg';
 
+const modalRoot = document.getElementById('modal-root');
 
 const Modal = (props) => {
+
 
   const handleChildClick = (e) => {
     e.stopPropagation();
@@ -27,7 +29,7 @@ const Modal = (props) => {
           {props.children}
         </div>
       </div>,
-      document.getElementById('modal-root')
+      modalRoot
     )
   )
 }

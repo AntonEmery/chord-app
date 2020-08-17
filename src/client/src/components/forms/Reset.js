@@ -44,7 +44,11 @@ class Reset extends Component {
 
   render() {
     if (this.state.isValidEmail === true) {
-      return (<p>A reset email has been sent!</p>)
+      return (
+        <div className="card card__form">
+          <p>A reset email has been sent!</p>
+        </div>
+      )
     } else {
       return (
         <div className="card card__form">
