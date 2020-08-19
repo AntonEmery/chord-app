@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import Button from '../components/buttons/Button';
 import { ReactComponent as CloseIcon } from '../svg/close-icon.svg';

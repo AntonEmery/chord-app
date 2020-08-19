@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Register from './Register';
-import Reset from './Reset';
-import ToggleContent from '../ToggleContent';
-import Modal from '../../modals/Modal';
 const axios = require('axios');
 
 
@@ -50,16 +46,7 @@ class Login extends Component {
     return (
       <div className="card card__form">
         <h1 className="card__heading">Log into Chord App</h1>
-        or <ToggleContent
-              toggle={showFn => <button className="button button--text" onClick={showFn}>Create Account</button>}
-              content={hideFn => (
-                <>
-                  <Modal hide={hideFn} width='365px'>
-                    <Register />
-                  </Modal>
-                </>
-              )}
-            />
+        or <Link to="/register">Create Account</Link>
 
         <form className="form__login">
           <div className="card__input-item">
@@ -73,16 +60,7 @@ class Login extends Component {
           {this.state.error ? <p>{this.state.error}</p> : ''}
           <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med" disabled={!this.state.email || !this.state.password}>Log In</button>
         </form>
-        <ToggleContent
-          toggle={showFn => <button className="button button--text" onClick={showFn}>Forgot Password?</button>}
-          content={hideFn => (
-            <>
-              <Modal hide={hideFn} width='365px'>
-                <Reset />
-              </Modal>
-            </>
-          )}
-        />
+        <Link to="/reset-password">Forgot Password?</Link>
       </div>
     )
   }
