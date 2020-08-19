@@ -17,6 +17,8 @@
     text-align: center;
     position: relative;
     margin: 0 auto;
+    background: linear-gradient(#fff,#f2f6f9);
+    box-shadow: $card-box-shadow;
   }
 
   &__input-item {

@@ -51,17 +51,18 @@ class Reset extends Component {
       )
     } else {
       return (
-        <div className="card card__form">
-          <h1>Reset Your Password</h1>
-          <p>A reset link will be sent to your email</p>
-          <form className="form__reset">
-            <div className="card__input-item">
-              <label htmlFor="email">Email address</label>
-              <input name="email" value={this.state.email} onChange={this.handleChange} type="text" placeholder="Email" />
-            </div>
-            <button type="submit" onClick={this.handleResetPassword} className="button button--grey button--med">Reset</button>
-          </form>
-        <Link to="/login">Or login</Link>
+        <div className="page__form-wrapper">
+          <div className="card card__form">
+            <h1>Reset Your Password</h1>
+            <p>A reset link will be sent to your email</p>
+            <form className="form__reset">
+              <div className="card__input-item">
+                <label htmlFor="email">Email address</label>
+                <input name="email" value={this.state.email} onChange={this.handleChange} type="text" placeholder="Email" />
+              </div>
+              <button type="submit" onClick={this.handleResetPassword} className="button button--grey button--med">Reset</button>
+            </form>
+          </div>
         </div>
       );
     }

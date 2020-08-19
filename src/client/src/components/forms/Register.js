@@ -46,29 +46,31 @@ class Register extends Component {
 
   render() {
     return (
-      <div className="card card__form">
-        <h1>Create an Account</h1>
-        <form className="register">
-          <div className="card__input-item">
-            <label htmlFor="name">Name</label>
-            <input name="name" onChange={this.handleChange} type="text" placeholder="Username" value={this.state.name}/>
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="email">Email</label>
-            <input name="email" onChange={this.handleChange} type="text" placeholder="Email" value={this.state.text} />
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="password">Password</label>
-            <input name="password" onChange={this.handleChange} type="password" placeholder="Password" value={this.state.password} />
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="confirmedPassword">Confirm Password</label>
-            <input name="confirmedPassword" onChange={this.handleChange} type="password" placeholder="Confirm Password" value={this.state.confirmedPassword} />
-          </div>
-          {this.state.error ? <p>{this.state.error}</p> : ''}
-          {this.state.passwordMismatch ? <p>Passwords must match</p> : ''}
-          <button type="submit" onClick={this.handleSubmit} disabled={this.state.submitDisabled} className="button button--grey button--med">Create Account</button>
-        </form>
+      <div className="page__form-wrapper">
+        <div className="card card__form">
+          <h1>Create an Account</h1>
+          <form className="register">
+            <div className="card__input-item">
+              <label htmlFor="name">Name</label>
+              <input name="name" onChange={this.handleChange} type="text" placeholder="Username" value={this.state.name}/>
+            </div>
+            <div className="card__input-item">
+              <label htmlFor="email">Email</label>
+              <input name="email" onChange={this.handleChange} type="text" placeholder="Email" value={this.state.text} />
+            </div>
+            <div className="card__input-item">
+              <label htmlFor="password">Password</label>
+              <input name="password" onChange={this.handleChange} type="password" placeholder="Password" value={this.state.password} />
+            </div>
+            <div className="card__input-item">
+              <label htmlFor="confirmedPassword">Confirm Password</label>
+              <input name="confirmedPassword" onChange={this.handleChange} type="password" placeholder="Confirm Password" value={this.state.confirmedPassword} />
+            </div>
+            {this.state.error ? <p>{this.state.error}</p> : ''}
+            {this.state.passwordMismatch ? <p>Passwords must match</p> : ''}
+            <button type="submit" onClick={this.handleSubmit} disabled={this.state.submitDisabled} className="button button--grey button--med">Create Account</button>
+          </form>
+        </div>
       </div>
     );
   }
