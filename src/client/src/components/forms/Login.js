@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 const axios = require('axios');
 
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -33,21 +34,20 @@ class Login extends Component {
       referrer: 'no-referrer',
     })
       .then(({ data }) => {
+        console.log(data)
         if (data.response === 'success') {
           this.props.history.push('/chordsheets');
         }
       })
-      .catch(error => console.log('Error', error));
-
-    // if response code is 401 not valid login, redirect
-
+      .catch(error => this.setState({ error: error.response.data.response }));
   }
 
   render() {
     return (
       <div className="card card__form">
-        <h1>Log into Chord App</h1>
+        <h1 className="card__heading">Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
+
         <form className="form__login">
           <div className="card__input-item">
             <label htmlFor="email">Email</label>
@@ -57,7 +57,8 @@ class Login extends Component {
             <label htmlFor="password">Password</label>
             <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
           </div>
-          <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med">Log In</button>
+          {this.state.error ? <p>{this.state.error}</p> : ''}
+          <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med" disabled={!this.state.email || !this.state.password}>Log In</button>
         </form>
         <Link to="/reset-password">Forgot Password?</Link>
       </div>

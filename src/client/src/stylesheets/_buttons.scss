@@ -29,4 +29,18 @@ button, .button {
     background-color: $input-grey;
   }
 
+  &--transparent {
+    background: transparent;
+    box-shadow: none;
+  }
+
+  &--icon {
+    width: 2rem;
+    padding: .375rem;
+  }
+
+  &--text {
+    box-shadow: none;
+  }
+
 }

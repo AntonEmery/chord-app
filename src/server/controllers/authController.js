@@ -3,10 +3,19 @@ const crypto = require('crypto'); // this module is included with node
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
-exports.login = passport.authenticate('local', {
-  successRedirect: 'http://localhost:3000/chordsheets',
-  failureRedirect: 'http://localhost:3000'
-});
+exports.login = function(req, res, next) {
+  console.log('login')
+  passport.authenticate('local', function(err, user, info) {
+    if (!user) {
+      res.status(400).send('User not found');
+      return;
+    }
+    req.logIn(user, function(err) {
+      res.status(200).send('logged in');
+      return;
+    });
+  })(req, res, next)
+}
 
 exports.logout = (req, res) => {
   req.logout();

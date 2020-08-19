@@ -1,9 +1,17 @@
 .card {
   width: 300px;
   margin: 0 auto;
-  background: linear-gradient(#fff,#f2f6f9);
-  box-shadow: $card-box-shadow;
-  padding: 2rem 1rem;
+  padding: 0 2rem 1rem 2rem;
+
+  &__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  &__heading {
+    margin-top: 0;
+  }
 
   &__form {
     text-align: center;
