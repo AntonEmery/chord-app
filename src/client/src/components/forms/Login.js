@@ -44,7 +44,7 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="card card__form">
+      <div className="card card__form card__form--modal">
         <h1 className="card__heading">Log into Chord App</h1>
         or <Link to="/register">Create Account</Link>
 
