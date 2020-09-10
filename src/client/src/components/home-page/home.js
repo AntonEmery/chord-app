@@ -1,10 +1,10 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import ChordSheet from '../chord-sheet/ChordSheet';
 import ToggleContent from '../ToggleContent';
 import Modal from '../../modals/Modal';
 import LoginForm from '../forms/Login';
 
-function Home() {
+function Home({ history }) {
   return (
     <Fragment>
       <header>
@@ -18,7 +18,7 @@ function Home() {
           content={hideFn => (
             <>
               <Modal hide={hideFn} width='365px'>
-                <LoginForm />
+                <LoginForm history={history}/>
               </Modal>
             </>
           )}

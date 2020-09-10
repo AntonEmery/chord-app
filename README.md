@@ -14,7 +14,7 @@ cd src/client
 npm install
 
 # Start up the Node server from the root project directory after starting Docker
-docker build -t server . && docker run -p 2020:8080 --rm -it server
+make docker
 
 # Server should be running on port 8080
 
