@@ -7,20 +7,18 @@ The Node backend is in a Docker container, the React front end is not.
 ````
 git clone https://github.com/AntonEmery/chord-app.git
 cd chord-app
-# Install Node dependencies
-npm install
-cd src/client
-# Install React dependencies
-npm install
 
-# Start up the Node server from the root project directory after starting Docker
-make docker
+# Install Node and React client dependencies
+make npm
+
+# Start up the Node server from the project root
+make node
 
 # Server should be running on port 8080
 
 # Start the React client
-cd src/client
-npm start
+make client
+
 # Navigate to http://localhost:3000/ in your browser
 
 # To shut down Docker containers
