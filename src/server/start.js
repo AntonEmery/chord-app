@@ -1,13 +1,15 @@
 const mongoose = require('mongoose');
 
-
 // Import variables.env file
-require('dotenv').config({ path: 'src/server/variables.env' });
+require('dotenv').config({ path: 'variables.env' });
 
 // Connect to database
 mongoose.connect(
   process.env.DATABASE,
-  { useNewUrlParser: true }
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true // Added due to terminal error
+  }
 );
 mongoose.Promise = global.Promise;
 
