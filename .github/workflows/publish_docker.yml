@@ -1,11 +1,8 @@
-name: testing actions
+name: publish docker on master merge
 
 on:
   push:
-    branches: [actions-sandbox]
-    paths:
-      - 'src/server/**'
-
+    branches: [master]
 
 jobs:
   run-actions:
