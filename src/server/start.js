@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Import variables.env file
-require('dotenv').config({ path: 'variables.env' });
+require('dotenv').config({ path: 'src/server/variables.env' });
 
 // Connect to database
 mongoose.connect(
