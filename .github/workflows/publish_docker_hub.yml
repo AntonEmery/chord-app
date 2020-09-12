@@ -1,0 +1,17 @@
+name: publish to Docker Hub on master merge
+
+on:
+  push:
+    branches: [master]
+
+jobs:
+  run-actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Echo a string
+        run: echo "Lets go!"
+      - name: running a multi line command syntax
+        run: |
+          node -v
+          npm -v
+
