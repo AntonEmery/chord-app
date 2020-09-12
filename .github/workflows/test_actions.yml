@@ -1,8 +1,11 @@
-name: publish to Docker Hub on master merge
+name: testing actions
 
 on:
   push:
-    branches: [master]
+    branches: [actions-sandbox]
+    paths:
+      - 'src/server/**'
+
 
 jobs:
   run-actions:
