@@ -5,7 +5,12 @@ npm:
 node_dev:
 	echo 'Starting Node dev server in Docker Container'
 	docker build -t node_dev .
-	docker run -t -p 8080:8080 node_dev
+	docker run -it -p 8080:8080 node_dev
+
+node_prod:
+	echo 'Starting Node prod server in Docker Container'
+	docker build --build-arg run_mode_arg=start -t node_prod .
+	docker run -p 8080:8080 -e "run_mode_env=start" node_prod
 
 client:
 	echo 'Starting client'
