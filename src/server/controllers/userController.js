@@ -13,6 +13,8 @@ const crypto = require('crypto');
 //   res.send('done');
 // }
 
+//no reason, test action should run due to this change
+
 exports.validateRegister = (req, res, next) => {
   // sanitize data from form and ensure they are not blank
   req.sanitizeBody('name');
