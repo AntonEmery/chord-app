@@ -11,8 +11,8 @@ cd chord-app
 # Install Node and React client dependencies
 make npm
 
-# Start up the Node server from the project root
-make node
+# Start up the Node server in dev mode (hot reload) from the project root
+make node_dev
 
 # Server should be running on port 8080
 
