@@ -2,3 +2,6 @@ node_modules
 src/client
 variables.env
 notes.txt
+.idea
+.git
+npm-debug.log
