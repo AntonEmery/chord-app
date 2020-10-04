@@ -55,9 +55,9 @@ jobs:
 
             docker run \
             --restart unless-stopped \
-            --env-file variables.env \
-            -p 8000:8000 \
             --name chord_app \
+            --env-file variables.env \
+            -p 8080:8080 \
             -e "run_mode_env=start" \
             antonemery/chord-app:latest
 
