@@ -32,9 +32,32 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          tags: xixiapdx/test_chord:latest
+          tags: antonemery/chord-app:latest
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+      - name: Deploy to Digital Ocean droplet via SSH action
+        uses: appleboy/ssh-action@v0.1.3
+        with:
+          HOST: ${{ secrets.HOST }}
+          USERNAME: ${{ secrets.USERNAME }}
+          KEY: ${{ secrets.SSHKEY }}
+          script: |
+            # Stop running container
+            docker stop chord_app
+
+            # Remove old container
+            docker system prune -a -f
+
+            # Pull and run new container
+            docker run  \
+            --restart unless-stopped \
+            --name chord_app \
+            --env-file variables.env \
+            -p 8080:8080 \
+            -e "run_mode_env=start" \
+            antonemery/chord-app:latest
+
 
