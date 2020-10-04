@@ -48,11 +48,9 @@ jobs:
             docker stop chord_app
 
             # Remove old container
-            docker rm chord_app
+            docker system prune -a -f
 
             # Pull and run new container
-            # docker run --restart unless-stopped --name chord_app --env-file variables.env -p 8080:8080 -e "run_mode_env=start" antonemery/chord-app:latest
-
             docker run \
             --restart unless-stopped \
             --name chord_app \
