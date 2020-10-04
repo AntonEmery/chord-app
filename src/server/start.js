@@ -8,6 +8,7 @@ mongoose.connect(
     useUnifiedTopology: true // Added due to terminal error
   }
 );
+mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise;
 
 mongoose.connection.on('error', err => {
