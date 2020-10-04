@@ -51,7 +51,7 @@ jobs:
             docker system prune -a -f
 
             # Pull and run new container
-            docker run \
+            docker run -d \
             --restart unless-stopped \
             --name chord_app \
             --env-file variables.env \
