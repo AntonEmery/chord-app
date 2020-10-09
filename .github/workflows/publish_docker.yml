@@ -3,6 +3,9 @@ name: publish docker on master merge
 on:
   push:
     branches: [master]
+    paths:
+      - 'src/Dockerfile'
+      - 'src/server/**'
 
 jobs:
   run-actions:
