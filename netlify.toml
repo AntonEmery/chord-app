@@ -1,4 +1,4 @@
 [build]
   base    = "src/client"
   publish = "build"
-  command = "npm build"
+  command = "npm run build"
