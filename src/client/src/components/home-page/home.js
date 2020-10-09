@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment } from 'react';
 import ChordSheet from '../chord-sheet/ChordSheet';
 import ToggleContent from '../ToggleContent';
 import Modal from '../../modals/Modal';
@@ -10,7 +10,7 @@ function Home({ history }) {
       <header>
         <h1>Chord Sheets</h1>
         <p>An app for creating simple chord sheets</p>
-        <a className="header__link" href="https://github.com/AntonEmery/chord-app-client" target="_blank">Github Repo</a>
+        <a className="header__link" href="https://github.com/AntonEmery/chord-app-client" target="_blank" rel="noopener noreferrer">Github Repo</a>
       </header>
       <div className="home__intro">
         <ToggleContent
