@@ -1,0 +1,4 @@
+[build]
+  base    = "src/client"
+  publish = "src/client/build"
+  command = "npm build"

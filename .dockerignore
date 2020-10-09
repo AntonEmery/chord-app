@@ -5,3 +5,4 @@ notes.txt
 .idea
 .git
 npm-debug.log
+netlify.toml
