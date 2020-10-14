@@ -28,6 +28,7 @@ docker system prune -a
 The Node backend uses a `variables.env` in `src/server` file to connect to the Mongo database and Mailtrap.io, a service used to test emails sent to users.  You will need to create that file and fill in your specific data.
 ````
 NODE_ENV=development
+CLIENT_URL=http://localhost:3000/
 DATABASE=mongodb address and credentials
 MAIL_USER=mailtrap.io user
 MAIL_PASS=mailtraip.io password
