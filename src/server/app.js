@@ -31,7 +31,7 @@ app.use(cookieParser());
 
 //stores data on visitors from request to request and keeps them logged in
 app.use(session({
-  domain: 'http://localhost:3000/',
+  domain: process.env.CLIENT_URL,
   secret: 'keyboard dog',
   resave: false,
   saveUninitialized: false,
@@ -41,7 +41,7 @@ app.use(session({
 
 // promisify some callback based APIs
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", 'http://localhost:3000');
+  res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Options");
   res.header('Access-Control-Allow-Methods', 'POST, GET, PUT, DELETE, OPTIONS');
@@ -51,7 +51,7 @@ app.use((req, res, next) => {
 });
 
 let corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: process.env.CLIENT_URL,
   credentials: true,
   preFlightContinue: true
 }
