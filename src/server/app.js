@@ -41,6 +41,16 @@ app.use(session({
 
 // promisify some callback based APIs
 app.use((req, res, next) => {
+  var cookie = req.cookies['cookie'];
+  if (cookie === undefined){
+    var randomNumber=Math.random().toString();
+    randomNumber=randomNumber.substring(2,randomNumber.length);
+    res.cookie('cookie',randomNumber, { maxAge: 900000, httpOnly: true });
+    console.log('cookie created successfully');
+  } else {
+    console.log("Found a cookie: " + cookie);
+  }
+
   res.header("Access-Control-Allow-Origin", process.env.CLIENT_URL);
   res.header("Access-Control-Allow-Credentials", true);
   res.header("Access-Control-Allow-Headers", "X-Requested-With, Content-Type, Accept, Options");
