@@ -36,7 +36,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { secure: false, httpOnly: false, maxAge: 600000000 }
+  cookie: { sameSite: 'None', secure: true, httpOnly: false, maxAge: 600000000 }
 }))
 
 // promisify some callback based APIs
