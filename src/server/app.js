@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 // ToDo: why does commenting this out eliminate the CORS error when saving chord sheets?
-// app.set('trust proxy', 1) // trust first proxy
+app.set('trust proxy', 1) // trust first proxy
 
 // Exposes a bunch of methods for validating data. Used heavily on userController.validateRegister
 app.use(expressValidator());
