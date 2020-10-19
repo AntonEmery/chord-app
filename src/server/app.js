@@ -36,7 +36,7 @@ app.use(session({
   resave: false,
   saveUninitialized: false,
   store: new MongoStore({ mongooseConnection: mongoose.connection }),
-  cookie: { sameSite: 'none', secure: true, httpOnly: false, maxAge: 600000000 }
+  cookie: { sameSite: 'none', secure: true, httpOnly: false, maxAge: 600000000, domain: 'chord-app.com' }
 }))
 
 // promisify some callback based APIs
