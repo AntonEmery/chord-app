@@ -54,7 +54,7 @@ let corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
   preFlightContinue: true,
-  exposedHeaders: ['set-cookie'],
+  // exposedHeaders: ['set-cookie'],
 }
 
 app.use(cors(corsOptions));
