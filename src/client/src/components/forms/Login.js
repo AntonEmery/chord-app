@@ -33,8 +33,9 @@ class Login extends Component {
       withCredentials: true,
       referrer: 'no-referrer',
     })
-    .then(({ data }) => {
-      if (data.response === 'success') {
+    .then((data) => {
+      console.log(data);
+      if (data.data.response === 'success') {
           this.props.history.push('/chordsheets');
         }
       })
