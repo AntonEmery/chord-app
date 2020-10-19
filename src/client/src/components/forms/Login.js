@@ -25,12 +25,12 @@ class Login extends Component {
     axios({
       method: 'post',
       url,
+      withCredentials: true,
       data: { email: this.state.email, password: this.state.password },
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
       },
-      withCredentials: true,
       referrer: 'no-referrer',
     })
     .then((data) => {
