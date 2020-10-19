@@ -53,7 +53,8 @@ app.use((req, res, next) => {
 let corsOptions = {
   origin: process.env.CLIENT_URL,
   credentials: true,
-  preFlightContinue: true
+  preFlightContinue: true,
+  exposedHeaders: ['set-cookie'],
 }
 
 app.use(cors(corsOptions));
