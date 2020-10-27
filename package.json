@@ -7,11 +7,18 @@
     "buildClient": "cd src/client && npm run start",
     "dev": "concurrently \"npm run buildClient\" \"nodemon --exec babel-node src/server/start.js\" ",
     "devNoClient": "nodemon --exec babel-node src/server/start.js",
-    "start": "node ./src/server/start.js"
+    "start": "node ./src/server/start.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AntonEmery/chord-app.git"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   },
   "author": "Anton Emery",
   "license": "MIT",
@@ -41,7 +48,9 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "concurrently": "^3.6.0",
+    "jest": "^26.6.1",
     "nodemailer": "^6.1.1",
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
   }
 }
