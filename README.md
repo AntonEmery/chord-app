@@ -24,6 +24,12 @@ make client
 # To shut down Docker containers
 docker system prune -a
 ````
+
+#### Tests
+Backend tests - `src/server/tests`
+
+Run `npm test` from the root folder
+
 ##### Env file
 The Node backend uses a `variables.env` in `src/server` file to connect to the Mongo database and Mailtrap.io, a service used to test emails sent to users.  You will need to create that file and fill in your specific data.
 ````
