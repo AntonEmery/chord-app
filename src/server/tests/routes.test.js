@@ -1,10 +1,20 @@
+const express = require('express');
 const request = require('supertest');
-const app = require('../start');
+
+// The Models need to be required before the routes
+require('../models/ChordSheet');
+require('../models/User');
+
+const routes = require('../routes');
+const app = express();
+
+app.use(routes)
 
 describe('Test Endpoints', () => {
   it('Test root route', async() => {
-    const res = await request(app).get('/');
-    expect(res).toEqual('api working from digital ocean');
+    const res = await request(app)
+    .get('/');
+    await expect(res.text).toEqual('Home api route working');
   })
 })
 

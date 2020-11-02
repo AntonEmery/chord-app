@@ -48,7 +48,7 @@ router.get('/users', (req, res) => {
 
 // To test API in Docker
 router.get('/', (req, res) => {
-  res.send('api working from digital ocean')
+  res.send('Home api route working')
 })
 
 // Creates a new user
