@@ -14,11 +14,8 @@ require('./handlers/passport');
 
 const app = express();
 
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 // ToDo: why does commenting this out eliminate the CORS error when saving chord sheets?
 app.set('trust proxy', 1) // trust first proxy
@@ -63,7 +60,6 @@ app.use(cors(corsOptions));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(express.static(pathToClient));
 app.use(routes);
 
 module.exports = app;
