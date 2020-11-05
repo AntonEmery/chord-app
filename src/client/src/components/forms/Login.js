@@ -1,32 +1,31 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
+
 import { Link } from 'react-router-dom';
 const axios = require('axios');
 
 
-class Login extends Component {
-  constructor(props) {
-    super(props);
+function Login(props) {
 
-    this.state = {
-      email: '',
-      password: '',
+  const [ email, setEmail ] = useState('');
+  const [ password, setPassword ] = useState('');
+
+  const handleChange = (event) => {
+
+    if (event.target.name === 'email') {
+      setEmail(event.target.value)
+    } else {
+      setPassword(event.target.value)
     }
   }
 
-  handleChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
-  }
-
-  handleLoginSubmit = (event) => {
+  const handleLoginSubmit = (event) => {
     event.preventDefault()
     const url = `${process.env.REACT_APP_API_URL}login/`;
     axios({
       method: 'post',
       url,
       withCredentials: true,
-      data: { email: this.state.email, password: this.state.password },
+      data: { email: email, password: password },
       mode: 'cors',
       headers: {
         'Content-Type': 'application/json',
@@ -36,34 +35,31 @@ class Login extends Component {
     .then((data) => {
       console.log(data);
       if (data.data.response === 'success') {
-          this.props.history.push('/chordsheets');
+          props.history.push('/chordsheets');
         }
       })
-      .catch(error => console.log('error', error));
+    .catch(error => console.log('error', error));
   }
 
-  render() {
-    return (
-      <div className="card card__form">
-        <h1 className="card__heading">Log into Chord App</h1>
-        or <Link to="/register">Create Account</Link>
+  return (
+    <div className="card card__form">
+      <h1 className="card__heading">Log into Chord App</h1>
+      or <Link to="/register">Create Account</Link>
 
-        <form className="form__login">
-          <div className="card__input-item">
-            <label htmlFor="email">Email</label>
-            <input name="email" type="text" placeholder="Email" value={this.state.email} onChange={this.handleChange} />
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="password">Password</label>
-            <input name="password" type="password" placeholder="Password" value={this.state.password} onChange={this.handleChange} />
-          </div>
-          {this.state.error ? <p>{this.state.error}</p> : ''}
-          <button type="submit" onClick={this.handleLoginSubmit} className="button button--grey button--med" disabled={!this.state.email || !this.state.password}>Log In</button>
-        </form>
-        <Link to="/reset-password">Forgot Password?</Link>
-      </div>
-    )
-  }
+      <form className="form__login">
+        <div className="card__input-item">
+          <label htmlFor="email">Email</label>
+          <input name="email" type="text" placeholder="Email" value={email} onChange={handleChange} />
+        </div>
+        <div className="card__input-item">
+          <label htmlFor="password">Password</label>
+          <input name="password" type="password" placeholder="Password" value={password} onChange={handleChange} />
+        </div>
+        <button type="submit" onClick={handleLoginSubmit} className="button button--grey button--med" disabled={!email || !password}>Log In</button>
+      </form>
+      <Link to="/reset-password">Forgot Password?</Link>
+    </div>
+  )
 }
 
 export default Login;
