@@ -33,7 +33,6 @@ function Login(props) {
       referrer: 'no-referrer',
     })
     .then((data) => {
-      console.log(data);
       if (data.data.response === 'success') {
           props.history.push('/chordsheets');
         }

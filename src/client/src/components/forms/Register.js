@@ -1,77 +1,75 @@
-import React, { Component } from 'react';
+import React, { useState, useReducer } from 'react';
 const axios = require('axios');
 
-class Register extends Component {
+function Register (props) {
 
-  constructor(props) {
-    super(props)
+  const [ passwordMismatch, setPasswordMismatch ] = useState('')
+  const [ submitDisabled, setSubmitDisabled ] = useState(false)
+  const [ serverError, setServerError ] = useState('')
 
-    this.state = {
-      name: '',
-      email: '',
-      password: '',
-      confirmedPassword: '',
-    }
-  }
+  // https://zacjones.io/handle-multiple-inputs-in-react-with-hooks
+  const [ userInput, setUserInput ] = useReducer(
+    (state, newState) => ({...state, ...newState}),
+    { name: '', email: '', password: '', confirmedPassword: '' }
+  )
 
-  handleSubmit = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (this.state.password !== this.state.confirmedPassword) {
-      this.setState({ passwordMismatch: true });
+    if (userInput.password !== userInput.confirmedPassword) {
+      setPasswordMismatch(true);
       return;
     }
-    this.setState({ submitDisabled: true })
+    setSubmitDisabled(true)
     axios.post(`${process.env.REACT_APP_API_URL}register`, {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      confirmedPassword: this.state.confirmedPassword,
+      name: userInput.name,
+      email: userInput.email,
+      password: userInput.password,
+      confirmedPassword: userInput.confirmedPassword,
     })
       .then((response) => {
-        this.setState({ submitDisabled: false })
-        if (response.status === 200) this.props.history.push('/chordsheets');
+        setSubmitDisabled(false)
+        if (response.status === 200) props.history.push('/chordsheets');
       })
       .catch(error => {
-        this.setState({ submitDisabled: false })
+        setSubmitDisabled(false)
         console.log(error.response.data.response)
-        this.setState({ error: error.response.data.response })
-      }
-        )
+        setServerError(error.response.data.response)
+      })
   }
 
-  handleChange = (event) => {
-    this.setState({ [event.target.name]: event.target.value })
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setUserInput({[name]: value});
   }
 
-  render() {
-    return (
-      <div className="card card__form">
-        <h1>Create an Account</h1>
-        <form className="register">
-          <div className="card__input-item">
-            <label htmlFor="name">Name</label>
-            <input name="name" onChange={this.handleChange} type="text" placeholder="Username" value={this.state.name}/>
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="email">Email</label>
-            <input name="email" onChange={this.handleChange} type="text" placeholder="Email" value={this.state.text} />
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="password">Password</label>
-            <input name="password" onChange={this.handleChange} type="password" placeholder="Password" value={this.state.password} />
-          </div>
-          <div className="card__input-item">
-            <label htmlFor="confirmedPassword">Confirm Password</label>
-            <input name="confirmedPassword" onChange={this.handleChange} type="password" placeholder="Confirm Password" value={this.state.confirmedPassword} />
-          </div>
-          {this.state.error ? <p>{this.state.error}</p> : ''}
-          {this.state.passwordMismatch ? <p>Passwords must match</p> : ''}
-          <button type="submit" onClick={this.handleSubmit} disabled={this.state.submitDisabled} className="button button--grey button--med">Create Account</button>
-        </form>
-      </div>
-    );
-  }
+  return (
+    <div className="card card__form">
+      <h1>Create an Account</h1>
+      <form className="register">
+        <div className="card__input-item">
+          <label htmlFor="name">Name</label>
+          <input name="name" onChange={handleChange} type="text" placeholder="Username" value={userInput.name}/>
+        </div>
+        <div className="card__input-item">
+          <label htmlFor="email">Email</label>
+          <input name="email" onChange={handleChange} type="text" placeholder="Email" value={userInput.email} />
+        </div>
+        <div className="card__input-item">
+          <label htmlFor="password">Password</label>
+          <input name="password" onChange={handleChange} type="password" placeholder="Password" value={userInput.password} />
+        </div>
+        <div className="card__input-item">
+          <label htmlFor="confirmedPassword">Confirm Password</label>
+          <input name="confirmedPassword" onChange={handleChange} type="password" placeholder="Confirm Password" value={userInput.confirmedPassword} />
+        </div>
+        {serverError ? <p>{serverError}</p> : ''}
+        {passwordMismatch ? <p>Passwords must match</p> : ''}
+        <button type="submit" onClick={handleSubmit} disabled={submitDisabled} className="button button--grey button--med">Create Account</button>
+      </form>
+    </div>
+  );
 }
 
 export default Register;
