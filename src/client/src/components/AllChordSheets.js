@@ -10,7 +10,7 @@ function AllChordSheets() {
 
   useEffect(() => {
     axios({
-      url: `${process.env.REACT_APP_API_URL}getChordSheets`,
+      url: `${process.env.REACT_APP_API_URL}getChordSheets/`,
       method: 'get',
       withCredentials: true,
       mode: 'cors',
