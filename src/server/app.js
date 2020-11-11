@@ -9,7 +9,6 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo')(session);
 const expressValidator = require('express-validator');
 const { promisify } = require('es6-promisify');
-const { cookie } = require('express-validator/check');
 const routes = require('./routes.js');
 require('./handlers/passport');
 
@@ -26,17 +25,6 @@ app.use(expressValidator());
 
 // populates req.cookies with any cookies that came along with the request
 app.use(cookieParser());
-
-const cookieData =
-  process.env.NODE_ENV === 'development'
-    ? { secure: false, httpOnly: false, maxAge: 600000000 }
-    : {
-        sameSite: 'none',
-        secure: true,
-        httpOnly: false,
-        maxAge: 600000000,
-        domain: 'chord-app.com',
-      };
 
 // stores data on visitors from request to request and keeps them logged in
 app.use(
