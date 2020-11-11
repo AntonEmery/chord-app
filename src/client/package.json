@@ -4,10 +4,10 @@
   "private": true,
   "proxy": "http://localhost:8080/",
   "devDependencies": {
-    "axios": "^0.18.1",
     "react-scripts": "^3.3.1"
   },
   "dependencies": {
+    "axios": "^0.18.1",
     "create-react-app": "^3.4.1",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
