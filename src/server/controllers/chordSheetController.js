@@ -54,13 +54,13 @@ exports.deleteChordSheet = async (req, res) => {
 };
 
 exports.returnChordSheetsByUser = async (req, res) => {
-  console.log(req.session);
+  console.log(req.user);
   if (req.user && req.user._id) {
     const userQuery = User.where({ _id: req.user._id });
     const user = await userQuery.findOne().populate('chordSheets');
     const chordSheets = await user.chordSheets;
     res.send(chordSheets);
   } else {
-    res.send(req.session);
+    res.send(req);
   }
 };
