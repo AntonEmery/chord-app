@@ -14,6 +14,9 @@ function AllChordSheets() {
       method: 'get',
       withCredentials: true,
       mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
       .then((result) => {
         console.log(result);

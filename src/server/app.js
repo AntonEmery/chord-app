@@ -65,6 +65,7 @@ const corsOptions = {
   credentials: true,
   preFlightContinue: true,
   exposedHeaders: ['set-cookie'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],
 };
 
 app.use(cors(corsOptions));
