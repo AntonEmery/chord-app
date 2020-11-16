@@ -16,6 +16,7 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+const pathToClient = path.join(__dirname, '..', 'client', 'build');
 
 // ToDo: why does commenting this out eliminate the CORS error when saving chord sheets?
 app.set('trust proxy', 1); // trust first proxy
@@ -34,14 +35,14 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    cookie: {
-      sameSite: 'none',
-      secure: true,
-      httpOnly: false,
-      maxAge: 600000000,
-      domain: 'chord-app.com',
-    },
-    // cookie: { secure: false, httpOnly: false, maxAge: 600000000 },
+    // cookie: {
+    //   sameSite: 'none',
+    //   secure: true,
+    //   httpOnly: false,
+    //   maxAge: 600000000,
+    //   domain: 'chord-app.com',
+    // },
+    cookie: { secure: false, httpOnly: false, maxAge: 600000000 },
   })
 );
 
@@ -70,7 +71,7 @@ app.use(cors(corsOptions));
 
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(express.static(pathToClient));
 app.use(routes);
 
 module.exports = app;
