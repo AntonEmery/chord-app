@@ -60,6 +60,6 @@ exports.returnChordSheetsByUser = async (req, res) => {
     const chordSheets = await user.chordSheets;
     res.send(chordSheets);
   } else {
-    res.send(req.user);
+    res.send(req.session);
   }
 };
