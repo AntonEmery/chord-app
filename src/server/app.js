@@ -35,14 +35,14 @@ app.use(
     resave: false,
     saveUninitialized: false,
     store: new MongoStore({ mongooseConnection: mongoose.connection }),
-    // cookie: {
-    //   sameSite: 'none',
-    //   secure: true,
-    //   httpOnly: false,
-    //   maxAge: 600000000,
-    //   domain: 'chord-app.com',
-    // },
-    cookie: { secure: false, httpOnly: false, maxAge: 600000000 },
+    cookie: {
+      sameSite: 'none',
+      secure: true,
+      httpOnly: false,
+      maxAge: 600000000,
+      domain: 'chord-app.com',
+    },
+    // cookie: { secure: false, httpOnly: false, maxAge: 600000000 },
   })
 );
 
