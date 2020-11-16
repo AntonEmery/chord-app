@@ -16,12 +16,14 @@ function AllChordSheets() {
       mode: 'cors',
     })
       .then((result) => {
+        console.log(result);
         setChordSheets(result.data);
       })
       .catch((error) => console.log(error));
   }, []);
 
   const deleteChordSheet = (event) => {
+    event.preventDefault();
     axios({
       url: `${process.env.REACT_APP_API_URL}deleteChordSheet/`,
       method: 'delete',
@@ -31,11 +33,10 @@ function AllChordSheets() {
       data: { id: event.target.dataset.sheet },
     })
       .then((result) => {
-        console.log(result);
         if (result.data.response === 'sheet deleted') {
           const newSheetsState = [...chordSheets];
           const currentSheets = newSheetsState.filter(
-            (sheet) => sheet._id !== result.id
+            (sheet) => sheet._id !== result.data.id
           );
           setChordSheets(currentSheets);
         }
