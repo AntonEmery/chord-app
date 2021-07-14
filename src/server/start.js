@@ -1,17 +1,14 @@
 const mongoose = require('mongoose');
 
 // Connect to database
-mongoose.connect(
-  process.env.DATABASE,
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true // Added due to terminal error
-  }
-);
+mongoose.connect(process.env.DATABASE, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true, // Added due to terminal error
+});
 mongoose.set('useCreateIndex', true);
 mongoose.Promise = global.Promise;
 
-mongoose.connection.on('error', err => {
+mongoose.connection.on('error', (err) => {
   console.error(err.message);
 });
 
@@ -21,12 +18,8 @@ require('./models/User');
 
 // Start app
 const app = require('./app');
+
 app.set('port', process.env.PORT || 8080);
 const server = app.listen(app.get('port'), () => {
   console.log(`App running on ${server.address().port}`);
 });
-
-
-
-
-
